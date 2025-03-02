@@ -2,13 +2,13 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 
-public class PlayerShoot : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public GameObject bulletPrefab; 
     public float bulletSpeed = 10f; 
     public float fireRate = 1f; 
     private Zombie targetZombie; 
-
+    
 
     void Start()
     {
