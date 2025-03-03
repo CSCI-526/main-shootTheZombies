@@ -1,25 +1,27 @@
 using UnityEngine;
 using System.Collections;
-using TMPro;
 
-public class PlayerShoot : MonoBehaviour
+public class BulletSpawner : MonoBehaviour
 {
     public GameObject bulletPrefab; 
     public float bulletSpeed = 10f; 
     public float fireRate = 1f; 
     private Zombie targetZombie; 
 
+    public int splitCount = 2;   
+    public float spreadAngle = 30f; 
+    public int parallelCount = 3; 
+    public float parallelSpacing = 0.5f; 
+    public int burstCount = 2;
+    public float burstInterval = 0.1f; 
 
     void Start()
     {
-
-        StartCoroutine(ShootCoroutine()); 
+        StartCoroutine(ShootCoroutine());
     }
-
 
     void Update()
     {
-
         if (Input.GetMouseButtonDown(0))  
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
@@ -46,7 +48,7 @@ public class PlayerShoot : MonoBehaviour
             {
                 FireBullet(targetZombie.transform.position);
             }
-            yield return new WaitForSeconds(fireRate); 
+            yield return new WaitForSeconds(1/fireRate); 
         }
     }
 
@@ -56,9 +58,19 @@ public class PlayerShoot : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         // rotate
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, angle+90));
-
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, angle + 90));
+        
         Bullet bulletScript = bullet.GetComponent<Bullet>();
+        
+        // 设置发射模式
+        bulletScript.speed = bulletSpeed;
+        bulletScript.splitCount = splitCount;
+        bulletScript.spreadAngle = spreadAngle;
+        bulletScript.parallelCount = parallelCount;
+        bulletScript.parallelSpacing = parallelSpacing;
+        bulletScript.burstCount = burstCount;
+        bulletScript.burstInterval = burstInterval;
+
         bulletScript.Initialize(target);
     }
 

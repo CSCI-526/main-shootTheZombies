@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4248591671570446133}
   - component: {fileID: -1061789581818368399}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: SimpleBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,3 +167,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   damage: 30
+  splitBulletPrefab: {fileID: 0}
+  splitCount: 2
+  spreadAngle: 30
+  parallelCount: 2
+  parallelSpacing: 0.5
+  burstCount: 3
+  burstInterval: 0.1
