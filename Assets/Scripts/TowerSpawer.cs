@@ -6,7 +6,7 @@ public class TowerSpawner : MonoBehaviour
 {
     public TextMeshProUGUI hintText; 
     public GameObject towerPrefab;
-    public BulletSpawner bulletSpawnerPrefab;
+    public TowerBulletSpawner bulletSpawnerPrefab;
     private List<GameObject> towers = new List<GameObject>();
     private GameObject currentTower; // Declare currentTower as a class member
     private int MaxTowerNumber = 2;
@@ -54,7 +54,7 @@ public class TowerSpawner : MonoBehaviour
             isMoving = false;
             if (currentTower != null)
             {
-                InitializeBulletSpawner(currentTower);
+                InitializeTowerBulletSpawner(currentTower);
             }
         }
 
@@ -84,12 +84,12 @@ public class TowerSpawner : MonoBehaviour
         }
     }
 
-    private void InitializeBulletSpawner(GameObject tower)
+    private void InitializeTowerBulletSpawner(GameObject tower)
     {
         if (bulletSpawnerPrefab != null)
         {
-            BulletSpawner bulletSpawner = Instantiate(bulletSpawnerPrefab, tower.transform.position, Quaternion.identity);
-            bulletSpawner.Initialize(tower.transform.position);
+            TowerBulletSpawner TowerBulletSpawner = Instantiate(bulletSpawnerPrefab, tower.transform.position, Quaternion.identity);
+            TowerBulletSpawner.Initialize(tower.transform.position);
         }
         else
         {

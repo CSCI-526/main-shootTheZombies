@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class BulletSpawner : MonoBehaviour
+public class TowerBulletSpawner : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float fireRate = 2f;

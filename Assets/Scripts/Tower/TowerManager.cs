@@ -23,7 +23,6 @@ public class TowerManager : MonoBehaviour
             towerScript.bulletDamage = 1;
             towerScript.bulletSpeed = 2;
         }
-
     }
 
     // Update is called once per frame

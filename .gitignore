@@ -1,3 +1,6 @@
+*.vscode/
+*.csproj
+*.sln
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
@@ -5,4 +8,3 @@
 [Bb]uilds/
 [Ll]ogs/
 UserSettings/
-
