@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3190745440143614781}
   - component: {fileID: 7752043336454863819}
   - component: {fileID: 4248591671570446133}
-  - component: {fileID: -1061789581818368399}
+  - component: {fileID: 5037209444095345760}
   m_Layer: 0
-  m_Name: SimpleBullet
+  m_Name: SplitBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.01, y: -12.43, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.15, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -153,7 +153,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &-1061789581818368399
+--- !u!114 &5037209444095345760
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e4e5796e71ad4e6ab24a6ab52dfe0a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
-  splitSpeed: 10
-  splitBulletPrefab: {fileID: 1003970795388038849, guid: 69718c6361c81497a87fbe63c4420eba, type: 3}
-  splitCount: 4
+  damage: 10
+  splitSpeed: 0
+  splitBulletPrefab: {fileID: 0}
+  splitCount: 0

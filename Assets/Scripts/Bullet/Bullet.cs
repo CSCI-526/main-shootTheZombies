@@ -2,35 +2,21 @@ using UnityEngine;
 using System.Collections;
 
 public class Bullet : MonoBehaviour
-{
-    public float speed = 30f; 
+{ 
     public int damage = 30;
+    public int splitSpeed = 10;
 
-    public GameObject splitBulletPrefab; 
-    public int splitCount = 1; 
-    public float spreadAngle = 30f; 
+    public GameObject splitBulletPrefab;
+    public int splitCount = 3;    
 
+    private Vector3 targetPosition;
+    private Quaternion originalRotation;
+    private Collider2D ignoredZombie;
 
-    public int parallelCount = 1; 
-    public float parallelSpacing = 0.5f; 
-
-
-    public int burstCount = 1; 
-    public float burstInterval = 0.1f;   
-    
-    private Vector3 targetPosition;  
-
-    public void Initialize(Vector3 target)
+    public void Initialize(Vector3 target, Collider2D ignoreZombie = null)
     {
         targetPosition = target;
-        Vector3 direction = (targetPosition - transform.position).normalized;
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.linearVelocity = direction * speed;
-            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; 
-        }
+        ignoredZombie = ignoreZombie;
     }
 
     private void Start()
@@ -40,6 +26,8 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other == ignoredZombie) return;
+
         if (other.CompareTag("Zombie"))
         {
             Zombie zombie = other.GetComponent<Zombie>();
@@ -47,60 +35,50 @@ public class Bullet : MonoBehaviour
             {
                 zombie.TakeDamage(damage);
             }
-            SplitIntoSmallBullets();
+
+            SplitIntoSmallBullets(other);
+
             Destroy(gameObject); 
         }
     }
 
-    private void SplitIntoSmallBullets()
+    public void SetRotation(Quaternion rotation)
+    {
+        originalRotation = rotation;
+    }
+
+    private void SplitIntoSmallBullets(Collider2D hitZombie)
     {
         if (splitCount < 2 || splitBulletPrefab == null) return;
 
-        float startAngle = -spreadAngle / 2f;
-        float angleStep = spreadAngle / (splitCount - 1);
+        int totalBullets = splitCount + 1; 
+        float angleStep = 360f / totalBullets;
 
-        for (int i = 0; i < splitCount; i++)
+        for (int i = 1; i < totalBullets; i++)
         {
-            float angleOffset = startAngle + (angleStep * i);
-            Quaternion rotation = Quaternion.Euler(0, 0, angleOffset);
-            CreateBullet(transform.position, rotation);
+            float angleOffset = angleStep * i;
+            Quaternion bulletRotation = originalRotation * Quaternion.Euler(0, 0, angleOffset) * Quaternion.Euler(0, 0, 180);
+
+            CreateBullet(transform.position, bulletRotation, hitZombie, splitBulletPrefab);
         }
     }
 
-    public void FireBullet(Vector3 position, Quaternion rotation)
+    private void CreateBullet(Vector3 position, Quaternion rotation, Collider2D ignoredZombie, GameObject prefab)
     {
-        StartCoroutine(BurstFire(position, rotation));
-    }
 
-    private IEnumerator BurstFire(Vector3 position, Quaternion rotation)
-    {
-        for (int i = 0; i < burstCount; i++)
+        GameObject bullet = Instantiate(prefab, position, rotation);
+
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        if (bulletScript != null)
         {
-            CreateParallelBullets(position, rotation);
-            yield return new WaitForSeconds(burstInterval);
+            bulletScript.Initialize(position, ignoredZombie);
         }
-    }
-
-    private void CreateParallelBullets(Vector3 position, Quaternion rotation)
-    {
-        float offsetStart = -(parallelCount - 1) * parallelSpacing / 2f;
-
-        for (int i = 0; i < parallelCount; i++)
-        {
-            Vector3 spawnPosition = position + new Vector3(offsetStart + i * parallelSpacing, 0, 0);
-            CreateBullet(spawnPosition, rotation);
-        }
-    }
-
-    private void CreateBullet(Vector3 position, Quaternion rotation)
-    {
-        GameObject bullet = Instantiate(splitBulletPrefab, position, rotation);
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            Vector2 direction = rotation * Vector2.right;
-            rb.linearVelocity = direction * speed;
+            Vector2 direction = rotation * Vector2.up;
+            rb.linearVelocity = direction * splitSpeed;
         }
     }
 }

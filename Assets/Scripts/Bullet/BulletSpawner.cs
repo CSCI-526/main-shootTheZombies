@@ -3,17 +3,15 @@ using System.Collections;
 
 public class BulletSpawner : MonoBehaviour
 {
-    public GameObject bulletPrefab; 
-    public float bulletSpeed = 10f; 
-    public float fireRate = 1f; 
-    private Zombie targetZombie; 
+    public GameObject bulletPrefab;
+    public float bulletSpeed = 10f;
+    public float fireRate = 1f;
+    private Zombie targetZombie;
 
-    public int splitCount = 2;   
-    public float spreadAngle = 30f; 
-    public int parallelCount = 3; 
-    public float parallelSpacing = 0.5f; 
-    public int burstCount = 2;
+    public int burstCount = 1; 
     public float burstInterval = 0.1f; 
+    public int parallelCount = 1; 
+    public float parallelSpacing = 0.5f;
 
     void Start()
     {
@@ -48,30 +46,57 @@ public class BulletSpawner : MonoBehaviour
             {
                 FireBullet(targetZombie.transform.position);
             }
-            yield return new WaitForSeconds(1/fireRate); 
+            float adjustedInterval = Mathf.Pow(0.9f, fireRate - 1);
+            yield return new WaitForSeconds(adjustedInterval); 
         }
     }
 
     void FireBullet(Vector3 target)
     {
         Vector3 direction = (target - transform.position).normalized; 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 
-        // rotate
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, angle + 90));
-        
+        Debug.Log("Quaternion.Euler(0, 0, angle): " + Quaternion.Euler(0, 0, angle).eulerAngles);
+
+        StartCoroutine(BurstFire(transform.position, Quaternion.Euler(0, 0, angle)));
+    }
+
+    IEnumerator BurstFire(Vector3 position, Quaternion rotation)
+    {
+        for (int i = 0; i < burstCount; i++)
+        {
+            CreateParallelBullets(position, rotation);
+            yield return new WaitForSeconds(burstInterval);
+        }
+    }
+
+    private void CreateParallelBullets(Vector3 position, Quaternion rotation)
+    {
+        float offsetStart = -(parallelCount - 1) * parallelSpacing / 2f;
+
+        for (int i = 0; i < parallelCount; i++)
+        {
+            Vector3 spawnPosition = position + new Vector3(offsetStart + i * parallelSpacing, 0, 0);
+            CreateBullet(spawnPosition, rotation);
+        }
+    }
+
+    private void CreateBullet(Vector3 position, Quaternion rotation)
+    {
+        GameObject bullet = Instantiate(bulletPrefab, position, rotation);
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        
-        // 设置发射模式
-        bulletScript.speed = bulletSpeed;
-        bulletScript.splitCount = splitCount;
-        bulletScript.spreadAngle = spreadAngle;
-        bulletScript.parallelCount = parallelCount;
-        bulletScript.parallelSpacing = parallelSpacing;
-        bulletScript.burstCount = burstCount;
-        bulletScript.burstInterval = burstInterval;
+        bulletScript.SetRotation(rotation);
+        if (bulletScript != null)
+        {
+            bulletScript.Initialize(position, null);
+        }
 
-        bulletScript.Initialize(target);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            Vector2 direction = rotation * Vector2.up;
+            rb.linearVelocity = direction * bulletSpeed;
+        }
     }
 
     Zombie FindZombieAtPosition(Vector3 position)

@@ -105,6 +105,7 @@
     <Compile Include="Assets/Scripts/Zombie.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TextMeshProFloatingText.cs" />
     <Compile Include="Assets/Scripts/Bullet/BulletSpawner.cs" />
+    <Compile Include="Assets/Scripts/Bullet/BulletManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
