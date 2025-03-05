@@ -909,7 +909,11 @@ GameObject:
   - component: {fileID: 785563994}
   - component: {fileID: 785563993}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: TowerBulletSpawner
+=======
+  m_Name: BulletSpawner
+>>>>>>> Chan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -944,6 +948,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 870250989}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &861513024
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +994,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerDatabase: {fileID: 1742495288}
+=======
+>>>>>>> Chan
 --- !u!1 &870250987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,6 +1582,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1537070809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,11 +1616,14 @@ Transform:
   - {fileID: 1742495287}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> Chan
 --- !u!224 &1736902984 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8428932372816954710, guid: be045624f2fff4ed28386a3e2529074f, type: 3}
   m_PrefabInstance: {fileID: 1896563160677543353}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &1742495286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,6 +1671,8 @@ MonoBehaviour:
   towerPrefabs:
   - {fileID: 2329369698235008983, guid: 4fa36402d8f4344848369ab0c8318261, type: 3}
   - {fileID: 6871212363128140854, guid: 409118b41c67e42938d7830488ea7972, type: 3}
+=======
+>>>>>>> Chan
 --- !u!1 &1772486196
 GameObject:
   m_ObjectHideFlags: 0
@@ -2352,4 +2365,7 @@ SceneRoots:
   - {fileID: 1193353648}
   - {fileID: 1261289794}
   - {fileID: 870250989}
+<<<<<<< HEAD
   - {fileID: 1537070810}
+=======
+>>>>>>> Chan

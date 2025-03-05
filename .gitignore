@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 *.vscode/
 *.csproj
 *.sln
+=======
+>>>>>>> Chan
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
@@ -8,3 +11,7 @@
 [Bb]uilds/
 [Ll]ogs/
 UserSettings/
+<<<<<<< HEAD
+=======
+
+>>>>>>> Chan
