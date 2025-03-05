@@ -56,9 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-<<<<<<< HEAD
-    "dotnet.defaultSolution": "main-shootTheZombies.sln"
-=======
+    "main-shootTheZombies.sln=======dotnet.defaultSolution": "project.sln>>>>>>>Chan",
     "dotnet.defaultSolution": "project.sln"
->>>>>>> Chan
 }
