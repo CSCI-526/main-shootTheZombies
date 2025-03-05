@@ -5,13 +5,16 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     public GameObject bulletPrefab; 
+    public TowerPlayerManager towerPlayerManager;
+    public int playerLevel;
     public float bulletSpeed = 10f; 
     public float fireRate = 1f; 
     private Zombie targetZombie; 
     
-
-    void Start()
+    
+         void Start()
     {
+        towerPlayerManager = new TowerPlayerManager(); 
 
         StartCoroutine(ShootCoroutine()); 
     }
@@ -19,6 +22,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        
 
         if (Input.GetMouseButtonDown(0))  
         {
@@ -50,6 +54,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    void LevelUp(){
+        playerLevel += 1;
+        
+    }
     void FireBullet(Vector3 target)
     {
         Vector3 direction = (target - transform.position).normalized; 
@@ -96,3 +104,84 @@ public class Player : MonoBehaviour
         return nearestZombie;
     }
 }
+
+
+public class PlayerShooter{
+
+}
+
+ public class TowerPlayerManager {
+
+    private int maxTowerNumber;
+    private int currentTowerNumber;
+    // private TowerDataBase towerDataBase;
+//     private list<bool> level2UnlockTowerType = new list<int> { true,false,false,true,false,false};
+
+
+//     public TowerSpawner towerSpawner;
+
+
+//     private enum TowerAttribute {hp,fireRate,bulletSpeed, bulletDamage };
+     
+    public TowerPlayerManager(){
+        maxTowerNumber = 0;
+        currentTowerNumber = 0;
+        InitializeDisplayTowerUnlocked();
+
+    }
+    private void InitializeDisplayTowerUnlocked(){
+        // display tower unlocked
+        // first for non unlock tower
+        // for(int i = 0; i < towerDataBase.towerData.Count; i++){
+        //     if(towerDataBase.towerData[i].level == 0){
+        //         // display tower locked
+        //     }
+        // }
+    }
+
+
+//     public void UnlockTowerType(int level){
+//         if(level2UnlockTowerType[level]){
+//             // unlock tower type
+//         }
+//     }
+
+    public void DisplayTowerUnlocked(){
+        
+    }
+
+//     public void DisplayTowerAvailable(){
+
+//     }
+
+//     public void AddTower(GameObject tower){
+//             if(tower != null){
+//                 currentTowerNumber += 1;
+//             }
+//             towerSpawner.CreateNewTower();
+//         }
+
+
+//     public void upgradeTower(GameObject tower,TowerAttribute attribute, int inc){
+//             if(tower != null){
+//                 switch(attribute){
+//                     case TowerAttribute.damage:
+//                         tower.GetComponent<TowerBase>().bulletDamage += inc;
+//                         break;
+//                     case TowerAttribute.range:
+//                         tower.GetComponent<TowerBase>().range += inc;
+//                         break;
+//                     case TowerAttribute.fireRate:
+//                         tower.GetComponent<TowerBase>().fireRate -= inc;
+//                         break;
+//                     default:
+//                         break;
+//                 }
+//             }
+
+    }
+
+
+
+    
+

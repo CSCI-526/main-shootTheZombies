@@ -2110,6 +2110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1003970795388038849, guid: dd4944a01738a4f3191c3abba2a02b0e, type: 3}
+  playerLevel: 0
   bulletSpeed: 10
   fireRate: 1
 --- !u!1 &2020172108
