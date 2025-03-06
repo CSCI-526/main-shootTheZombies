@@ -1,7 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManagerScript : MonoBehaviour
 {
+    //exp bar setting 
+    public Image expbar;
+    public float maxXp = 100f;
+
     //will change after we get the xp and level from others
     public int level = 1;
     public float xp = 0f;
@@ -33,6 +38,10 @@ public class PlayerManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //update the exp bar 
+        expbar.fillAmount = Mathf.Clamp(xp / maxXp, 0, 1);
+
+
         // add more player
         ChoosePlayer();
 
@@ -93,5 +102,7 @@ public class PlayerManagerScript : MonoBehaviour
             Debug.LogError("do not find the bullet");
         }
     }
+
+
 
 }
