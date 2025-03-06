@@ -2980,6 +2980,7 @@ GameObject:
   - component: {fileID: 1984422668}
   - component: {fileID: 1984422669}
   - component: {fileID: 1984422670}
+  - component: {fileID: 1984422671}
   m_Layer: 0
   m_Name: Shooter
   m_TagString: Wall
@@ -3136,6 +3137,25 @@ MonoBehaviour:
   burstInterval: 0.1
   parallelCount: 1
   parallelSpacing: 0.5
+--- !u!114 &1984422671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984422665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6593345bd49e49f5a0cd256037d95ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1193353647}
+  buttonSpawner: {fileID: 935558063}
+  playerLevel: 1
+  bulletSpeed: 10
+  fireRate: 1
+  exp: 0
+  expRate: 10
 --- !u!1 &2020172108
 GameObject:
   m_ObjectHideFlags: 0

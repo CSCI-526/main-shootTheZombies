@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
          void Start()
     {
         towerPlayerManager = new TowerPlayerManager(); 
+        buttonSpawner = FindObjectOfType<ButtonSpawner>();
+
         StartCoroutine(ShootCoroutine()); 
         // buttonSpawner.InitializeButtons("Increase Tower HP", "Boost Tower Fire Rate", "Speed Up Tower Bullets");
     }
@@ -89,7 +91,7 @@ public class Player : MonoBehaviour
     {
         exp += amount;
         // Debug.Log($"EXP: {exp}");
-        if(this.exp >= 100){
+        if(this.exp >= 30){
             LevelUp();
             exp = 0;
         }
@@ -97,6 +99,7 @@ public class Player : MonoBehaviour
 
     void LevelUp(){
         playerLevel += 1;
+        Debug.Log("Level Up! Current Level: " + playerLevel);
         towerPlayerManager.UnlockTowerType(playerLevel);
         AutoGenerateButton();
         
