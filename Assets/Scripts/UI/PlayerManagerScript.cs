@@ -2,7 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerManagerScript : MonoBehaviour
-{
+{   
+    // get all the variable from the player class
+    public Player player;
     //exp bar setting 
     public Image expbar;
     public float maxXp = 100f;
@@ -51,8 +53,10 @@ public class PlayerManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("exp == " + player.exp);
+
         //update the exp bar 
-        expbar.fillAmount = Mathf.Clamp(xp / maxXp, 0, 1);
+        expbar.fillAmount = Mathf.Clamp(player.exp / maxXp, 0, 1);
 
 
         // add more player
@@ -60,19 +64,15 @@ public class PlayerManagerScript : MonoBehaviour
 
         //show the UI of choosing skills
         LevelUp();
-        
-        if(xp == 50){
-            ModifyBulletProperties();
-            xp = 0;
-        }
     }
 
 
 
     public void LevelUp(){
-        if(xp == 100){
+        if(player.exp == 100){
             LevelUpUI.SetActive(true);
-            xp = 10;
+            player.exp = 0;
+            level += 1;
         }
         
     }
@@ -86,9 +86,9 @@ public class PlayerManagerScript : MonoBehaviour
 
     public void ChoosePlayer(){
         if(level % 3 == 0){
-            index = level / 3;
+            index = player.playerLevel / 3;
             players[index].SetActive(true);
-            level = 0;
+            level = 1;
         }
     }
 

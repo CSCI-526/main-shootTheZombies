@@ -8,6 +8,7 @@ public class Zombie : MonoBehaviour
     private float attackSpeed = 2f;
     private float attackTimer = 0f;
     private bool isAttacking = false;
+    public Player player;
 
     public GameObject damagePopupPrefab;
 
@@ -38,7 +39,11 @@ public class Zombie : MonoBehaviour
 
         if (health <= 0)
         {
+            Player player = GameObject.Find("Testplayer").GetComponent<Player>();
             Destroy(gameObject);
+            if(player.playerLevel <= 6){
+                player.GainExp(5);
+            }
         }
     }
 

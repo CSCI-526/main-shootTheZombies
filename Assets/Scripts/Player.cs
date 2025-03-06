@@ -8,11 +8,11 @@ public class Player : MonoBehaviour
     public GameObject bulletPrefab; 
     public TowerPlayerManager towerPlayerManager;
     public ButtonSpawner buttonSpawner;
-    public int playerLevel;
+    public int playerLevel = 1;
     public float bulletSpeed = 10f; 
     public float fireRate = 1f; 
     private Zombie targetZombie; 
-    private int exp;
+    public int exp = 0;
     public int expRate = 10;    // EXP gained per second
     private float timer = 0f;   // Timer to track elapsed time
     public enum TowerAttribute {hp,fireRate,bulletSpeed, bulletDamage, number };
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        ExpGrowth();
+        //ExpGrowth();
         if (Input.GetMouseButtonDown(0))  
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void GainExp(int amount)
+    public void GainExp(int amount)
     {
         exp += amount;
         // Debug.Log($"EXP: {exp}");
