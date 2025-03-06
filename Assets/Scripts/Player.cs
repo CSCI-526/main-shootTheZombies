@@ -1,29 +1,48 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
     public GameObject bulletPrefab; 
     public TowerPlayerManager towerPlayerManager;
+    public ButtonSpawner buttonSpawner;
     public int playerLevel;
     public float bulletSpeed = 10f; 
     public float fireRate = 1f; 
     private Zombie targetZombie; 
+    private int exp;
+    public int expRate = 10;    // EXP gained per second
+    private float timer = 0f;   // Timer to track elapsed time
+    public enum TowerAttribute {hp,fireRate,bulletSpeed, bulletDamage, number };
+    // public Dictionary<TowerAttribute, string> attributeToButtonText = new Dictionary<TowerAttribute, string>
+    // {
+    //     { TowerAttribute.hp, "Increase Tower HP" },
+    //     { TowerAttribute.fireRate, "Boost Tower Fire Rate" },
+    //     { TowerAttribute.bulletSpeed, "Speed Up Tower Bullets" },
+    //     { TowerAttribute.bulletDamage, "Increase Tower Damage" },
+    //     { TowerAttribute.number, "Increase Tower Number" }
+    // };
+    // 1 : Increase Tower HP
+    // 2 : Boost Tower Fire Rate
+    // 3 : Speed Up Tower Bullets
+    // 4 : Increase Tower Damage
+    // 5 : Increase Tower Number
+    private List<string> buttoonTexts = new List<string>{"Increase Tower HP", "Boost Tower Fire Rate", "Speed Up Tower Bullets", "Increase Tower Damage", "Increase Tower Number"};
     
     
          void Start()
     {
         towerPlayerManager = new TowerPlayerManager(); 
-
         StartCoroutine(ShootCoroutine()); 
+        // buttonSpawner.InitializeButtons("Increase Tower HP", "Boost Tower Fire Rate", "Speed Up Tower Bullets");
     }
 
 
     void Update()
     {
-        
-
+        ExpGrowth();
         if (Input.GetMouseButtonDown(0))  
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
@@ -54,9 +73,45 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void ExpGrowth()
+    {
+        timer += Time.deltaTime; // Accumulate time
+
+        if (timer >= 1f) // Every second
+        {
+            GainExp(expRate); // Gain EXP
+            timer = 0f; // Reset timer
+            // Debug.Log($"EXP: {exp}");
+        }
+    }
+
+    private void GainExp(int amount)
+    {
+        exp += amount;
+        // Debug.Log($"EXP: {exp}");
+        if(this.exp >= 100){
+            LevelUp();
+            exp = 0;
+        }
+    }
+
     void LevelUp(){
         playerLevel += 1;
+        towerPlayerManager.UnlockTowerType(playerLevel);
+        AutoGenerateButton();
         
+    }
+    void AutoGenerateButton(){
+        // randomly choose 3 int  without repeat
+        HashSet<int> randomIndex = new HashSet<int>();
+        while(randomIndex.Count < 3){
+            randomIndex.Add(Random.Range(0, buttoonTexts.Count));
+        }
+        List<string> buttonTexts = new List<string>();
+        foreach(int index in randomIndex){
+            buttonTexts.Add(buttoonTexts[index]);
+        }
+        buttonSpawner.InitializeButtons(buttonTexts[0], buttonTexts[1], buttonTexts[2]);
     }
     void FireBullet(Vector3 target)
     {
@@ -103,6 +158,7 @@ public class Player : MonoBehaviour
 
         return nearestZombie;
     }
+
 }
 
 
@@ -114,45 +170,32 @@ public class PlayerShooter{
 
     private int maxTowerNumber;
     private int currentTowerNumber;
-    // private TowerDataBase towerDataBase;
-//     private list<bool> level2UnlockTowerType = new list<int> { true,false,false,true,false,false};
+    public TowerDatabase towerDataBase;
+    private HashSet<int> level2UnlockTowerType = new HashSet<int> { 2, 6 };
 
 
-//     public TowerSpawner towerSpawner;
+    public TowerSpawner towerSpawner;
 
 
-//     private enum TowerAttribute {hp,fireRate,bulletSpeed, bulletDamage };
+
      
     public TowerPlayerManager(){
         maxTowerNumber = 0;
         currentTowerNumber = 0;
-        InitializeDisplayTowerUnlocked();
+    }
+    
+    
+    public void UnlockTowerType(int level){           
+        if(level2UnlockTowerType.Contains(level)){
+
+        }
+       
+    }
+    public void PlaceTower(){
 
     }
-    private void InitializeDisplayTowerUnlocked(){
-        // display tower unlocked
-        // first for non unlock tower
-        // for(int i = 0; i < towerDataBase.towerData.Count; i++){
-        //     if(towerDataBase.towerData[i].level == 0){
-        //         // display tower locked
-        //     }
-        // }
-    }
 
-
-//     public void UnlockTowerType(int level){
-//         if(level2UnlockTowerType[level]){
-//             // unlock tower type
-//         }
-//     }
-
-    public void DisplayTowerUnlocked(){
-        
-    }
-
-//     public void DisplayTowerAvailable(){
-
-//     }
+    
 
 //     public void AddTower(GameObject tower){
 //             if(tower != null){

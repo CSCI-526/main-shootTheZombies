@@ -33,7 +33,7 @@ public class BulletBase : MonoBehaviour
             Zombie zombie = other.GetComponent<Zombie>();
             if (zombie != null)
             {
-                print(damage);
+                // print(damage);
                 zombie.TakeDamage(damage);
             }
             Destroy(gameObject); 
