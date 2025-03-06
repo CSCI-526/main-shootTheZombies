@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
     {
         exp += amount;
         // Debug.Log($"EXP: {exp}");
-        if(this.exp >= 30){
+        if(this.exp >= 150){
             LevelUp();
             exp = 0;
         }
