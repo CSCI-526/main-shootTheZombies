@@ -16,14 +16,24 @@ public class TowerBase : MonoBehaviour
     public GameObject bulletPrefab;  // 子弹预制体
     public GameObject damagePopupPrefab;
 
+    public TowerManager towerManager;
+    public ButtonSpawner buttonSpawner;
+
+    
+   
 
 
     void Start()
     {
+        if (GetComponent<BoxCollider2D>() == null)
+    {
+        gameObject.AddComponent<BoxCollider2D>(); // Ensure collider exists
+    }
         print(gameObject);
         towerPosition = transform.position;
         StartCoroutine(ShootCoroutine());
         print(bulletPrefab);
+        
     }
 
 
@@ -40,6 +50,19 @@ public class TowerBase : MonoBehaviour
             yield return new WaitForSeconds(fireRate);
         }
     }
+
+    public void OnMouseDown()
+    {
+        // towerManager = FindObjectOfType<TowerManager>();
+        buttonSpawner = FindObjectOfType<ButtonSpawner>();
+        print(buttonSpawner);
+        // print("Selected tower type: " + this);
+        buttonSpawner.SelectTower(this);
+        //log
+        
+        // towerManager.towerDatabase.towerPrefabs[0];
+    }
+
 
     public virtual void ShootBullet(Vector3 targetPosition, float speed, int damage)
     {
