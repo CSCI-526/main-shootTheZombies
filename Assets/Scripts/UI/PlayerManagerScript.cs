@@ -24,10 +24,23 @@ public class PlayerManagerScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameObject child = players[2].transform.Find("SimpleBullet").gameObject;
-        Debug.Log("找到子对象：" + child.name);
-        Debug.Log("找到对象：" +  players[2].name);
-        
+        if (players != null && players.Length > 2 && players[2] != null)
+        {
+            GameObject child = players[2].transform.Find("SimpleBullet")?.gameObject;
+            if (child != null)
+            {
+                Debug.Log("找到子对象：" + child.name);
+                Debug.Log("找到对象：" + players[2].name);
+            }
+            else
+            {
+                Debug.LogError("SimpleBullet not found in player " + players[2].name);
+            }
+        }
+        else
+        {
+            Debug.LogError("Player array is not properly initialized or player[2] is null.");
+        }
     }
 
     // Update is called once per frame

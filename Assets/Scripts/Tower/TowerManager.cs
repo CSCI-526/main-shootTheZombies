@@ -4,6 +4,7 @@ public class TowerManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public TowerDatabase towerDatabase;
+    
     void Start()
     {
 
@@ -25,6 +26,7 @@ public class TowerManager : MonoBehaviour
         }
 
     }
+
 
     // Update is called once per frame
     void Update()
