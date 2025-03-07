@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2469485113111461934}
   - component: {fileID: 5622110533510470275}
-  - component: {fileID: 4462921850953843428}
   - component: {fileID: 4716800807657791607}
   - component: {fileID: -7824314321068058195}
+  - component: {fileID: 3108641002450990474}
   m_Layer: 0
-  m_Name: ZombiePrefab
+  m_Name: ZombiePrefab-Melee
   m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,22 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4462921850953843428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2073466129586462176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82379f5a3d7414512aba5890d0515be0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  hp: 100
-  damage: 20
-  damagePopupPrefab: {fileID: 0}
 --- !u!50 &4716800807657791607
 Rigidbody2D:
   serializedVersion: 5
@@ -169,3 +153,20 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &3108641002450990474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073466129586462176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77043b1f27e3f483db73bcccb440bcda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePopupPrefab: {fileID: 2437635022160800495, guid: 57af91314f46b40ebace9c0eb458f01d, type: 3}
+  hp: 100
+  moveSpeed: 2
+  player: {fileID: 0}
+  damage: 20
