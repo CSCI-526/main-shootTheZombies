@@ -7,6 +7,7 @@ public class ButtonSpawner : MonoBehaviour
     public string buttonTextB = "bb";
     public string buttonTextC = "ccc";
     public TowerSpawner towerSpawner;
+    public PlayerManagerScript playerManager;
 
     private GameObject buttonA;
     private GameObject buttonB;
@@ -118,7 +119,7 @@ public class ButtonSpawner : MonoBehaviour
 
     private void UpdateTowerAttribute(string buttonText)
     {
-         canSelectTower = true;
+         
         
 
         switch (buttonText)
@@ -126,7 +127,12 @@ public class ButtonSpawner : MonoBehaviour
             case "Increase Tower Number":
                 towerSpawner.incMaxTowerNumber();
                 break; 
+            case "Upgrade The Player Damage":
+                playerManager.ModifyBulletSpawnerProperties();
+                playerManager.CloseUpgradeWindow();
+                break;
             default:
+                canSelectTower = true;
                 chooseText = buttonText;
                 break;
         }

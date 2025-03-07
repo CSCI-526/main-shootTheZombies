@@ -855,7 +855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &540534656
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1470,6 +1470,7 @@ MonoBehaviour:
   buttonTextB: b
   buttonTextC: c
   towerSpawner: {fileID: 870250988}
+  playerManager: {fileID: 1866031802}
 --- !u!4 &935558064
 Transform:
   m_ObjectHideFlags: 0
