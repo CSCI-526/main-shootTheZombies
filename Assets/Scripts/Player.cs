@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (targetZombie == null || targetZombie.health <= 0)
+        if (targetZombie == null || targetZombie.hp <= 0)
         {
             targetZombie = FindNearestZombie(transform.position);
         }

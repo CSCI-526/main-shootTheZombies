@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Zombie
   - Bullet
+  - ZombieBullet
   layers:
   - Default
   - TransparentFX
