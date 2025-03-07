@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     // 3 : Speed Up Tower Bullets
     // 4 : Increase Tower Damage
     // 5 : Increase Tower Number
-    private List<string> buttoonTexts = new List<string>{"Increase Tower HP", "Boost Tower Fire Rate", "Speed Up Tower Bullets", "Increase Tower Damage", "Increase Tower Number"};
+    private List<string> buttoonTexts = new List<string>{"Increase Tower HP", "Boost Tower Fire Rate", "Speed Up Tower Bullets", "Increase Tower Damage", "Increase Tower Number", "Upgrade The Player Damage"};
     
     
          void Start()
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
     {
         exp += amount;
         // Debug.Log($"EXP: {exp}");
-        if(this.exp >= 150){
+        if(this.exp >= 100){
             LevelUp();
             exp = 0;
         }
