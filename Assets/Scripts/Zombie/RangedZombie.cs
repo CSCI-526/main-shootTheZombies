@@ -37,12 +37,12 @@ public class RangedZombie : Zombie
             }
             else
             {
-                Debug.LogError("RangedZombie Projectile script is missing on the instantiated object!");
+                //Debug.LogError("RangedZombie Projectile script is missing on the instantiated object!");
             }
         }
         else
         {
-            Debug.LogError("RangedZombie Projectile Prefab or Wall is missing!");
+            //Debug.LogError("RangedZombie Projectile Prefab or Wall is missing!");
         }
     }
 }

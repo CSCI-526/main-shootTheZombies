@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public int exp = 0;
     public int expRate = 10;    // EXP gained per second
     private float timer = 0f;   // Timer to track elapsed time
-    public enum TowerAttribute {hp,fireRate,bulletSpeed, bulletDamage, number };
+    // public enum TowerAttribute {hp,fireRate,bulletSpeed, bulletDamage, number };
     // public Dictionary<TowerAttribute, string> attributeToButtonText = new Dictionary<TowerAttribute, string>
     // {
     //     { TowerAttribute.hp, "Increase Tower HP" },
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     // 3 : Speed Up Tower Bullets
     // 4 : Increase Tower Damage
     // 5 : Increase Tower Number
-    private List<string> buttoonTexts = new List<string>{"Increase Tower HP", "Boost Tower Fire Rate", "Speed Up Tower Bullets", "Increase Tower Damage", "Increase Tower Number", "Upgrade The Player Damage"};
+    private List<string> buttoonTexts = new List<string>{"Tower HP", "Tower Fire Rate", "Tower Bullets", "Tower Damage", "Tower Number", "Player Damage"};
     
     
          void Start()
@@ -83,14 +83,14 @@ public class Player : MonoBehaviour
         {
             GainExp(expRate); // Gain EXP
             timer = 0f; // Reset timer
-            Debug.Log($"EXP: {exp}");
+            // //Debug.Log($"EXP: {exp}");
         }
     }
 
     public void GainExp(int amount)
     {
         exp += amount;
-        // Debug.Log($"EXP: {exp}");
+        // //Debug.Log($"EXP: {exp}");
         if(this.exp >= 100){
             LevelUp();
             exp = 0;
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
 
     void LevelUp(){
         playerLevel += 1;
-        Debug.Log("Level Up! Current Level: " + playerLevel);
+        // //Debug.Log("Level Up! Current Level: " + playerLevel);
         towerPlayerManager.UnlockTowerType(playerLevel);
         AutoGenerateButton();
         

@@ -56,7 +56,7 @@ public class BulletSpawner : MonoBehaviour
         Vector3 direction = (target - transform.position).normalized; 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 
-        // Debug.Log("Quaternion.Euler(0, 0, angle): " + Quaternion.Euler(0, 0, angle).eulerAngles);
+        // //Debug.Log("Quaternion.Euler(0, 0, angle): " + Quaternion.Euler(0, 0, angle).eulerAngles);
 
         StartCoroutine(BurstFire(transform.position, Quaternion.Euler(0, 0, angle)));
     }
