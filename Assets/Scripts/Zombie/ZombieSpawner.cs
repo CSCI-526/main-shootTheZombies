@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class ZombieSpawner : MonoBehaviour
 {
+    private int waveCount = 60;
+    public PlayerManagerScript playerManager;
     public GameObject meleeZombiePrefab;
     public GameObject rangedZombiePrefab;
     public GameObject explodingZombiePrefab;
-    public float spawnInterval = 2f; // Time between spawns
+    public float spawnInterval = 10f; // Time between spawns
     public Vector2 spawnRangeX = new Vector2(-4f, 4f); // X-axis spawn range
     public float fixedY = 10f; // Y position for spawning
 
@@ -24,14 +26,41 @@ public class ZombieSpawner : MonoBehaviour
 
     private void SpawnZombie()
     {
+        
         float randomX = Random.Range(spawnRangeX.x, spawnRangeX.y);
         Vector3 spawnPosition = new Vector3(randomX, fixedY, 0f);
+        GameObject zombiePrefab;
 
-        // Randomly select a zombie type
-        int zombieType = Random.Range(0, 3);
-        GameObject zombiePrefab = (zombieType == 0) ? meleeZombiePrefab :
-                                  (zombieType == 1) ? rangedZombiePrefab :
-                                  explodingZombiePrefab;
+        //for wave 1
+        if (waveCount > 40 && waveCount <= 60){
+            zombiePrefab = meleeZombiePrefab;
+            waveCount -= 1;
+        }
+        else if (waveCount > 20){
+            spawnInterval = 3f;
+            zombiePrefab = explodingZombiePrefab;
+            waveCount -= 1;
+        }
+        else if (waveCount > 0){
+            spawnInterval = 2f;
+            zombiePrefab = rangedZombiePrefab;
+            waveCount -= 1;
+        }
+        else{
+            spawnInterval = 1f;
+            int zombieType = Random.Range(0, 3);
+            zombiePrefab = (zombieType == 0) ? meleeZombiePrefab :
+                          (zombieType == 1) ? rangedZombiePrefab :
+                          explodingZombiePrefab;
+        }
+        Debug.Log(" wavecount == " + waveCount);
+        if (waveCount == 39){
+            playerManager.ShowPopup("New zombies 1");}
+        else if (waveCount == 19){
+            playerManager.ShowPopup("New zombies 2");}
+        else if (waveCount == 0){
+            playerManager.ShowPopup("Mix zombies comes");}
+        
 
         Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
     }
