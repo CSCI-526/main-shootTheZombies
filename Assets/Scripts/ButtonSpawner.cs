@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class ButtonSpawner : MonoBehaviour
 {
+    public PlayerManagerScript playerManager;
     public string buttonTextA = "a";
     public string buttonTextB = "bb";
     public string buttonTextC = "ccc";
@@ -159,7 +161,8 @@ public class ButtonSpawner : MonoBehaviour
                 
                 break;
             case "Player Damage":
-                chooseText = "Player Damage";
+                playerManager.ModifyBulletSpawnerProperties();
+                playerManager.CloseUpgradeWindow();
                 break;
             // case "Boost Tower Fire Rate":
             //     towerSpawner.UpdateAttributeB();
@@ -234,9 +237,6 @@ public class ButtonSpawner : MonoBehaviour
                     // //Debug.Log("Tower bulletDamage increåased by 10. New bulletDamage: " + selectedTower.bulletDamage);
                     break;  
 
-                case "Tower Number":
-                   
-                    break; 
                 
                 default:
                     //Debug.LogWarning("Unknown button text: " + chooseText);

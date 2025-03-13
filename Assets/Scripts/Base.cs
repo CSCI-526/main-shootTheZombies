@@ -24,16 +24,16 @@ public class Base : MonoBehaviour
         CancelInvoke(nameof(ClickHint)); 
         Invoke(nameof(ClickHint), 10f); 
         Invoke(nameof(PlaceTowerHint), 20f);
-        Invoke(nameof(PlaceTowerHint), 30f);
+        Invoke(nameof(ChangeTowerHint), 30f);                                         
     }
 
     void ClickHint(){
-        hintText.text = "Click blank to auto Aiming!";
+        hintText.text = "Click on a blank area to lock the shooting angle";
     }
     void PlaceTowerHint(){
         hintText.text = "Q/E to place the tower!";
     }
-    void CHnageTowerHint(){
+    void ChangeTowerHint(){
         hintText.text = "Z to change the tower!";
     }
 

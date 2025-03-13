@@ -1418,11 +1418,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17cde97b80c94721ad68cdcd7a02d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 1866031802}
   buttonTextA: a
   buttonTextB: b
   buttonTextC: c
   towerSpawner: {fileID: 870250988}
-  playerManager: {fileID: 1866031802}
 --- !u!4 &935558064
 Transform:
   m_ObjectHideFlags: 0
@@ -2675,9 +2675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79538762d45c470a8425ca811304a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1485013290}
-  expbar: {fileID: 201137786}
-  maxXp: 100
   level: 1
   xp: 0
   LevelUpUI: {fileID: 374026902}
