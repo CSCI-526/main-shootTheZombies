@@ -1,19 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class ButtonSpawner : MonoBehaviour
 {
+    public PlayerManagerScript playerManager;
     public string buttonTextA = "a";
     public string buttonTextB = "bb";
     public string buttonTextC = "ccc";
     public TowerSpawner towerSpawner;
-    public PlayerManagerScript playerManager;
 
     private GameObject buttonA;
     private GameObject buttonB;
     private GameObject buttonC;
     private GameObject canvas;
+    private GameObject hintTextObj; // Add this line to store the hint text object
 
+    private GameObject hintClickTower;
     private string chooseText;
 
     private TowerBase selectedTower;
@@ -43,9 +46,13 @@ public class ButtonSpawner : MonoBehaviour
 
         if (buttonC == null)
             buttonC = CreateButton(buttonTextC, new Vector2(200, -200)); // Avoid same position as buttonB
+
+        
+         // Add hint text
+        hintTextObj = CreateText("Level Up!", new Vector2(0, 0));
     
     }
-
+ 
     
 
     private void CreateCanvas()
@@ -65,6 +72,8 @@ public class ButtonSpawner : MonoBehaviour
         Canvas c = canvas.GetComponent<Canvas>();
         c.sortingOrder = 100; // Set a high sorting order to ensure the canvas is in front
     }
+
+   
         
     }
 
@@ -81,7 +90,7 @@ public class ButtonSpawner : MonoBehaviour
 
         Button btn = buttonObj.AddComponent<Button>();
         Image img = buttonObj.AddComponent<Image>();
-        img.color = new Color(0.9f, 0.9f, 0.9f); 
+        img.color = new Color(0.9f, 0.9f, 0.9f);
 
         GameObject textObj = new GameObject("Text");
         textObj.transform.SetParent(buttonObj.transform);
@@ -95,18 +104,40 @@ public class ButtonSpawner : MonoBehaviour
         RectTransform textRect = textObj.GetComponent<RectTransform>();
         textRect.sizeDelta = rectTransform.sizeDelta;
         textRect.anchoredPosition = Vector2.zero;
-        Debug.Log("Button " + buttonText + " created and click listener added.");
+        // //Debug.Log("Button " + buttonText + " created and click listener added.");
         btn.onClick.AddListener(() => OnButtonClick(buttonText));
 
-        return buttonObj;
+
+    
+
+   return buttonObj;
     }
 
+    private GameObject CreateText(string hintText, Vector2 anchoredPosition)
+    {
+        GameObject hintTextObj = new GameObject("HintText");
+        hintTextObj.transform.SetParent(canvas.transform, false);
+
+        RectTransform hintTextRect = hintTextObj.AddComponent<RectTransform>();
+        hintTextRect.sizeDelta = new Vector2(480, 50); // Hint text size
+        hintTextRect.anchoredPosition = anchoredPosition; // Hint text position
+
+        Text hintTextText = hintTextObj.AddComponent<Text>();
+        hintTextText.text = hintText;
+        hintTextText.fontSize = 24;
+        hintTextText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        hintTextText.alignment = TextAnchor.MiddleCenter;
+        hintTextText.color = Color.red;
+
+        return hintTextObj;
+    }
     private void OnButtonClick(string buttonText)
     {
         Debug.Log("Button " + buttonText + " clicked");
         Destroy(buttonA, 0.2f);
         Destroy(buttonB, 0.2f);
         Destroy(buttonC, 0.2f);
+        Destroy(hintTextObj, 0.2f); // Destroy the hint text
         UpdateTowerAttribute(buttonText);
         
     }
@@ -119,21 +150,37 @@ public class ButtonSpawner : MonoBehaviour
 
     private void UpdateTowerAttribute(string buttonText)
     {
-         
+         canSelectTower = true;
         
 
         switch (buttonText)
         {
-            case "Increase Tower Number":
-                towerSpawner.incMaxTowerNumber();
-                break; 
-            case "Upgrade The Player Damage":
+            case "Tower Number":
+                 towerSpawner.incMaxTowerNumber();
+                 hintClickTower = CreateText("Press Q/E to place the tower!", new Vector2(0, 0));
+                 Destroy(hintClickTower, 2f);
+                 break;
+                
+                break;
+            case "Player Damage":
                 playerManager.ModifyBulletSpawnerProperties();
                 playerManager.CloseUpgradeWindow();
                 break;
+            // case "Boost Tower Fire Rate":
+            //     towerSpawner.UpdateAttributeB();
+            //     break;
+            // case "Speed Up Tower Bullets":
+            //     towerSpawner.UpdateAttributeC();
+            //     break;
+            // case "Increase Tower Damage":
+            //     towerSpawner.UpdateAttributeD();
+            //     break;  
+   
+            
             default:
-                canSelectTower = true;
+                hintClickTower = CreateText("Click the tower to upgrade!", new Vector2(0, 0));
                 chooseText = buttonText;
+                //Debug.LogWarning("Unknown button text: " + buttonText);
                 break;
         }
     }
@@ -145,7 +192,7 @@ public class ButtonSpawner : MonoBehaviour
             return;
         }
         selectedTower = tower;
-        Debug.Log("Selected Tower: " + selectedTower);
+        // //Debug.Log("Selected Tower: " + selectedTower);
         canSelectTower = false;
         UpdateTowerAttribute();
     }
@@ -159,32 +206,44 @@ public class ButtonSpawner : MonoBehaviour
     {
         if (selectedTower != null)
         {
+            if (hintClickTower != null)
+            {
+                //change the hint text
+                hintClickTower.GetComponent<Text>().text ="upgraded!";
+                
+                // hintClickTower.= "upgraded!";
+                Destroy(hintClickTower, 2f);
+
+            }
+
+
             switch (chooseText)
             {
-                case "Increase Tower HP":
+                case "Tower HP":
                     selectedTower.hp += 10;
-                    Debug.Log("Tower HP increased by 10. New HP: " + selectedTower.hp);
+                    // //Debug.Log("Tower HP increased by 10. New HP: " + selectedTower.hp);
                     break;
-                case "Boost Tower Fire Rate":
+                case "Tower Fire Rate":
                     selectedTower.fireRate += 10;
-                    Debug.Log("Tower fireRate increased by 10. New fireRate: " + selectedTower.fireRate);
+                    // //Debug.Log("Tower fireRate increased by 10. New fireRate: " + selectedTower.fireRate);
                     break;
 
-                case "Speed Up Tower Bullets":
+                case "Tower Bullets":
                     selectedTower.bulletSpeed += 10;
-                    Debug.Log("Tower bulletSpeed increased by 10. New bulletSpeed: " + selectedTower.bulletSpeed);
+                    // //Debug.Log("Tower bulletSpeed increased by 10. New bulletSpeed: " + selectedTower.bulletSpeed);
                     break;  
-                case "Increase Tower Damage":
+                case "Tower Damage":
                     selectedTower.bulletDamage += 10;
-                    Debug.Log("Tower bulletDamage increased by 10. New bulletDamage: " + selectedTower.bulletDamage);
+                    // //Debug.Log("Tower bulletDamage increåased by 10. New bulletDamage: " + selectedTower.bulletDamage);
                     break;  
 
+                
                 default:
-                    Debug.LogWarning("Unknown button text: " + chooseText);
+                    //Debug.LogWarning("Unknown button text: " + chooseText);
                     break;
             }
             // selectedTower.hp += 10;
-            // Debug.Log("Tower HP increased by 10. New HP: " + selectedTower.hp);
+            // //Debug.Log("Tower HP increased by 10. New HP: " + selectedTower.hp);
         }
     }
 }
