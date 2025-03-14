@@ -7,7 +7,7 @@ public class SendToGoogle : MonoBehaviour
 {
     public static SendToGoogle Instance { get; private set; } // Singleton instance
 
-    [SerializeField] private string URL;
+    [SerializeField] private string URL = "https://docs.google.com/forms/u/0/d/1xZyN9kskQieYopl92nBkjy2guu_T_0tS9aRd8ruMxlg/formResponse";
 
     private long _sessionID;
     //private int _testInt;
