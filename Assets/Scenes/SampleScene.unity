@@ -1168,11 +1168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17cde97b80c94721ad68cdcd7a02d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 1866031802}
   buttonTextA: a
   buttonTextB: b
   buttonTextC: c
   towerSpawner: {fileID: 870250988}
+  playerManager: {fileID: 1866031802}
 --- !u!4 &935558064
 Transform:
   m_ObjectHideFlags: 0
@@ -1965,6 +1965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6593345bd49e49f5a0cd256037d95ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1003970795388038849, guid: dd4944a01738a4f3191c3abba2a02b0e, type: 3}
   buttonSpawner: {fileID: 935558063}
   playerLevel: 0
   bulletSpeed: 10
@@ -2759,6 +2760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6593345bd49e49f5a0cd256037d95ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1003970795388038849, guid: dd4944a01738a4f3191c3abba2a02b0e, type: 3}
   buttonSpawner: {fileID: 935558063}
   playerLevel: 1
   bulletSpeed: 10
