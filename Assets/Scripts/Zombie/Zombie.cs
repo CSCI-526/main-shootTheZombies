@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Zombie : MonoBehaviour
@@ -27,6 +28,20 @@ public class Zombie : MonoBehaviour
             if (player.playerLevel <= 6)
             {
                 player.GainExp(10);
+            }
+
+            //AnalyticsCommon.timeZombieKilled = DateTime.Now.Ticks
+
+            long timeZombieKilled = DateTime.Now.Ticks;
+
+            // Call the singleton to send data
+            if (SendToGoogle.Instance != null)
+            {
+                SendToGoogle.Instance.Send(timeZombieKilled);
+            }
+            else
+            {
+                Debug.LogError("SendToGoogle instance not found!");
             }
         }
     }
