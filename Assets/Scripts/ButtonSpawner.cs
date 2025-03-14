@@ -132,7 +132,8 @@ public class ButtonSpawner : MonoBehaviour
         return hintTextObj;
     }
     private void OnButtonClick(string buttonText)
-    {
+    {   
+        Time.timeScale = 1;
         Debug.Log("Button " + buttonText + " clicked");
         Destroy(buttonA, 0.2f);
         Destroy(buttonB, 0.2f);
