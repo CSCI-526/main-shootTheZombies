@@ -5,28 +5,20 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-    public GameObject bulletPrefab; 
+    // public GameObject bulletPrefab; 
     public TowerPlayerManager towerPlayerManager;
     public ButtonSpawner buttonSpawner;
     public int playerLevel = 1;
     public int exp = 0;
     public int expRate = 10;    // EXP gained per second
     private float timer = 0f;   // Timer to track elapsed time
-    public enum TowerAttribute {hp,fireRate,bulletSpeed, bulletDamage, number };
-    // public Dictionary<TowerAttribute, string> attributeToButtonText = new Dictionary<TowerAttribute, string>
-    // {
-    //     { TowerAttribute.hp, "Increase Tower HP" },
-    //     { TowerAttribute.fireRate, "Boost Tower Fire Rate" },
-    //     { TowerAttribute.bulletSpeed, "Speed Up Tower Bullets" },
-    //     { TowerAttribute.bulletDamage, "Increase Tower Damage" },
-    //     { TowerAttribute.number, "Increase Tower Number" }
-    // };
-    // 1 : Increase Tower HP
-    // 2 : Boost Tower Fire Rate
-    // 3 : Speed Up Tower Bullets
-    // 4 : Increase Tower Damage
-    // 5 : Increase Tower Number
-    private List<string> buttoonTexts = new List<string>{"Increase Tower HP", "Boost Tower Fire Rate", "Speed Up Tower Bullets", "Increase Tower Damage", "Increase Tower Number", "Upgrade The Player Damage"};
+
+    // 1 : Tower HP
+    // 2 : Tower Fire Rate
+    // 3 : Tower Bullets
+    // 4 : Tower Damage
+    // 5 : Tower Number
+    private List<string> buttoonTexts = new List<string>{"Tower HP", "Tower Fire Rate", "Tower Bullets", "Tower Damage", "Tower Number", "Player Damage"};
     
     
          void Start()
@@ -34,7 +26,7 @@ public class Player : MonoBehaviour
         towerPlayerManager = new TowerPlayerManager(); 
         buttonSpawner = FindObjectOfType<ButtonSpawner>();
 
-        StartCoroutine(ShootCoroutine()); 
+        // StartCoroutine(ShootCoroutine()); 
         // buttonSpawner.InitializeButtons("Increase Tower HP", "Boost Tower Fire Rate", "Speed Up Tower Bullets");
     }
 
@@ -59,7 +51,7 @@ public class Player : MonoBehaviour
     public void GainExp(int amount)
     {
         exp += amount;
-        // Debug.Log($"EXP: {exp}");
+        // //Debug.Log($"EXP: {exp}");
         if(this.exp >= 100){
             LevelUp();
             exp = 0;
@@ -68,7 +60,7 @@ public class Player : MonoBehaviour
 
     void LevelUp(){
         playerLevel += 1;
-        Debug.Log("Level Up! Current Level: " + playerLevel);
+        // //Debug.Log("Level Up! Current Level: " + playerLevel);
         towerPlayerManager.UnlockTowerType(playerLevel);
         AutoGenerateButton();
         Time.timeScale = 0;
@@ -116,39 +108,11 @@ public class PlayerShooter{
 
         }
        
-    }
-    public void PlaceTower(){
-
-    }
-
     
-
-//     public void AddTower(GameObject tower){
-//             if(tower != null){
-//                 currentTowerNumber += 1;
-//             }
-//             towerSpawner.CreateNewTower();
-//         }
-
-
-//     public void upgradeTower(GameObject tower,TowerAttribute attribute, int inc){
-//             if(tower != null){
-//                 switch(attribute){
-//                     case TowerAttribute.damage:
-//                         tower.GetComponent<TowerBase>().bulletDamage += inc;
-//                         break;
-//                     case TowerAttribute.range:
-//                         tower.GetComponent<TowerBase>().range += inc;
-//                         break;
-//                     case TowerAttribute.fireRate:
-//                         tower.GetComponent<TowerBase>().fireRate -= inc;
-//                         break;
-//                     default:
-//                         break;
-//                 }
-//             }
-
     }
+    
+ }
+
 
 
 

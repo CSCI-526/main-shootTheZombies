@@ -13,7 +13,7 @@ public class FlameThrowerTower : TowerBase
 
     public override void ShootBullet(Vector3 targetPosition, float speed, int damage)
     {
-        GameObject bullet = Instantiate(bulletPrefab, towerPosition, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         FlameBullet bulletScript = bullet.GetComponent<FlameBullet>();
         if (bulletScript != null)
         {

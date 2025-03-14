@@ -33,7 +33,7 @@ public class Wall : MonoBehaviour
     void GameOver()
     {
         // 游戏结束逻辑
-        Debug.Log("Game Over");
+        // //Debug.Log("Game Over");
         hintText.text = "The zombies ate your brains!";
         CancelInvoke(nameof(HideHint)); 
         Invoke(nameof(HideHint), 1f); 

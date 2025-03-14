@@ -21,7 +21,7 @@ public class Zombie : MonoBehaviour
 
         if (hp <= 0)
         {
-            Debug.Log("Base Zombie Died: " + gameObject.name);
+            //Debug.Log("Base Zombie Died: " + gameObject.name);
             Player player = GameObject.Find("Testplayer").GetComponent<Player>();
             Destroy(gameObject);
             if (player.playerLevel <= 6)

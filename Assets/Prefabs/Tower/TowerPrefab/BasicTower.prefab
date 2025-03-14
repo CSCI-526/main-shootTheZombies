@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 11
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 1, b: 0.10618591, a: 1}
   m_FlipX: 0
@@ -101,10 +101,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  range: 10
   fireRate: 1
   bulletSpeed: 5
+  bulletDamage: 30
   towerPosition: {x: 0, y: 0, z: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   bulletPrefab: {fileID: 4692455046652044710, guid: 8b5786322162c461f9d302f7082e538e, type: 3}
   damagePopupPrefab: {fileID: 2437635022160800495, guid: 57af91314f46b40ebace9c0eb458f01d, type: 3}
+  towerManager: {fileID: 0}
+  buttonSpawner: {fileID: 0}

@@ -33,7 +33,7 @@ public class ExplodingZombie : Zombie
     public override void TakeDamage(int damageAmount)
     {
         hp -= damageAmount;
-        Debug.Log("Exploding Zombie took damage: " + damageAmount + ", HP: " + hp);
+        //Debug.Log("Exploding Zombie took damage: " + damageAmount + ", HP: " + hp);
 
         GameObject canvasObj = GameObject.Find("Damage");
         Transform canvas = canvasObj.transform;
@@ -49,12 +49,12 @@ public class ExplodingZombie : Zombie
 
     protected void Die()
     {
-        Debug.Log("Exploding Zombie Died");
+        //Debug.Log("Exploding Zombie Died");
         Explode();
 
         Player player = GameObject.Find("Testplayer").GetComponent<Player>();
 
-        Debug.Log("Destroying Exploding Zombie: " + gameObject.name);
+        //Debug.Log("Destroying Exploding Zombie: " + gameObject.name);
         Destroy(gameObject);
         
         if (player.playerLevel <= 6)
@@ -65,21 +65,21 @@ public class ExplodingZombie : Zombie
 
     private void Explode()
     {
-        Debug.Log("Exploding! Checking for nearby objects...");
+        //Debug.Log("Exploding! Checking for nearby objects...");
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 
-        Debug.Log("Total objects detected in explosion: " + colliders.Length);
+        //Debug.Log("Total objects detected in explosion: " + colliders.Length);
 
         foreach (Collider2D col in colliders)
         {
-            Debug.Log("Found zombies in explosion radius: " + col.gameObject.name);
+            //Debug.Log("Found zombies in explosion radius: " + col.gameObject.name);
 
             if (col.CompareTag("Zombie"))
             {
                 Zombie otherZombie = col.GetComponent<Zombie>();
                 if (otherZombie != null && otherZombie != this)
                 {
-                    Debug.Log("Damaging zombie: " + col.gameObject.name + " with " + explosionDamage + " damage");
+                    //Debug.Log("Damaging zombie: " + col.gameObject.name + " with " + explosionDamage + " damage");
                     otherZombie.TakeDamage(explosionDamage);
                 }
             }
@@ -88,7 +88,7 @@ public class ExplodingZombie : Zombie
                 Wall wall = col.GetComponent<Wall>();
                 if (wall != null)
                 {
-                    Debug.Log("Damaging wall: " + col.gameObject.name + " with " + explosionDamage + " damage");
+                    //Debug.Log("Damaging wall: " + col.gameObject.name + " with " + explosionDamage + " damage");
                     wall.TakeDamage(explosionDamage);
                 }
             }

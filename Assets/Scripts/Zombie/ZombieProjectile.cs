@@ -18,7 +18,7 @@ public class ZombieProjectile : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ZombieProjectile Rigidbody2D is missing on this projectile!");
+            //Debug.LogError("ZombieProjectile Rigidbody2D is missing on this projectile!");
         }
     }
 
