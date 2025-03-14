@@ -66,7 +66,7 @@ public class TowerBase : MonoBehaviour
 
     public virtual void ShootBullet(Vector3 targetPosition, float speed, int damage)
     {
-        GameObject bullet = Instantiate(bulletPrefab, towerPosition, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         BasicBullet bulletScript = bullet.GetComponent<BasicBullet>();
         if (bulletScript != null)
         {
