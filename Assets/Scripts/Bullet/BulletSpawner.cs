@@ -46,6 +46,11 @@ public class BulletSpawner : MonoBehaviour
             {
                 FireBullet(targetZombie.transform.position);
             }
+            else
+            {
+                yield return null;
+                continue;
+            }
             float adjustedInterval = Mathf.Pow(0.9f, fireRate - 1);
             yield return new WaitForSeconds(adjustedInterval); 
         }
