@@ -8,11 +8,13 @@ public class Base : MonoBehaviour
     void Start()
     {
         // Position the hintText at the top right
-        RectTransform rectTransform = hintText.GetComponent<RectTransform>();
-        rectTransform.anchorMin = new Vector2(1, 1);
-        rectTransform.anchorMax = new Vector2(1, 1);
-        rectTransform.pivot = new Vector2(1, 1);
-        rectTransform.anchoredPosition = new Vector2(-10, -10); // Adjust the offset as needed
+         RectTransform rectTransform = hintText.GetComponent<RectTransform>();
+
+        // Set the anchor to the center of the screen
+        rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+        rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        rectTransform.pivot = new Vector2(0.5f, 0.5f); 
+        rectTransform.anchoredPosition =  new Vector2(0, 200); // Adjust the offset as needed
 
         // Set the font size
         hintText.fontSize = 24; // Adjust the font size as needed
@@ -20,21 +22,35 @@ public class Base : MonoBehaviour
         // Set the width of the text field to be shorter
         rectTransform.sizeDelta = new Vector2(200, rectTransform.sizeDelta.y); // Adjust the width as needed
 
-        hintText.text = "Welcome! Click the zombie to shoot!";
-        CancelInvoke(nameof(ClickHint)); 
+        hintText.text = "Click the zombie to shoot!";
+        
         Invoke(nameof(ClickHint), 10f); 
         Invoke(nameof(PlaceTowerHint), 20f);
-        Invoke(nameof(ChangeTowerHint), 30f);                                         
+        Invoke(nameof(ChangeTowerHint), 30f);    
+        Invoke(nameof(CancelHint), 40f);
+                                   
     }
 
     void ClickHint(){
-        hintText.text = "Click on a blank area to lock the shooting angle";
+        UpdateHint("Tired? Click on a blank area to auto aiming", new Vector2(0, -100), 24, 200);
     }
     void PlaceTowerHint(){
-        hintText.text = "Q/E to place the tower!";
+        UpdateHint("Try Q/E/Z for towers!", new Vector2(-200, 0), 24, 200);
     }
     void ChangeTowerHint(){
-        hintText.text = "Z to change the tower!";
+        UpdateHint("Move the mouse and left click!", new Vector2(-200, 0), 24, 200);
+    }
+    void CancelHint(){
+        // UpdateHint(" ", new Vector2(0, 0), 24, 200);
+        hintText.text = "";
     }
 
+    public void UpdateHint(string newText, Vector2 newPosition, float newFontSize, float newWidth)
+    {
+        hintText.text = newText;
+        RectTransform rectTransform = hintText.GetComponent<RectTransform>();
+        rectTransform.anchoredPosition = newPosition;
+        hintText.fontSize = newFontSize;
+        rectTransform.sizeDelta = new Vector2(newWidth, rectTransform.sizeDelta.y);
+    }
 }

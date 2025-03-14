@@ -157,6 +157,8 @@ public class ButtonSpawner : MonoBehaviour
         {
             case "Tower Number":
                  towerSpawner.incMaxTowerNumber();
+                 hintClickTower = CreateText("Press Q/E to place the tower!", new Vector2(0, 0));
+                 Destroy(hintClickTower, 2f);
                  break;
                 
                 break;
@@ -173,9 +175,7 @@ public class ButtonSpawner : MonoBehaviour
             // case "Increase Tower Damage":
             //     towerSpawner.UpdateAttributeD();
             //     break;  
-            // case "Increase Tower Number":
-            //     towerSpawner.incMaxTowerNumber();
-            //     break; 
+   
             
             default:
                 hintClickTower = CreateText("Click the tower to upgrade!", new Vector2(0, 0));
