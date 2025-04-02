@@ -13,9 +13,11 @@ public class TowerSpawner : MonoBehaviour
     private int MaxTowerNumber = 1;
     private int currentTowerNumber = 0;
     private float fixedX = 1f;
-    private bool isMoving = true;
+    private bool isMoving = false;
     // private int towerBuildTime = 30;
+    private int towerType;
     private int currentTowerIndex = 0; // Add this line to track the current tower type
+    private bool FirstTime = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,44 +29,34 @@ public class TowerSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if(Time.time < towerBuildTime) return;
-        // if(Time.time >= towerBuildTime && Time.time <= towerBuildTime + 1) ShowHint("Press 'Q' to build tower on the left side of the lane! Press 'E' on the right side. ");
-        // Press E to place the tower on the right side
-        KeyboardAction();
+        if(isMoving){
+            Move();
+        }
+        
     }
     public void incMaxTowerNumber(){
         MaxTowerNumber += 1;
     }
-    private void KeyboardAction(){
-         if (Input.GetKeyDown(KeyCode.E))
-        {
-            fixedX = 7f;
-            if (isMoving)
-            {
-                DestroyCurrentTower();
-            
-            }
-            CreateNewTower();
+    public void AddTower(int type){
+        //change isMoving
+        //create tower
+        
+        if(isMoving){
+            DestroyCurrentTower();
         }
-        // Press Q to place the tower on the left side
-        else if (Input.GetKeyDown(KeyCode.Q))
-        {
-            
-           fixedX = -7f;
-            if (isMoving)
-            {
-                DestroyCurrentTower();
-            
-            }
-            CreateNewTower();
-            
-        }
+        towerType = type;
+        CreateNewTower();//change ismoving inside
 
-        // Press Z to change the tower type
-        if (Input.GetKeyDown(KeyCode.Z) && isMoving)
-        {
-            ChangeTowerType();
-        }
+
+    }
+    private void Move(){
+
+
+        // Press right mouse button to change the tower type
+        // if (Input.GetMouseButtonDown(1) && isMoving)
+        // {
+        //     ChangeTowerType();
+        // }
 
         // Press left mouse button to place the tower
         if (Input.GetMouseButtonDown(0))
@@ -75,19 +67,18 @@ public class TowerSpawner : MonoBehaviour
 
         if (currentTower != null && isMoving)
         {
-            MoveTowerWithMouse(currentTower, fixedX);
+            MoveTowerWithMouse(currentTower);
         }
 
     }
     
-
     private void CreateNewTower()
     {
         if(currentTowerNumber >= MaxTowerNumber){
             ShowHint("You can not build more tower!");
             return ;
         }
-        currentTower = Instantiate(towerDatabase.towerPrefabs[0]);
+        currentTower = Instantiate(towerDatabase.towerPrefabs[towerType]);
         // currentTower = Instantiate(towerPrefab);
         towers.Add(currentTower);
         currentTowerNumber += 1;
@@ -103,25 +94,36 @@ public class TowerSpawner : MonoBehaviour
         }
     }
 
-    private void ChangeTowerType()
+    // private void ChangeTowerType()
+    // {
+    //     if (currentTower != null)
+    //     {
+    //         Destroy(currentTower);
+    //     }
+
+    //     currentTowerIndex = (currentTowerIndex + 1) % towerDatabase.towerPrefabs.Length;
+    //     currentTower = Instantiate(towerDatabase.towerPrefabs[currentTowerIndex]);
+    //     towers.Add(currentTower);
+    //     isMoving = true;
+    // }
+
+
+    void MoveTowerWithMouse(GameObject tower )
     {
-        if (currentTower != null)
-        {
-            Destroy(currentTower);
-        }
-
-        currentTowerIndex = (currentTowerIndex + 1) % towerDatabase.towerPrefabs.Length;
-        currentTower = Instantiate(towerDatabase.towerPrefabs[currentTowerIndex]);
-        towers.Add(currentTower);
-        isMoving = true;
-    }
-
-
-    void MoveTowerWithMouse(GameObject tower, float fixedX)
-    {
+        float fixedX;
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = -Camera.main.transform.position.z; 
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        // Adjust fixedX based on mouse X position
+        if (mousePosition.x < Screen.width / 2)
+        {
+            fixedX = -7f;
+        }
+        else
+        {
+            fixedX = 7f;
+        }
 
         worldPosition.x = fixedX; // Keep X locked
         worldPosition.z = 0f;     // Ensure Z is zero in 2D
