@@ -9,21 +9,21 @@ public class TowerManager : MonoBehaviour
     {
 
 
-        GameObject basicTower = Instantiate(towerDatabase.towerPrefabs[0]);
-        basicTower.transform.position = new Vector3(-7, 2, 0);
+        //GameObject basicTower = Instantiate(towerDatabase.towerPrefabs[0]);
+        // basicTower.transform.position = new Vector3(-7, 2, 0);
 
-        // how to init
-        GameObject flameTower = Instantiate(towerDatabase.towerPrefabs[1]);
-        // GameObject flameTower = Instantiate(towerDatabase.towerPrefabs[1], /* POSITION you need to place tower at */, Quaternion.identity);
-        flameTower.transform.position = new Vector3(7, 2, 0);
+        // // how to init
+        // GameObject flameTower = Instantiate(towerDatabase.towerPrefabs[1]);
+        // // GameObject flameTower = Instantiate(towerDatabase.towerPrefabs[1], /* POSITION you need to place tower at */, Quaternion.identity);
+        // flameTower.transform.position = new Vector3(7, 2, 0);
         // how to edit attributes
-        FlameThrowerTower towerScript = flameTower.GetComponent<FlameThrowerTower>();
-        if (towerScript != null)
-        {
-            towerScript.fireRate = 0.5f; 
-            towerScript.bulletDamage = 1;
-            towerScript.bulletSpeed = 2;
-        }
+        // FlameThrowerTower towerScript = flameTower.GetComponent<FlameThrowerTower>();
+        // if (towerScript != null)
+        // {
+        //     towerScript.fireRate = 0.5f; 
+        //     towerScript.bulletDamage = 1;
+        //     towerScript.bulletSpeed = 2;
+        // }
 
     }
 

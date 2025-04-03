@@ -10,7 +10,7 @@ public class TowerSpawner : MonoBehaviour
     // public TowerBulletSpawner bulletSpawnerPrefab;
     private List<GameObject> towers = new List<GameObject>();
     private GameObject currentTower; // Declare currentTower as a class member
-    private int MaxTowerNumber = 1;
+    private int MaxTowerNumber = 5;
     private int currentTowerNumber = 0;
     private float fixedX = 1f;
     private bool isMoving = true;
@@ -39,24 +39,24 @@ public class TowerSpawner : MonoBehaviour
          if (Input.GetKeyDown(KeyCode.E))
         {
             fixedX = 7f;
-            if (isMoving)
-            {
-                DestroyCurrentTower();
+            // if (isMoving)
+            // {
+            //     DestroyCurrentTower();
             
-            }
-            CreateNewTower();
+            // }
+            //CreateNewTower();
         }
         // Press Q to place the tower on the left side
         else if (Input.GetKeyDown(KeyCode.Q))
         {
             
            fixedX = -7f;
-            if (isMoving)
-            {
-                DestroyCurrentTower();
+            // if (isMoving)
+            // {
+            //     DestroyCurrentTower();
             
-            }
-            CreateNewTower();
+            // }
+            //CreateNewTower();
             
         }
 
@@ -70,7 +70,7 @@ public class TowerSpawner : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             isMoving = false;
-
+            CreateNewTower();
         }
 
         if (currentTower != null && isMoving)

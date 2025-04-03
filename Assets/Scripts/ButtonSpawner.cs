@@ -225,7 +225,7 @@ public class ButtonSpawner : MonoBehaviour
                     // //Debug.Log("Tower HP increased by 10. New HP: " + selectedTower.hp);
                     break;
                 case "Tower Fire Rate":
-                    selectedTower.fireRate += 10;
+                    selectedTower.fireRate -= 0.05f;
                     // //Debug.Log("Tower fireRate increased by 10. New fireRate: " + selectedTower.fireRate);
                     break;
 
