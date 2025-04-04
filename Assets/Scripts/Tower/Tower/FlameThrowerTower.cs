@@ -17,7 +17,14 @@ public class FlameThrowerTower : TowerBase
         FlameBullet bulletScript = bullet.GetComponent<FlameBullet>();
         if (bulletScript != null)
         {
-            bulletScript.Initialize(targetPosition, speed, damage);
+            // Vector3 offSet = new Vector3(0,-5,0);
+            // if(targetPosition.y < -15){
+            //     offSet.y = 0;
+            // }
+            // bulletScript.Initialize(targetPosition + offSet, speed, damage);
+            Vector3 oppositePosition = towerPosition;
+            oppositePosition.x = -towerPosition.x;
+            bulletScript.Initialize(oppositePosition, speed, damage);
         }
 
     }
