@@ -17,6 +17,8 @@ public class ButtonSpawner : MonoBehaviour
     private GameObject hintTextObj; // Add this line to store the hint text object
 
     private GameObject hintClickTower;
+    private TowerButtonSpawner towerButtonSpawner;
+    private Player player;
     private string chooseText;
 
     private TowerBase selectedTower;
@@ -25,6 +27,8 @@ public class ButtonSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        player = FindObjectOfType<Player>();
+        towerButtonSpawner = FindObjectOfType<TowerButtonSpawner>();
         CreateCanvas();
        
     }
@@ -152,33 +156,26 @@ public class ButtonSpawner : MonoBehaviour
     private void UpdateTowerAttribute(string buttonText)
     {
          canSelectTower = true;
-        
+       
 
         switch (buttonText)
         {
             case "Tower Number":
                  towerSpawner.incMaxTowerNumber();
-                 hintClickTower = CreateText("Press Q/E to place the tower!", new Vector2(0, 0));
-                 Destroy(hintClickTower, 2f);
+                 towerButtonSpawner.InitializeButtons();
+                //  hintClickTower = CreateText("Press Q/E to place the tower!", new Vector2(0, 0));
+                //  Destroy(hintClickTower, 2f);
                  break;
                 
                 break;
             case "Player Damage":
                 playerManager.ModifyBulletSpawnerProperties();
                 playerManager.CloseUpgradeWindow();
+                player.ResumeGame();
                 break;
-            // case "Boost Tower Fire Rate":
-            //     towerSpawner.UpdateAttributeB();
-            //     break;
-            // case "Speed Up Tower Bullets":
-            //     towerSpawner.UpdateAttributeC();
-            //     break;
-            // case "Increase Tower Damage":
-            //     towerSpawner.UpdateAttributeD();
-            //     break;  
-   
-            
+        
             default:
+                
                 hintClickTower = CreateText("Click the tower to upgrade!", new Vector2(0, 0));
                 chooseText = buttonText;
                 //Debug.LogWarning("Unknown button text: " + buttonText);
@@ -186,7 +183,7 @@ public class ButtonSpawner : MonoBehaviour
         }
     }
 
-        public void SelectTower(TowerBase tower)
+    public void SelectTower(TowerBase tower)
     {
         if(!canSelectTower)
         {
@@ -211,6 +208,7 @@ public class ButtonSpawner : MonoBehaviour
             {
                 //change the hint text
                 hintClickTower.GetComponent<Text>().text ="upgraded!";
+                player.ResumeGame();
                 
                 // hintClickTower.= "upgraded!";
                 Destroy(hintClickTower, 2f);
@@ -222,7 +220,6 @@ public class ButtonSpawner : MonoBehaviour
             {
                 case "Tower HP":
                     selectedTower.hp += 10;
-                    // //Debug.Log("Tower HP increased by 10. New HP: " + selectedTower.hp);
                     break;
                 case "Tower Fire Rate":
                     selectedTower.fireRate += 10;

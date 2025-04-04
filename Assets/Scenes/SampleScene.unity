@@ -2985,6 +2985,7 @@ MonoBehaviour:
   fireRate: 1
   exp: 0
   expRate: 10
+  grayCover: {fileID: 0}
 --- !u!4 &1485013291
 Transform:
   m_ObjectHideFlags: 0
@@ -3780,6 +3781,7 @@ MonoBehaviour:
   fireRate: 1
   exp: 0
   expRate: 10
+  grayCover: {fileID: 1093143848}
 --- !u!1 &2020172108
 GameObject:
   m_ObjectHideFlags: 0

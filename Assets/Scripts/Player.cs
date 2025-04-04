@@ -2,12 +2,14 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     // public GameObject bulletPrefab; 
     public TowerPlayerManager towerPlayerManager;
-    public ButtonSpawner buttonSpawner;
+    private ButtonSpawner buttonSpawner;
+    private TowerButtonSpawner towerButtonSpawner;
     public int playerLevel = 1;
     public float bulletSpeed = 10f; 
     public float fireRate = 1f; 
@@ -15,6 +17,7 @@ public class Player : MonoBehaviour
     public int exp = 0;
     public int expRate = 10;    // EXP gained per second
     private float timer = 0f;   // Timer to track elapsed time
+    private GameObject grayCover; // Reference to the gray cover UI element
 
     // 1 : Tower HP
     // 2 : Tower Fire Rate
@@ -24,10 +27,19 @@ public class Player : MonoBehaviour
     private List<string> buttoonTexts = new List<string>{"Tower HP", "Tower Fire Rate", "Tower Bullets", "Tower Damage", "Tower Number", "Player Damage"};
     
     
-         void Start()
+    void Start()
     {
         towerPlayerManager = new TowerPlayerManager(); 
         buttonSpawner = FindObjectOfType<ButtonSpawner>();
+        towerButtonSpawner = FindObjectOfType<TowerButtonSpawner>();
+        grayCover = GameObject.Find("Cover"); // Find the gray cover in the scene
+        Debug.Log("graycover11");
+        if (grayCover != null)
+        {
+            Debug.Log("graycover");
+            grayCover.SetActive(false); // Ensure the gray cover is initially hidden
+        }
+        // LevelUp();
 
         // StartCoroutine(ShootCoroutine()); 
         // buttonSpawner.InitializeButtons("Increase Tower HP", "Boost Tower Fire Rate", "Speed Up Tower Bullets");
@@ -92,11 +104,27 @@ public class Player : MonoBehaviour
     void LevelUp(){
         Time.timeScale = 0;
         playerLevel += 1;
+        if (grayCover != null)
+        {
+            grayCover.SetActive(true); // Show the gray cover
+        }
         // //Debug.Log("Level Up! Current Level: " + playerLevel);
         towerPlayerManager.UnlockTowerType(playerLevel);
         AutoGenerateButton();
-        
+        // towerButtonSpawner.InitializeButtons();
+        // Ensure the game remains stopped until ResumeGame is explicitly called
+        return;
     }
+
+    public void ResumeGame()
+    {
+        if (grayCover != null)
+        {
+            grayCover.SetActive(false); // Hide the gray cover
+        }
+        Time.timeScale = 1; // Resume the game
+    }
+
     void AutoGenerateButton(){
         // randomly choose 3 int  without repeat
         HashSet<int> randomIndex = new HashSet<int>();
@@ -129,6 +157,7 @@ public class PlayerShooter{
 
 
 
+
      
     public TowerPlayerManager(){
         maxTowerNumber = 0;
@@ -149,5 +178,5 @@ public class PlayerShooter{
 
 
 
-    
+
 
