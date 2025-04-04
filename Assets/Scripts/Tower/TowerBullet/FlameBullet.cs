@@ -9,7 +9,7 @@ public class FlameBullet : BulletBase
             Zombie zombie = other.GetComponent<Zombie>();
             if (zombie != null)
             {
-                zombie.TakeDamage(damage);
+                zombie.TakeDamage(damage, Color.black);
             }
             // Destroy(gameObject); 
         }

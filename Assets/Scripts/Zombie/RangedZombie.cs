@@ -17,6 +17,7 @@ public class RangedZombie : Zombie
         {
             ShootPlayerWall();
             shootTimer = 0f;
+            color = Color.Green;
         }
     }
 

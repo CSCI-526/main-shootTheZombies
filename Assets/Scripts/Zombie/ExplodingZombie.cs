@@ -13,6 +13,7 @@ public class ExplodingZombie : Zombie
     protected override void Start()
     {
         hp = 150;
+        color = Color.Blue;
     }
 
     public void Update()
@@ -30,8 +31,9 @@ public class ExplodingZombie : Zombie
         }
     }
 
-    public override void TakeDamage(int damageAmount)
+    public override void TakeDamage(int damageAmount, Color bulletColor)
     {
+        if (bulletColor != zombieColor || bulletColor != zombieColor.black) return;
         hp -= damageAmount;
         //Debug.Log("Exploding Zombie took damage: " + damageAmount + ", HP: " + hp);
 
@@ -80,7 +82,7 @@ public class ExplodingZombie : Zombie
                 if (otherZombie != null && otherZombie != this)
                 {
                     //Debug.Log("Damaging zombie: " + col.gameObject.name + " with " + explosionDamage + " damage");
-                    otherZombie.TakeDamage(explosionDamage);
+                    otherZombie.TakeDamage(explosionDamage, Color.black);
                 }
             }
             else if (col.CompareTag("Wall"))

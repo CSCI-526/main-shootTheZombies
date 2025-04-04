@@ -33,7 +33,9 @@ public class Bullet : MonoBehaviour
             Zombie zombie = other.GetComponent<Zombie>();
             if (zombie != null)
             {
-                zombie.TakeDamage(damage);
+                SpriteRenderer sr = bullet.GetComponent<SpriteRenderer>();
+                private Color bulletColor = sr.color;
+                zombie.TakeDamage(damage, bulletColor);
             }
 
             SplitIntoSmallBullets(other);

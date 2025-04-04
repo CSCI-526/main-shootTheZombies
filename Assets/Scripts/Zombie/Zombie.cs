@@ -3,16 +3,19 @@ using UnityEngine;
 
 public class Zombie : MonoBehaviour
 {
+
     public GameObject damagePopupPrefab;
     public int hp;
+    public Color zombieColor;
 
     protected virtual void Start()
     {
         hp = 100;
     }
-
-    public virtual void TakeDamage(int damageAmount)
+    public virtual void TakeDamage(int damageAmount, Color bulletColor)
     {        
+        if (bulletColor != zombieColor || bulletColor != zombieColor.black) return;
+
         hp -= damageAmount;
         GameObject canvasObj = GameObject.Find("Damage");
         Transform canvas = canvasObj.transform;

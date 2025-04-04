@@ -12,6 +12,7 @@ public class MeleeZombie : Zombie
     protected override void Start()
     {
         hp = 100;
+        color = Color.Red;
     }
 
     public void Update()
