@@ -70,7 +70,11 @@ public class TowerBase : MonoBehaviour
         BasicBullet bulletScript = bullet.GetComponent<BasicBullet>();
         if (bulletScript != null)
         {
-            bulletScript.Initialize(targetPosition, speed, damage);
+            Vector3 offSet = new Vector3(0,-2,0);
+            if(targetPosition.y < -15){
+                offSet.y = 0;
+            }
+            bulletScript.Initialize(targetPosition + offSet, speed, damage);
             // bulletScript.setDamage(damage);
             // bulletScript.setSpeed(speed);
         }
