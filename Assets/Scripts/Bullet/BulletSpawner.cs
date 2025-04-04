@@ -13,6 +13,8 @@ public class BulletSpawner : MonoBehaviour
     public int parallelCount = 1; 
     public float parallelSpacing = 0.5f;
 
+    private Color bulletColor = Color.red;
+
     void Start()
     {
         StartCoroutine(ShootCoroutine());
@@ -20,34 +22,19 @@ public class BulletSpawner : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))  
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-            
-            Zombie clickedZombie = FindZombieAtPosition(mousePosition);
-            
-            if (clickedZombie != null)
-            {
-                targetZombie = clickedZombie; 
-            }
-        }
-
-        if (targetZombie == null || targetZombie.hp <= 0)
-        {
-            targetZombie = FindNearestZombie(transform.position);
-        }
+        if (Input.GetKeyDown(KeyCode.Q)) bulletColor = Color.red;
+        if (Input.GetKeyDown(KeyCode.W)) bulletColor = Color.green;
+        if (Input.GetKeyDown(KeyCode.E)) bulletColor = Color.blue;
     }
 
     IEnumerator ShootCoroutine()
     {
         while (true)
         {
-            if (targetZombie != null)
-            {
-                FireBullet(targetZombie.transform.position);
-            }
+            Vector3 target = GetMouseWorldPosition();
+            FireBullet(target);
             float adjustedInterval = Mathf.Pow(0.9f, fireRate - 1);
-            yield return new WaitForSeconds(adjustedInterval); 
+            yield return new WaitForSeconds(adjustedInterval);
         }
     }
 
@@ -97,39 +84,52 @@ public class BulletSpawner : MonoBehaviour
             Vector2 direction = rotation * Vector2.up;
             rb.linearVelocity = direction * bulletSpeed;
         }
-    }
 
-    Zombie FindZombieAtPosition(Vector3 position)
-    {
-        float detectionRadius = 1.5f;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, detectionRadius);
-
-        foreach (Collider2D collider in colliders)
+        SpriteRenderer sr = bullet.GetComponent<SpriteRenderer>();
+        if (sr != null)
         {
-            if (collider.CompareTag("Zombie"))
-            {
-                return collider.GetComponent<Zombie>();
-            }
+            sr.color = bulletColor;
         }
-        return null;
     }
 
-    Zombie FindNearestZombie(Vector3 playerPosition)
+    Vector3 GetMouseWorldPosition()
     {
-        Zombie[] zombies = FindObjectsOfType<Zombie>();
-        Zombie nearestZombie = null;
-        float shortestDistance = Mathf.Infinity;
-
-        foreach (Zombie zombie in zombies)
-        {
-            float distance = Vector3.Distance(playerPosition, zombie.transform.position);
-            if (distance < shortestDistance)
-            {
-                shortestDistance = distance;
-                nearestZombie = zombie;
-            }
-        }
-
-        return nearestZombie;
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = -Camera.main.transform.position.z;
+        return Camera.main.ScreenToWorldPoint(mousePosition);
     }
+
+    // Zombie FindZombieAtPosition(Vector3 position)
+    // {
+    //     float detectionRadius = 1.5f;
+    //     Collider2D[] colliders = Physics2D.OverlapCircleAll(position, detectionRadius);
+
+    //     foreach (Collider2D collider in colliders)
+    //     {
+    //         if (collider.CompareTag("Zombie"))
+    //         {
+    //             return collider.GetComponent<Zombie>();
+    //         }
+    //     }
+    //     return null;
+    // }
+
+    // Zombie FindNearestZombie(Vector3 playerPosition)
+    // {
+    //     Zombie[] zombies = FindObjectsOfType<Zombie>();
+    //     Zombie nearestZombie = null;
+    //     float shortestDistance = Mathf.Infinity;
+
+    //     foreach (Zombie zombie in zombies)
+    //     {
+    //         float distance = Vector3.Distance(playerPosition, zombie.transform.position);
+    //         if (distance < shortestDistance)
+    //         {
+    //             shortestDistance = distance;
+    //             nearestZombie = zombie;
+    //         }
+    //     }
+
+    //     return nearestZombie;
+    // }
 }

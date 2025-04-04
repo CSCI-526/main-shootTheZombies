@@ -222,7 +222,7 @@ public class ButtonSpawner : MonoBehaviour
                     selectedTower.hp += 10;
                     break;
                 case "Tower Fire Rate":
-                    selectedTower.fireRate += 10;
+                    selectedTower.fireRate -= 0.05f;
                     // //Debug.Log("Tower fireRate increased by 10. New fireRate: " + selectedTower.fireRate);
                     break;
 

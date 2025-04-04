@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 11
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.28826985, g: 0.44119015, b: 0.7735849, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -168,4 +168,4 @@ MonoBehaviour:
   damage: 30
   splitSpeed: 10
   splitBulletPrefab: {fileID: 1003970795388038849, guid: 69718c6361c81497a87fbe63c4420eba, type: 3}
-  splitCount: 4
+  splitCount: 0
