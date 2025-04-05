@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   fireRate: 1
-  bulletSpeed: 5
+  bulletSpeed: 10
   bulletDamage: 30
   towerPosition: {x: 0, y: 0, z: 0}
   targetPosition: {x: 0, y: 0, z: 0}

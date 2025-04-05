@@ -160,11 +160,17 @@ public class ButtonSpawner : MonoBehaviour
 
         switch (buttonText)
         {
-            case "Tower Number":
-                 towerSpawner.incMaxTowerNumber();
-                 towerButtonSpawner.InitializeButtons();
-                //  hintClickTower = CreateText("Press Q/E to place the tower!", new Vector2(0, 0));
-                //  Destroy(hintClickTower, 2f);
+            // case "Tower Number":
+            //      towerSpawner.incMaxTowerNumber();
+            //      towerButtonSpawner.InitializeButtons();
+            //     //  hintClickTower = CreateText("Press Q/E to place the tower!", new Vector2(0, 0));
+            //     //  Destroy(hintClickTower, 2f);
+            //      break;
+                
+            case "Player Damage":
+                playerManager.ModifyBulletSpawnerProperties();
+                playerManager.CloseUpgradeWindow();
+                player.ResumeGame();
                 break;
                 
             // case "Player Damage":
