@@ -925,6 +925,83 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &664519583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 664519584}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &664519584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664519583}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 476.00317, y: 626.2369, z: -10.566215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &703661515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703661517}
+  - component: {fileID: 703661516}
+  m_Layer: 0
+  m_Name: TowerButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &703661516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703661515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fdc687e923949c9b3f58b838ac0410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: 1866031802}
+  towerSpawner: {fileID: 870250988}
+--- !u!4 &703661517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703661515}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 476.00317, y: 626.2369, z: -10.566215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &742530403
 GameObject:
   m_ObjectHideFlags: 0
@@ -3024,13 +3101,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6593345bd49e49f5a0cd256037d95ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonSpawner: {fileID: 935558063}
   playerLevel: 0
   bulletSpeed: 10
   fireRate: 1
   exp: 0
   expRate: 10
-  grayCover: {fileID: 0}
 --- !u!4 &1485013291
 Transform:
   m_ObjectHideFlags: 0
@@ -3820,13 +3895,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6593345bd49e49f5a0cd256037d95ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonSpawner: {fileID: 935558063}
   playerLevel: 1
   bulletSpeed: 10
   fireRate: 1
   exp: 0
   expRate: 10
-  grayCover: {fileID: 1093143848}
 --- !u!1 &2020172108
 GameObject:
   m_ObjectHideFlags: 0
@@ -4074,3 +4147,5 @@ SceneRoots:
   - {fileID: 1620237428}
   - {fileID: 1178303755}
   - {fileID: 1457349814}
+  - {fileID: 664519584}
+  - {fileID: 703661517}
