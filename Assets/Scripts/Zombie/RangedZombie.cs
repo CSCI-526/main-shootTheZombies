@@ -8,6 +8,12 @@ public class RangedZombie : Zombie
     private float shootTimer = 0f;
     public int damage = 10;
 
+    protected override void Start()
+    {
+        hp = 100;
+        color = Color.green;
+    }
+
     private void Update()
     {
         transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
