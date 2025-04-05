@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
             Debug.Log("graycover");
             grayCover.SetActive(false); // Ensure the gray cover is initially hidden
         }
+        // towerButtonSpawner.InitializeButtons();
         // LevelUp();
 
         // StartCoroutine(ShootCoroutine()); 
@@ -110,8 +111,8 @@ public class Player : MonoBehaviour
         }
         // //Debug.Log("Level Up! Current Level: " + playerLevel);
         towerPlayerManager.UnlockTowerType(playerLevel);
-        AutoGenerateButton();
-        // towerButtonSpawner.InitializeButtons();
+        // AutoGenerateButton();
+        towerButtonSpawner.InitializeButtons();
         // Ensure the game remains stopped until ResumeGame is explicitly called
         return;
     }

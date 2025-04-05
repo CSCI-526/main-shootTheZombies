@@ -6,7 +6,7 @@ public class TowerBase : MonoBehaviour
     // basic attributes
     public float hp = 100;
     public float fireRate = 1.0f;    // 发射间隔（秒）
-    public float bulletSpeed = 5f;   // 子弹速度
+    public float bulletSpeed = 10f;   // 子弹速度
     public int bulletDamage = 30;
     // public float range = 10.0f;
     public Vector3 towerPosition; 
@@ -35,7 +35,10 @@ public class TowerBase : MonoBehaviour
         print(bulletPrefab);
         
     }
-
+       void Update(){
+        towerPosition = transform.position;
+        
+    }
 
     public IEnumerator ShootCoroutine()
     {

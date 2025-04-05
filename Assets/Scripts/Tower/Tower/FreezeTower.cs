@@ -5,7 +5,7 @@ public class FreezeTower  : TowerBase
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // fireRate = 3;
+        fireRate = 3;
         towerPosition = transform.position;
         StartCoroutine(ShootCoroutine());  
     }
