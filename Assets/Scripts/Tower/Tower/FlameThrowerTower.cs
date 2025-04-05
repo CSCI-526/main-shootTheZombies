@@ -29,7 +29,6 @@ public class FlameThrowerTower : TowerBase
 
     }
 
-
     public override void TakeDamage(int damage)
     {
         hp -= damage;

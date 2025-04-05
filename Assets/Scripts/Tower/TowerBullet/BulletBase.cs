@@ -34,7 +34,7 @@ public class BulletBase : MonoBehaviour
             if (zombie != null)
             {
                 // print(damage);
-                // zombie.TakeDamage(damage);
+                zombie.TakeDamage(damage, Color.black);
             }
             Destroy(gameObject); 
         }

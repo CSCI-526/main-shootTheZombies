@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ZombieSpawner : MonoBehaviour
 {
-    private int waveCount = 60;
+    private int waveCount = 40;
     public PlayerManagerScript playerManager;
     public GameObject meleeZombiePrefab;
     public GameObject rangedZombiePrefab;
@@ -32,17 +32,17 @@ public class ZombieSpawner : MonoBehaviour
         GameObject zombiePrefab;
 
         //for wave 1
-        if (waveCount > 40 && waveCount <= 60){
+        if (waveCount > 25 && waveCount <= 40){
             zombiePrefab = meleeZombiePrefab;
             waveCount -= 1;
         }
-        else if (waveCount > 20){
+        else if (waveCount > 10){
             spawnInterval = 3f;
             zombiePrefab = explodingZombiePrefab;
             waveCount -= 1;
         }
         else if (waveCount > 0){
-            spawnInterval = 2f;
+            spawnInterval = 5f;
             zombiePrefab = rangedZombiePrefab;
             waveCount -= 1;
         }
@@ -54,9 +54,9 @@ public class ZombieSpawner : MonoBehaviour
                           explodingZombiePrefab;
         }
         Debug.Log(" wavecount == " + waveCount);
-        if (waveCount == 39){
+        if (waveCount == 19){
             playerManager.ShowPopup("Tank zombies have appeared!!!");}
-        else if (waveCount == 19){
+        else if (waveCount == 9){
             playerManager.ShowPopup("Ranged zombies have appeared!!!");}
         else if (waveCount == 0){
             playerManager.ShowPopup("Mix zombies comes!!!");}

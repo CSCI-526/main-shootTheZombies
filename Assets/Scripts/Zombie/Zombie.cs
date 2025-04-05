@@ -5,15 +5,16 @@ public class Zombie : MonoBehaviour
 {
     public GameObject damagePopupPrefab;
     public int hp;
+    public Color color;
 
     protected virtual void Start()
     {
         hp = 100;
     }
 
-    // public virtual void TakeDamage(int damageAmount)
     public virtual void TakeDamage(int damageAmount, Color bulletColor)
-    {        
+    {   //Debug.Log("Zombie color: " + color + ", Bullet color: " + bulletColor);
+        if (bulletColor != color && bulletColor != Color.black) return;
         hp -= damageAmount;
         GameObject canvasObj = GameObject.Find("Damage");
         Transform canvas = canvasObj.transform;
@@ -28,7 +29,7 @@ public class Zombie : MonoBehaviour
             Destroy(gameObject);
             if (player.playerLevel <= 6)
             {
-                player.GainExp(10);
+                player.GainExp(20);
             }
 
             //AnalyticsCommon.timeZombieKilled = DateTime.Now.Ticks

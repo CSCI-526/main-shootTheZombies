@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 11
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.06314526, g: 0.4056604, b: 0.2502085, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePopupPrefab: {fileID: 2437635022160800495, guid: 57af91314f46b40ebace9c0eb458f01d, type: 3}
   hp: 100
+  color: {r: 1, g: 0, b: 0, a: 1}
   moveSpeed: 2
   player: {fileID: 0}
   damage: 20
