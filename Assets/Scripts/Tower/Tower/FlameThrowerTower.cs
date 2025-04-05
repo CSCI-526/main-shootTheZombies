@@ -6,7 +6,7 @@ public class FlameThrowerTower : TowerBase
 
     void Start()
     {
-        // fireRate = 3;
+        fireRate = 3;
         towerPosition = transform.position;
         StartCoroutine(ShootCoroutine());  
     }
