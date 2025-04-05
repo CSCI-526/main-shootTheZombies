@@ -24,12 +24,12 @@ public class Base : MonoBehaviour
 
         hintText.text = "Click the zombie to shoot!";
         
-        Invoke(nameof(ClickHint), 10f); 
+        Invoke(nameof(ClickHint), 5f); 
         // Invoke(nameof(PlaceTowerHintLeft), 20f);
         // Invoke(nameof(PlaceTowerHintRight), 25f);
         // Invoke(nameof(PlaceTowerHintZ), 30f);
         // Invoke(nameof(ChangeTowerHint), 35f);    
-        Invoke(nameof(CancelHint), 40f);
+        Invoke(nameof(CancelHint), 10f);
                                    
     }
 

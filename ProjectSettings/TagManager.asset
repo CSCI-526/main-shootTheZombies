@@ -9,6 +9,7 @@ TagManager:
   - Zombie
   - Bullet
   - ZombieBullet
+  - ReflectWall
   layers:
   - Default
   - TransparentFX

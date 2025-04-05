@@ -1402,7 +1402,7 @@ GameObject:
   - component: {fileID: 742530407}
   m_Layer: 0
   m_Name: RightWall
-  m_TagString: Untagged
+  m_TagString: ReflectWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2327,7 +2327,7 @@ GameObject:
   - component: {fileID: 1168804135}
   m_Layer: 0
   m_Name: LeftWall
-  m_TagString: Untagged
+  m_TagString: ReflectWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5087,3 +5087,5 @@ SceneRoots:
   - {fileID: 1457349814}
   - {fileID: 742530406}
   - {fileID: 1168804138}
+  - {fileID: 664519584}
+  - {fileID: 703661517}
