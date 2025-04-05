@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
             Debug.Log("graycover");
             grayCover.SetActive(false); // Ensure the gray cover is initially hidden
         }
+        // towerButtonSpawner.InitializeButtons();
         // LevelUp();
 
         // StartCoroutine(ShootCoroutine()); 

@@ -7,7 +7,7 @@ public class TowerButtonSpawner : MonoBehaviour
     public PlayerManagerScript playerManager;
     private string buttonTextA = "Normal Tower";
     private string buttonTextB = "Flame Tower";
-    private string buttonTextC = "Freeze Tower";
+    private string buttonTextC = "Freeze Towerz";
     public TowerSpawner towerSpawner;
     private GameObject TbuttonA;
     private GameObject TbuttonB;
