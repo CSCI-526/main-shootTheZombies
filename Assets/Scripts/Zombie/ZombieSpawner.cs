@@ -55,11 +55,11 @@ public class ZombieSpawner : MonoBehaviour
         }
         Debug.Log(" wavecount == " + waveCount);
         if (waveCount == 39){
-            playerManager.ShowPopup("New zombies 1");}
+            playerManager.ShowPopup("Tank zombies have appeared!!!");}
         else if (waveCount == 19){
-            playerManager.ShowPopup("New zombies 2");}
+            playerManager.ShowPopup("Ranged zombies have appeared!!!");}
         else if (waveCount == 0){
-            playerManager.ShowPopup("Mix zombies comes");}
+            playerManager.ShowPopup("Mix zombies comes!!!");}
         
 
         Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);

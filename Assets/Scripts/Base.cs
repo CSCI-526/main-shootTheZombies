@@ -24,22 +24,30 @@ public class Base : MonoBehaviour
 
         hintText.text = "Click the zombie to shoot!";
         
-        // Invoke(nameof(ClickHint), 10f); 
-        // Invoke(nameof(PlaceTowerHint), 20f);
-        // Invoke(nameof(ChangeTowerHint), 30f);    
-        Invoke(nameof(CancelHint), 20f);
+        Invoke(nameof(ClickHint), 10f); 
+        Invoke(nameof(PlaceTowerHintLeft), 20f);
+        Invoke(nameof(PlaceTowerHintRight), 25f);
+        Invoke(nameof(PlaceTowerHintZ), 30f);
+        Invoke(nameof(ChangeTowerHint), 35f);    
+        Invoke(nameof(CancelHint), 40f);
                                    
     }
 
-    // void ClickHint(){
-    //     UpdateHint("Tired? Click on a blank area to auto aiming", new Vector2(0, -100), 24, 200);
-    // }
-    // void PlaceTowerHint(){
-    //     UpdateHint("Try Q/E/Z for towers!", new Vector2(-200, 0), 24, 200);
-    // }
-    // void ChangeTowerHint(){
-    //     UpdateHint("Move the mouse and left click!", new Vector2(-200, 0), 24, 200);
-    // }
+    void ClickHint(){
+        UpdateHint("Tired? Click on a blank area to auto aiming", new Vector2(0, -100), 24, 200);
+    }
+    void PlaceTowerHintLeft(){
+        UpdateHint("Try Q for towers!", new Vector2(-200, 0), 24, 200);
+    }
+     void PlaceTowerHintRight(){
+        UpdateHint("Try E for towers!", new Vector2(200, 0), 24, 200);
+    }
+     void PlaceTowerHintZ(){
+        UpdateHint("Try Z to switch!", new Vector2(200, 0), 24, 200);
+    }
+    void ChangeTowerHint(){
+        UpdateHint("Move the mouse and left click!", new Vector2(200, 0), 24, 200);
+    }
     void CancelHint(){
         // UpdateHint(" ", new Vector2(0, 0), 24, 200);
         hintText.text = "";
