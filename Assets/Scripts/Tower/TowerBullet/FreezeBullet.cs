@@ -9,7 +9,7 @@ public class FreezeBullet : BulletBase
             Zombie zombie = other.GetComponent<Zombie>();
             if (zombie != null)
             {
-                zombie.TakeDamage(damage);
+                // zombie.TakeDamage(damage);
                 // zombie.ApplySlow(0.9, 3);
             }
             // Destroy(gameObject); 

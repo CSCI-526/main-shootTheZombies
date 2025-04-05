@@ -11,7 +11,8 @@ public class Zombie : MonoBehaviour
         hp = 100;
     }
 
-    public virtual void TakeDamage(int damageAmount)
+    // public virtual void TakeDamage(int damageAmount)
+    public virtual void TakeDamage(int damageAmount, Color bulletColor)
     {        
         hp -= damageAmount;
         GameObject canvasObj = GameObject.Find("Damage");

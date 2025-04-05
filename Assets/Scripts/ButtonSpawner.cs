@@ -172,6 +172,12 @@ public class ButtonSpawner : MonoBehaviour
                 playerManager.CloseUpgradeWindow();
                 player.ResumeGame();
                 break;
+                
+            // case "Player Damage":
+            //     playerManager.ModifyBulletSpawnerProperties();
+            //     playerManager.CloseUpgradeWindow();
+            //     player.ResumeGame();
+            //     break;
         
             default:
                 

@@ -75,7 +75,7 @@ public class BulletSpawner : MonoBehaviour
         bulletScript.SetRotation(rotation);
         if (bulletScript != null)
         {
-            bulletScript.Initialize(position, null);
+            bulletScript.Initialize(position, bulletColor, null);
         }
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();

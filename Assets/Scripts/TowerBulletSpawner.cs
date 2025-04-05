@@ -38,7 +38,7 @@ public class TowerBulletSpawner : MonoBehaviour
         if (bulletScript != null)
         {
             print("bulletScript is null");
-            bulletScript.Initialize(targetPosition + new Vector3(0, -1, 0));
+            // bulletScript.Initialize(targetPosition + new Vector3(0, -1, 0));
         }
     }
 
