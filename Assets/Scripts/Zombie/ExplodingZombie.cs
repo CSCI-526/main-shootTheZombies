@@ -30,7 +30,8 @@ public class ExplodingZombie : Zombie
         }
     }
 
-    public override void TakeDamage(int damageAmount)
+    // public override void TakeDamage(int damageAmount)
+    public virtual void TakeDamage(int damageAmount, Color bulletColor)
     {
         hp -= damageAmount;
         //Debug.Log("Exploding Zombie took damage: " + damageAmount + ", HP: " + hp);
@@ -80,7 +81,7 @@ public class ExplodingZombie : Zombie
                 if (otherZombie != null && otherZombie != this)
                 {
                     //Debug.Log("Damaging zombie: " + col.gameObject.name + " with " + explosionDamage + " damage");
-                    otherZombie.TakeDamage(explosionDamage);
+                    // otherZombie.TakeDamage(explosionDamage);
                 }
             }
             else if (col.CompareTag("Wall"))

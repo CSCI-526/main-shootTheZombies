@@ -165,14 +165,13 @@ public class ButtonSpawner : MonoBehaviour
                  towerButtonSpawner.InitializeButtons();
                 //  hintClickTower = CreateText("Press Q/E to place the tower!", new Vector2(0, 0));
                 //  Destroy(hintClickTower, 2f);
-                 break;
+                break;
                 
-                break;
-            case "Player Damage":
-                playerManager.ModifyBulletSpawnerProperties();
-                playerManager.CloseUpgradeWindow();
-                player.ResumeGame();
-                break;
+            // case "Player Damage":
+            //     playerManager.ModifyBulletSpawnerProperties();
+            //     playerManager.CloseUpgradeWindow();
+            //     player.ResumeGame();
+            //     break;
         
             default:
                 

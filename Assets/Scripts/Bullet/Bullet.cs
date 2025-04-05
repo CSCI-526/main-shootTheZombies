@@ -13,10 +13,13 @@ public class Bullet : MonoBehaviour
     private Quaternion originalRotation;
     private Collider2D ignoredZombie;
 
-    public void Initialize(Vector3 target, Collider2D ignoreZombie = null)
+    private Color bulletColor = Color.red; 
+
+    public void Initialize(Vector3 target, Color color, Collider2D ignoreZombie = null)
     {
         targetPosition = target;
         ignoredZombie = ignoreZombie;
+        bulletColor = color;
     }
 
     private void Start()
@@ -33,7 +36,7 @@ public class Bullet : MonoBehaviour
             Zombie zombie = other.GetComponent<Zombie>();
             if (zombie != null)
             {
-                zombie.TakeDamage(damage);
+                zombie.TakeDamage(damage, bulletColor);
             }
 
             SplitIntoSmallBullets(other);
@@ -71,7 +74,7 @@ public class Bullet : MonoBehaviour
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         if (bulletScript != null)
         {
-            bulletScript.Initialize(position, ignoredZombie);
+            // bulletScript.Initialize(position, ignoredZombie);  //for split, ignore the target zombie
         }
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();

@@ -33,7 +33,7 @@ public class TowerBullet : MonoBehaviour
             Zombie zombie = other.GetComponent<Zombie>();
             if (zombie != null)
             {
-                zombie.TakeDamage(damage);
+                // zombie.TakeDamage(damage);
             }
             Destroy(gameObject); 
         }
