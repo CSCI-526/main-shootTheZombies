@@ -37,13 +37,13 @@ public class Zombie : MonoBehaviour
             long timeZombieKilled = DateTime.Now.Ticks;
 
             // Call the singleton to send data
-            if (SendToGoogle.Instance != null)
+            if (SendZombieKillRate.Instance != null)
             {
-                SendToGoogle.Instance.Send(timeZombieKilled);
+                SendZombieKillRate.Instance.Send(timeZombieKilled);
             }
             else
             {
-                Debug.LogError("SendToGoogle instance not found!");
+                Debug.LogError("SendZombieKillRate instance not found!");
             }
         }
     }
