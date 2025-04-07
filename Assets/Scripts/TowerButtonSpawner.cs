@@ -22,6 +22,7 @@ public class TowerButtonSpawner : MonoBehaviour
     private TowerBase selectedTower;
     private bool canSelectTower = false;
 
+    private bool hasShownHint = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -164,8 +165,17 @@ public class TowerButtonSpawner : MonoBehaviour
             towerSpawner.AddTower(2);
 
         }
+        Invoke(nameof(ShowHintText), 1f);
+        
     }
 
+    void ShowHintText()
+    {
+        if (hasShownHint) return;
+        hasShownHint = true;
+        hintTextObj = CreateText("Click to deploy a tower", new Vector2(0, 0));
+        Destroy(hintTextObj, 5f); 
+    }
 
    
 
