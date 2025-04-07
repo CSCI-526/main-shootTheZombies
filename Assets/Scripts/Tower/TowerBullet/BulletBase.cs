@@ -26,6 +26,14 @@ public class BulletBase : MonoBehaviour
         Destroy(gameObject, 10f);
     }
 
+    private void Update()
+    {
+        if (transform.position.x < -7.6f || transform.position.x > 7.6f || transform.position.y > 10.0f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Zombie"))

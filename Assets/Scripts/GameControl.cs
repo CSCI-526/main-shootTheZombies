@@ -9,6 +9,7 @@ public class GameControll : MonoBehaviour
     public Button pauseButton;
     public TextMeshProUGUI pauseButtonText;
     public Wall wall;
+    public Button mainMenuButton;
 
     private bool isPaused = false;
 
@@ -23,6 +24,12 @@ public class GameControll : MonoBehaviour
         {
             ShowRestartButton();
         }
+    }
+
+    public void GoToMainMenu() 
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0); 
     }
 
     public void RestartGame()
