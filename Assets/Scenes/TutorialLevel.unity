@@ -3874,7 +3874,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1620237428}
-  - component: {fileID: 1620237427}
+  - component: {fileID: 1620237429}
   m_Layer: 0
   m_Name: ZombieSpawner
   m_TagString: Untagged
@@ -3882,25 +3882,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1620237427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620237426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f304184ab4b924cc38b0121bee66d951, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerManager: {fileID: 1866031802}
-  meleeZombiePrefab: {fileID: 2073466129586462176, guid: fb0d68306e63c4f05bc88eb4a412f81b, type: 3}
-  rangedZombiePrefab: {fileID: 2073466129586462176, guid: f464322f3ac324a188b96db8c5cabc92, type: 3}
-  explodingZombiePrefab: {fileID: 2073466129586462176, guid: 6fff79995c63e4bc8abdbf35d7400b64, type: 3}
-  spawnInterval: 5
-  spawnRangeX: {x: -4, y: 4}
-  fixedY: 10
 --- !u!4 &1620237428
 Transform:
   m_ObjectHideFlags: 0
@@ -3916,6 +3897,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1620237429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620237426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3711666f8050469282b882395a043d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialMeleeZombiePrefab: {fileID: 2073466129586462176, guid: fb0d68306e63c4f05bc88eb4a412f81b, type: 3}
+  tutorialRangedZombiePrefab: {fileID: 2073466129586462176, guid: f464322f3ac324a188b96db8c5cabc92, type: 3}
+  tutorialExplodingZombiePrefab: {fileID: 2073466129586462176, guid: 6fff79995c63e4bc8abdbf35d7400b64, type: 3}
+  spawnRangeX: {x: -4, y: 4}
+  fixedY: 10
+  spawnInterval: 10
 --- !u!224 &1736902984 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8428932372816954710, guid: be045624f2fff4ed28386a3e2529074f, type: 3}
@@ -4286,7 +4285,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  bulletSpawner: {fileID: 1984422670}
+  bulletSpawner: {fileID: 0}
   bulletPrefab: {fileID: -1061789581818368399, guid: dd4944a01738a4f3191c3abba2a02b0e, type: 3}
   newFireRate: 0
   newBurstCount: 1
@@ -4550,8 +4549,8 @@ GameObject:
   - component: {fileID: 1984422666}
   - component: {fileID: 1984422668}
   - component: {fileID: 1984422669}
-  - component: {fileID: 1984422670}
   - component: {fileID: 1984422671}
+  - component: {fileID: 1984422672}
   m_Layer: 0
   m_Name: Shooter
   m_TagString: Wall
@@ -4689,25 +4688,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1984422670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984422665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fc268a91eb6e475cac97ce638d17728, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1003970795388038849, guid: dd4944a01738a4f3191c3abba2a02b0e, type: 3}
-  bulletSpeed: 10
-  fireRate: 1
-  burstCount: 1
-  burstInterval: 0.1
-  parallelCount: 1
-  parallelSpacing: 0.5
 --- !u!114 &1984422671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4725,6 +4705,25 @@ MonoBehaviour:
   fireRate: 1
   exp: 0
   expRate: 10
+--- !u!114 &1984422672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984422665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4637c28218b4231ba1aff874f39beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1003970795388038849, guid: dd4944a01738a4f3191c3abba2a02b0e, type: 3}
+  bulletSpeed: 10
+  fireRate: 1
+  burstCount: 1
+  burstInterval: 0.1
+  parallelCount: 1
+  parallelSpacing: 0.5
 --- !u!1 &2020172108
 GameObject:
   m_ObjectHideFlags: 0
