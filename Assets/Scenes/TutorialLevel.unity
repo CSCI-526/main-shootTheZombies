@@ -4950,9 +4950,7 @@ MonoBehaviour:
   bulletGuideLinePrefab: {fileID: 1236084651004297837, guid: 4f3e993079d784182a21709b8732ad2a, type: 3}
   showGuideInTutorial: 0
   maxTime: 5
-  exp: 0
-  expRate: 10
---- !u!114 &1984422671
+--- !u!114 &1984422672
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
