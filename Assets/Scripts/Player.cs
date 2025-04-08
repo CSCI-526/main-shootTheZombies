@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class Player : MonoBehaviour
 {
     // public GameObject bulletPrefab; 
     public TowerPlayerManager towerPlayerManager;
     private ButtonSpawner buttonSpawner;
     private TowerButtonSpawner towerButtonSpawner;
+    private JumpButtonSpawner jumpButtonSpawner;
     public int playerLevel = 1;
     public float bulletSpeed = 10f; 
     public float fireRate = 1f; 
@@ -33,8 +35,8 @@ public class Player : MonoBehaviour
         towerPlayerManager = new TowerPlayerManager(); 
         buttonSpawner = FindObjectOfType<ButtonSpawner>();
         towerButtonSpawner = FindObjectOfType<TowerButtonSpawner>();
+        jumpButtonSpawner = FindObjectOfType<JumpButtonSpawner>();
         grayCover = GameObject.Find("Cover"); // Find the gray cover in the scene
-        Debug.Log("graycover11");
         if (grayCover != null)
         {
             Debug.Log("graycover");
@@ -110,9 +112,15 @@ public class Player : MonoBehaviour
     }
     void LevelUpTutorial(){
       
-            Debug.Log("Level up in tutorialLevel!");
-            SceneManager.LoadScene("RegularLevel"); // Jump to Regularlevel scene
-        
+           
+            if (grayCover != null)
+        {
+            grayCover.SetActive(true); // Show the gray cover
+        }
+         Time.timeScale = 0;
+
+        // AutoGenerateButton();
+        jumpButtonSpawner.InitializeButtons();
 
     }
 
