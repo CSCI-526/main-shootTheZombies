@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -100,6 +101,19 @@ public class Player : MonoBehaviour
             LevelUp();
             exp = 0;
         }
+
+        if (SceneManager.GetActiveScene().name == "TutorialLevel"&&this.exp >= 60)
+        {
+           LevelUpTutorial();
+            exp = 0;
+        }
+    }
+    void LevelUpTutorial(){
+      
+            Debug.Log("Level up in tutorialLevel!");
+            SceneManager.LoadScene("RegularLevel"); // Jump to Regularlevel scene
+        
+
     }
 
     void LevelUp(){
