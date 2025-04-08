@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BulletSpawner : MonoBehaviour
 {
@@ -12,12 +13,25 @@ public class BulletSpawner : MonoBehaviour
     public float burstInterval = 0.1f; 
     public int parallelCount = 1; 
     public float parallelSpacing = 0.5f;
+    public GameObject bulletGuideLinePrefab;
+    public bool showGuideInTutorial = false;
+    public float maxTime = 5f;
 
     private Color bulletColor = Color.red;
+    private float timer = 0f;
+    private bool stop = false;
 
     void Start()
     {
         StartCoroutine(ShootCoroutine());
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            showGuideInTutorial = true;
+        }
+        else
+        {
+            showGuideInTutorial = false;
+        }
     }
 
     void Update()
@@ -25,6 +39,10 @@ public class BulletSpawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q)) bulletColor = Color.red;
         if (Input.GetKeyDown(KeyCode.W)) bulletColor = Color.green;
         if (Input.GetKeyDown(KeyCode.E)) bulletColor = Color.blue;
+        if (timer < maxTime)
+            timer += Time.deltaTime;
+        else
+            stop = true;
     }
 
     IEnumerator ShootCoroutine()
@@ -40,11 +58,18 @@ public class BulletSpawner : MonoBehaviour
 
     void FireBullet(Vector3 target)
     {
+        if (showGuideInTutorial && bulletGuideLinePrefab != null && !stop)
+        {
+            GameObject guide = Instantiate(bulletGuideLinePrefab);
+            BulletGuideLine guideScript = guide.GetComponent<BulletGuideLine>();
+            guideScript.bulletStart = transform;
+        }
+
         Vector3 direction = (target - transform.position).normalized; 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 
-        // //Debug.Log("Quaternion.Euler(0, 0, angle): " + Quaternion.Euler(0, 0, angle).eulerAngles);
-
+        // Debug.Log("Quaternion.Euler(0, 0, angle): " + Quaternion.Euler(0, 0, angle).eulerAngles);
+        
         StartCoroutine(BurstFire(transform.position, Quaternion.Euler(0, 0, angle)));
     }
 
@@ -82,6 +107,17 @@ public class BulletSpawner : MonoBehaviour
         if (rb != null)
         {
             Vector2 direction = rotation * Vector2.up;
+            if ((direction.x / direction.y > 7.6/3.25 || direction.y < 0) && direction.x > 0)
+            {
+                direction.x = 7.6f;
+                direction.y = 3.25f;
+            }
+            if ((direction.x / direction.y < -7.6/3.25 || direction.y <0 )&& direction.x < 0)
+            {
+                direction.x = -7.6f;
+                direction.y = 3.25f;
+            }
+            direction.Normalize();
             rb.linearVelocity = direction * bulletSpeed;
         }
 

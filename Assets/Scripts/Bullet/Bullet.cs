@@ -14,6 +14,8 @@ public class Bullet : MonoBehaviour
     private Collider2D ignoredZombie;
 
     private Color bulletColor = Color.red; 
+    private Rigidbody2D rb;
+    private bool hasReflected = false;
 
     public void Initialize(Vector3 target, Color color, Collider2D ignoreZombie = null)
     {
@@ -24,7 +26,16 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         Destroy(gameObject, 3f);
+    }
+
+    private void Update()
+    {
+        if (transform.position.x < -7.6f || transform.position.x > 7.6f || transform.position.y > 10.0f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -43,6 +54,25 @@ public class Bullet : MonoBehaviour
 
             Destroy(gameObject); 
         }
+
+        if (other.CompareTag("ReflectWall") && !hasReflected)
+        {
+            ReflectBullet(other);
+            hasReflected = true;
+        }
+    }
+
+    private void ReflectBullet(Collider2D wall)
+    {
+        Vector2 currentDirection = rb.linearVelocity.normalized;
+        Vector2 reflectedDirection = Vector2.Reflect(currentDirection, wall.transform.right); 
+        float angle = Mathf.Atan2(reflectedDirection.y, reflectedDirection.x) * Mathf.Rad2Deg - 90;
+
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+        rb.linearVelocity = reflectedDirection * rb.linearVelocity.magnitude;
+
+        transform.rotation = rotation;
     }
 
     public void SetRotation(Quaternion rotation)
