@@ -22,7 +22,7 @@ public class Base : MonoBehaviour
         // Set the width of the text field to be shorter
         rectTransform.sizeDelta = new Vector2(200, rectTransform.sizeDelta.y); // Adjust the width as needed
 
-        hintText.text = "Click the zombie to shoot!";
+        hintText.text = "Move the mouse to shoot zombies!";
         
         Invoke(nameof(ClickHint), 5f); 
         // Invoke(nameof(PlaceTowerHintLeft), 20f);
@@ -34,7 +34,7 @@ public class Base : MonoBehaviour
     }
 
     void ClickHint(){
-        UpdateHint("Using the Q W Z to change the color to shoot different zombies", new Vector2(0, -100), 24, 200);
+        UpdateHint("Using the Q W E to change the color to shoot zombies", new Vector2(0, -50), 24, 200);
     }
     // void PlaceTowerHintLeft(){
     //     UpdateHint("Try Q for towers!", new Vector2(-200, 0), 24, 200);
