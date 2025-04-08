@@ -4742,10 +4742,10 @@ RectTransform:
   - {fileID: 1042100096}
   m_Father: {fileID: 1983935275}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -296.16016, y: 197.20996}
-  m_SizeDelta: {x: 213.6797, y: 61.2457}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 124.83984, y: -42.79004}
+  m_SizeDelta: {x: 213.6797, y: 61.245697}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1954211576
 MonoBehaviour:
@@ -5171,13 +5171,8 @@ MonoBehaviour:
   playerLevel: 1
   bulletSpeed: 10
   fireRate: 1
-  burstCount: 1
-  burstInterval: 0.1
-  parallelCount: 1
-  parallelSpacing: 0.5
-  bulletGuideLinePrefab: {fileID: 1236084651004297837, guid: 4f3e993079d784182a21709b8732ad2a, type: 3}
-  showGuideInTutorial: 0
-  maxTime: 5
+  exp: 0
+  expRate: 10
 --- !u!114 &1984422672
 MonoBehaviour:
   m_ObjectHideFlags: 0
