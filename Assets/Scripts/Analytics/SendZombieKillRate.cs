@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class SendToGoogle : MonoBehaviour
+public class SendZombieKillRate : MonoBehaviour
 {
-    public static SendToGoogle Instance { get; private set; } // Singleton instance
+    public static SendZombieKillRate Instance { get; private set; } // Singleton instance
 
     [SerializeField] private string URL = "https://docs.google.com/forms/u/0/d/1xZyN9kskQieYopl92nBkjy2guu_T_0tS9aRd8ruMxlg/formResponse";
 

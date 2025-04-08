@@ -127,6 +127,20 @@ public class Player : MonoBehaviour
     void LevelUp(){
         Time.timeScale = 0;
         playerLevel += 1;
+
+        long timeLevelUp = System.DateTime.Now.Ticks;
+
+        // Call the singleton to send data
+        if (SendLevelUpRate.Instance != null)
+        {
+            SendLevelUpRate.Instance.Send(timeLevelUp);
+        }
+        else
+        {
+            Debug.LogError("SendLevelUpRate instance not found!");
+        }
+
+
         if (grayCover != null)
         {
             grayCover.SetActive(true); // Show the gray cover
