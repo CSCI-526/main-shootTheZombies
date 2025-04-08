@@ -70,7 +70,18 @@ public class BulletGuideLine : MonoBehaviour
         }
         else
         {
-                points.Add(mouseWorld);
+            Vector3 endPoint = start;
+            float step = 0.1f;
+            for (int i = 0; i < 1000; i++) 
+            {
+                endPoint += dir * step;
+                if (endPoint.y > 10f)
+                {
+                    points.Add(endPoint);
+                    // Debug.Log("endPoint " + endPoint);
+                    break;
+                }
+            }
         }
 
         lineRenderer.positionCount = points.Count;
