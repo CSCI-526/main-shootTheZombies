@@ -3,6 +3,8 @@ using System.Collections;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class Player : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class Player : MonoBehaviour
     public TowerPlayerManager towerPlayerManager;
     private ButtonSpawner buttonSpawner;
     private TowerButtonSpawner towerButtonSpawner;
+    private JumpButtonSpawner jumpButtonSpawner;
     public int playerLevel = 1;
     public float bulletSpeed = 10f; 
     public float fireRate = 1f; 
@@ -32,8 +35,8 @@ public class Player : MonoBehaviour
         towerPlayerManager = new TowerPlayerManager(); 
         buttonSpawner = FindObjectOfType<ButtonSpawner>();
         towerButtonSpawner = FindObjectOfType<TowerButtonSpawner>();
+        jumpButtonSpawner = FindObjectOfType<JumpButtonSpawner>();
         grayCover = GameObject.Find("Cover"); // Find the gray cover in the scene
-        Debug.Log("graycover11");
         if (grayCover != null)
         {
             Debug.Log("graycover");
@@ -100,11 +103,44 @@ public class Player : MonoBehaviour
             LevelUp();
             exp = 0;
         }
+
+        if (SceneManager.GetActiveScene().name == "TutorialLevel"&&this.exp >= 60)
+        {
+           LevelUpTutorial();
+            exp = 0;
+        }
+    }
+    void LevelUpTutorial(){
+      
+           
+            if (grayCover != null)
+        {
+            grayCover.SetActive(true); // Show the gray cover
+        }
+         Time.timeScale = 0;
+
+        // AutoGenerateButton();
+        jumpButtonSpawner.InitializeButtons();
+
     }
 
     void LevelUp(){
         Time.timeScale = 0;
         playerLevel += 1;
+
+        long timeLevelUp = System.DateTime.Now.Ticks;
+
+        // Call the singleton to send data
+        if (SendLevelUpRate.Instance != null)
+        {
+            SendLevelUpRate.Instance.Send(timeLevelUp);
+        }
+        else
+        {
+            Debug.LogError("SendLevelUpRate instance not found!");
+        }
+
+
         if (grayCover != null)
         {
             grayCover.SetActive(true); // Show the gray cover

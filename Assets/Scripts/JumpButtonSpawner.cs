@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-
-public class TowerButtonSpawner : MonoBehaviour
+public class JumpButtonSpawner : MonoBehaviour
 {
     public PlayerManagerScript playerManager;
-    private string buttonTextA = "Normal Tower";
-    private string buttonTextB = "Flame Tower";
-    private string buttonTextC = "Freeze Towerz";
+    private string buttonTextA = "Menu";
+    private string buttonTextC = "Regular Level";
+
     public TowerSpawner towerSpawner;
     private GameObject TbuttonA;
     private GameObject TbuttonB;
@@ -44,16 +44,14 @@ public class TowerButtonSpawner : MonoBehaviour
         if (TbuttonA == null&&buttonTextA!="")
             TbuttonA = CreateButton(buttonTextA, new Vector2(-200, -200));
 
-        if (TbuttonB == null&&buttonTextB!="")
-            TbuttonB = CreateButton(buttonTextB, new Vector2(0, -200));
+
         
 
         if (TbuttonC == null&&buttonTextC!="")
             TbuttonC = CreateButton(buttonTextC, new Vector2(200, -200)); // Avoid same position as buttonB
 
         
-         // Add hint text
-        hintTextObj = CreateText("Add a Tower Now!", new Vector2(0, 0));
+
     
     }
  
@@ -155,17 +153,16 @@ public class TowerButtonSpawner : MonoBehaviour
         player.ResumeGame();
 
         if(buttonText==buttonTextA){
-            towerSpawner.AddTower(0);
+            SceneManager.LoadScene("MainPage"); // Jump to Regularlevel scene
+            
+        }
 
 
-        }else if(buttonText == buttonTextB){
-            towerSpawner.AddTower(1);
-
-        }else if(buttonText == buttonTextC){
-            towerSpawner.AddTower(2);
+        else if(buttonText == buttonTextC){
+            SceneManager.LoadScene("RegularLevel"); // Jump to Regularlevel scene
 
         }
-        Invoke(nameof(ShowHintText), 1f);
+        // Invoke(nameof(ShowHintText), 1f);
         
     }
 
