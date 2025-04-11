@@ -46,6 +46,8 @@ public class BulletSpawner : MonoBehaviour
         // //Debug.Log("Quaternion.Euler(0, 0, angle): " + Quaternion.Euler(0, 0, angle).eulerAngles);
 
         StartCoroutine(BurstFire(transform.position, Quaternion.Euler(0, 0, angle)));
+
+        SendAccuracy.bulletsFired += 1;
     }
 
     IEnumerator BurstFire(Vector3 position, Quaternion rotation)

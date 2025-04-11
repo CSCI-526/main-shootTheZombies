@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -153,22 +154,32 @@ public class TowerButtonSpawner : MonoBehaviour
         Destroy(hintTextObj, 0.2f); // Destroy the hint text
         player.ResumeGame();
 
-        if(buttonText==buttonTextA){
+        long timeTowerSelection = DateTime.Now.Ticks;
+        string typeTowerSelection = "";
+
+        if (buttonText==buttonTextA){
             towerSpawner.AddTower(0);
-
-
-        }else if(buttonText == buttonTextB){
-            towerSpawner.AddTower(1);
-
-        }else if(buttonText == buttonTextC){
-            towerSpawner.AddTower(2);
-
+            typeTowerSelection = "normal";
         }
+        else if(buttonText == buttonTextB){
+            towerSpawner.AddTower(1);
+            typeTowerSelection = "flame";
+        }
+        else if(buttonText == buttonTextC){
+            towerSpawner.AddTower(2);
+            typeTowerSelection = "freeze";
+        }
+        //Invoke(nameof(ShowHintText), 1f);
+
+        // Call the singleton to send data
+        if (SendTowerSelection.Instance != null)
+        {
+            SendTowerSelection.Instance.Send(timeTowerSelection, typeTowerSelection);
+        }
+        else
+        {
+            Debug.LogError("SendTowerSelection instance not found!");
+        }
+
     }
-
-
-   
-
-   
-   
 }
