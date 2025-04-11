@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Zombie : MonoBehaviour
 {
     public GameObject damagePopupPrefab;
@@ -30,10 +30,11 @@ public class Zombie : MonoBehaviour
             //Debug.Log("Base Zombie Died: " + gameObject.name);
             Player player = GameObject.Find("Testplayer").GetComponent<Player>();
             Destroy(gameObject);
-            if (player.playerLevel <= 6)
-            {
+            if (SceneManager.GetActiveScene().name == "TutorialLevel"){
+                player.GainExp(100);
+             }else{
                 player.GainExp(20);
-            }
+             }
 
             //AnalyticsCommon.timeZombieKilled = DateTime.Now.Ticks
 
