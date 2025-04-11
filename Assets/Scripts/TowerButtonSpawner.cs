@@ -7,7 +7,7 @@ public class TowerButtonSpawner : MonoBehaviour
     public PlayerManagerScript playerManager;
     private string buttonTextA = "Normal Tower";
     private string buttonTextB = "Flame Tower";
-    private string buttonTextC = "Freeze Towerz";
+    private string buttonTextC = "Freeze Tower";
     public TowerSpawner towerSpawner;
     private GameObject TbuttonA;
     private GameObject TbuttonB;
@@ -23,41 +23,42 @@ public class TowerButtonSpawner : MonoBehaviour
     private bool canSelectTower = false;
 
     private bool hasShownHint = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         towerSpawner = FindObjectOfType<TowerSpawner>();
         player = FindObjectOfType<Player>();
         CreateCanvas();
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-     public void InitializeButtons()
+    public void InitializeButtons()
     {
         // If buttons already exist, don't recreate them
-        if (TbuttonA == null&&buttonTextA!="")
+        if (TbuttonA == null && buttonTextA != "")
             TbuttonA = CreateButton(buttonTextA, new Vector2(-200, -200));
 
-        if (TbuttonB == null&&buttonTextB!="")
+        if (TbuttonB == null && buttonTextB != "")
             TbuttonB = CreateButton(buttonTextB, new Vector2(0, -200));
-        
 
-        if (TbuttonC == null&&buttonTextC!="")
+
+        if (TbuttonC == null && buttonTextC != "")
             TbuttonC = CreateButton(buttonTextC, new Vector2(200, -200)); // Avoid same position as buttonB
 
-        
-         // Add hint text
+
+        // Add hint text
         hintTextObj = CreateText("Add a Tower Now!", new Vector2(0, 0));
-    
+
     }
- 
-    
+
+
 
     private void CreateCanvas()
     {
@@ -71,22 +72,23 @@ public class TowerButtonSpawner : MonoBehaviour
             c.sortingOrder = 100;
             canvas.AddComponent<CanvasScaler>();
             canvas.AddComponent<GraphicRaycaster>();
-        }else
-    {
-        Canvas c = canvas.GetComponent<Canvas>();
-        c.sortingOrder = 100; // Set a high sorting order to ensure the canvas is in front
+        }
+        else
+        {
+            Canvas c = canvas.GetComponent<Canvas>();
+            c.sortingOrder = 100; // Set a high sorting order to ensure the canvas is in front
+        }
+
+
+
     }
 
-   
-        
-    }
 
- 
 
     private GameObject CreateButton(string buttonText, Vector2 anchoredPosition)
     {
-        GameObject buttonObj = new GameObject("Button_" +buttonText);
-        buttonObj.transform.SetParent(canvas.transform,false); // Attach to Canvas
+        GameObject buttonObj = new GameObject("Button_" + buttonText);
+        buttonObj.transform.SetParent(canvas.transform, false); // Attach to Canvas
 
         RectTransform rectTransform = buttonObj.AddComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(160, 50); // Button size
@@ -112,9 +114,9 @@ public class TowerButtonSpawner : MonoBehaviour
         btn.onClick.AddListener(() => OnButtonClick(buttonText));
 
 
-    
 
-   return buttonObj;
+
+        return buttonObj;
     }
 
     private GameObject CreateText(string hintText, Vector2 anchoredPosition)
@@ -136,49 +138,67 @@ public class TowerButtonSpawner : MonoBehaviour
         return hintTextObj;
     }
     private void OnButtonClick(string buttonText)
-    {   
+    {
         Time.timeScale = 1;
-        Debug.Log("Button " + buttonText + " clicked");
-        if(TbuttonA !=null){
-             Destroy(TbuttonA, 0.2f);
+        // Debug.Log("Button " + buttonText + " clicked");
+        if (TbuttonA != null)
+        {
+            Destroy(TbuttonA, 0.2f);
 
         }
-       if(TbuttonB !=null){
-             Destroy(TbuttonB, 0.2f);
+        if (TbuttonB != null)
+        {
+            Destroy(TbuttonB, 0.2f);
 
         }
-        if(TbuttonC !=null){
-             Destroy(TbuttonC, 0.2f);
+        if (TbuttonC != null)
+        {
+            Destroy(TbuttonC, 0.2f);
 
         }
         Destroy(hintTextObj, 0.2f); // Destroy the hint text
+        Invoke(nameof(ShowHintText), 1f);
         player.ResumeGame();
 
-        if(buttonText==buttonTextA){
+        if (buttonText == buttonTextA)
+        {
             towerSpawner.AddTower(0);
 
 
-        }else if(buttonText == buttonTextB){
+        }
+        else if (buttonText == buttonTextB)
+        {
             towerSpawner.AddTower(1);
 
-        }else if(buttonText == buttonTextC){
+        }
+        else if (buttonText == buttonTextC)
+        {
             towerSpawner.AddTower(2);
 
         }
-        Invoke(nameof(ShowHintText), 1f);
-        
+
+
+
+
     }
 
     void ShowHintText()
     {
         if (hasShownHint) return;
         hasShownHint = true;
-        hintTextObj = CreateText("Click to deploy a tower", new Vector2(0, 0));
-        Destroy(hintTextObj, 5f); 
+        hintClickTower = CreateText("Click to deploy a tower", new Vector2(0, 0));
+       
     }
 
-   
+    public void destoryHint(){
 
-   
-   
+        // Debug.Log("destory");
+        Destroy(hintClickTower);
+
+    }
+
+
+
+
+
 }
