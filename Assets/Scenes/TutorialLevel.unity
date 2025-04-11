@@ -3762,6 +3762,8 @@ GameObject:
   - component: {fileID: 1457349814}
   - component: {fileID: 1457349816}
   - component: {fileID: 1457349815}
+  - component: {fileID: 1457349817}
+  - component: {fileID: 1457349818}
   m_Layer: 0
   m_Name: AnalyticsManager
   m_TagString: Untagged
@@ -3810,6 +3812,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   URL: https://docs.google.com/forms/u/0/d/1IpFpU7Lay32YuncERa6t60g2jDIUsmYLU22BrInMjdM/formResponse
+--- !u!114 &1457349817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457349812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d420e54d1fd83174fb4485c751af9b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  URL: https://docs.google.com/forms/u/0/d/11sASLWG-F7JJ3BVdkZ15QIc7pOL-KVFgRGa_RU_x-ZY/formResponse
+--- !u!114 &1457349818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457349812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d637ccbd875642a403bd470c7f863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  URL: https://docs.google.com/forms/u/0/d/1H-61x80dHdRw5jXSHYHhLMqBbV6uVPKvH3IMNHVxY6g/formResponse
+  sendInterval: 5
 --- !u!1 &1461172712
 GameObject:
   m_ObjectHideFlags: 0
