@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 {
     // public GameObject bulletPrefab; 
     public TowerPlayerManager towerPlayerManager;
+
+    public TowerSpawner towerSpawner;
     private ButtonSpawner buttonSpawner;
     private TowerButtonSpawner towerButtonSpawner;
     private JumpButtonSpawner jumpButtonSpawner;
@@ -21,6 +23,7 @@ public class Player : MonoBehaviour
     public int expRate = 10;    // EXP gained per second
     private float timer = 0f;   // Timer to track elapsed time
     private GameObject grayCover; // Reference to the gray cover UI element
+    private int cnt = 0;
 
     // 1 : Tower HP
     // 2 : Tower Fire Rate
@@ -36,12 +39,14 @@ public class Player : MonoBehaviour
         buttonSpawner = FindObjectOfType<ButtonSpawner>();
         towerButtonSpawner = FindObjectOfType<TowerButtonSpawner>();
         jumpButtonSpawner = FindObjectOfType<JumpButtonSpawner>();
+        towerSpawner = FindObjectOfType<TowerSpawner>();
         grayCover = GameObject.Find("Cover"); // Find the gray cover in the scene
         if (grayCover != null)
         {
             Debug.Log("graycover");
             grayCover.SetActive(false); // Ensure the gray cover is initially hidden
         }
+
         // towerButtonSpawner.InitializeButtons();
         // LevelUp();
 
@@ -52,6 +57,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+       
         //ExpGrowth();
         // if (Input.GetMouseButtonDown(0))  
         // {
@@ -99,46 +105,42 @@ public class Player : MonoBehaviour
     {
         exp += amount;
         // //Debug.Log($"EXP: {exp}");
-        if(this.exp >= 100){
+        if (SceneManager.GetActiveScene().name == "TutorialLevel"&&this.exp >= 100)
+        {
+           
+           cnt++;
+           Tutorial_LevelUp();
+            exp = 0;
+        }
+        else if(this.exp >= 100){
             LevelUp();
             exp = 0;
         }
+        
 
-        if (SceneManager.GetActiveScene().name == "TutorialLevel"&&this.exp >= 60)
-        {
-           LevelUpTutorial();
-            exp = 0;
-        }
+        
     }
-    void LevelUpTutorial(){
-      
-           
-            if (grayCover != null)
-        {
-            grayCover.SetActive(true); // Show the gray cover
-        }
-         Time.timeScale = 0;
+    void  Tutorial_LevelUp(){
+            if(cnt<3){
+                LevelUp();
+                   
+            }
+            else {
+                 if (grayCover != null)
+                        {
+                            grayCover.SetActive(true); // Show the gray cover
+                        }
+                        Time.timeScale = 0;
 
-        // AutoGenerateButton();
-        jumpButtonSpawner.InitializeButtons();
+                        // AutoGenerateButton();
+                        jumpButtonSpawner.InitializeButtons();
+            }
 
     }
-
     void LevelUp(){
         Time.timeScale = 0;
         playerLevel += 1;
 
-        long timeLevelUp = System.DateTime.Now.Ticks;
-
-        // Call the singleton to send data
-        if (SendLevelUpRate.Instance != null)
-        {
-            SendLevelUpRate.Instance.Send(timeLevelUp);
-        }
-        else
-        {
-            Debug.LogError("SendLevelUpRate instance not found!");
-        }
 
 
         if (grayCover != null)
