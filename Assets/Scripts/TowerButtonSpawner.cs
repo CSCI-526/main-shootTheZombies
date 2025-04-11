@@ -161,24 +161,31 @@ public class TowerButtonSpawner : MonoBehaviour
         Invoke(nameof(ShowHintText), 1f);
         player.ResumeGame();
 
-        if (buttonText == buttonTextA)
-        {
+        long timeTowerSelection = DateTime.Now.Ticks;
+        string typeTowerSelection = "";
+
+        if (buttonText==buttonTextA){
             towerSpawner.AddTower(0);
-
-
+            typeTowerSelection = "normal";
         }
-        else if (buttonText == buttonTextB)
-        {
+        else if(buttonText == buttonTextB){
             towerSpawner.AddTower(1);
-
+            typeTowerSelection = "flame";
         }
-        else if (buttonText == buttonTextC)
-        {
+        else if(buttonText == buttonTextC){
             towerSpawner.AddTower(2);
+            typeTowerSelection = "freeze";
         }
 
-
-
+        // Call the singleton to send data
+        if (SendTowerSelection.Instance != null)
+        {
+            SendTowerSelection.Instance.Send(timeTowerSelection, typeTowerSelection);
+        }
+        else
+        {
+            Debug.LogError("SendTowerSelection instance not found!");
+        }
 
     }
 
