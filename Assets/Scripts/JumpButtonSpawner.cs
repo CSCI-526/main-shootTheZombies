@@ -1,14 +1,13 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-
-public class TowerButtonSpawner : MonoBehaviour
+public class JumpButtonSpawner : MonoBehaviour
 {
     public PlayerManagerScript playerManager;
-    private string buttonTextA = "Normal Tower";
-    private string buttonTextB = "Flame Tower";
-    private string buttonTextC = "Freeze Towerz";
+    private string buttonTextA = "Menu";
+    private string buttonTextC = "Regular Level";
+
     public TowerSpawner towerSpawner;
     private GameObject TbuttonA;
     private GameObject TbuttonB;
@@ -45,16 +44,14 @@ public class TowerButtonSpawner : MonoBehaviour
         if (TbuttonA == null&&buttonTextA!="")
             TbuttonA = CreateButton(buttonTextA, new Vector2(-200, -200));
 
-        if (TbuttonB == null&&buttonTextB!="")
-            TbuttonB = CreateButton(buttonTextB, new Vector2(0, -200));
+
         
 
         if (TbuttonC == null&&buttonTextC!="")
             TbuttonC = CreateButton(buttonTextC, new Vector2(200, -200)); // Avoid same position as buttonB
 
         
-         // Add hint text
-        hintTextObj = CreateText("Add a Tower Now!", new Vector2(0, 0));
+
     
     }
  
@@ -155,22 +152,17 @@ public class TowerButtonSpawner : MonoBehaviour
         Destroy(hintTextObj, 0.2f); // Destroy the hint text
         player.ResumeGame();
 
-        long timeTowerSelection = DateTime.Now.Ticks;
-        string typeTowerSelection = "";
+        if(buttonText==buttonTextA){
+            SceneManager.LoadScene("MainPage"); // Jump to Regularlevel scene
+            
+        }
 
-        if (buttonText==buttonTextA){
-            towerSpawner.AddTower(0);
-            typeTowerSelection = "normal";
-        }
-        else if(buttonText == buttonTextB){
-            towerSpawner.AddTower(1);
-            typeTowerSelection = "flame";
-        }
+
         else if(buttonText == buttonTextC){
-            towerSpawner.AddTower(2);
-            typeTowerSelection = "freeze";
+            SceneManager.LoadScene("RegularLevel"); // Jump to Regularlevel scene
+
         }
-        Invoke(nameof(ShowHintText), 1f);
+        // Invoke(nameof(ShowHintText), 1f);
         
     }
 
@@ -182,15 +174,8 @@ public class TowerButtonSpawner : MonoBehaviour
         Destroy(hintTextObj, 5f); 
     }
 
-        // Call the singleton to send data
-        if (SendTowerSelection.Instance != null)
-        {
-            SendTowerSelection.Instance.Send(timeTowerSelection, typeTowerSelection);
-        }
-        else
-        {
-            Debug.LogError("SendTowerSelection instance not found!");
-        }
+   
 
-    }
+   
+   
 }

@@ -15,4 +15,12 @@ public class FreezeBullet : BulletBase
             Destroy(gameObject); 
         }
     }
+
+    private void Update()
+    {
+        if (transform.position.x < -7.6f || transform.position.x > 7.6f || transform.position.y > 10.0f)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class ButtonSpawner : MonoBehaviour
 {
     public PlayerManagerScript playerManager;
