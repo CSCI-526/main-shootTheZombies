@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      HDZombieAndBrain_0: -5084777368835316440
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
