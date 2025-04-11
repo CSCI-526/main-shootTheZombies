@@ -171,16 +171,6 @@ public class TowerButtonSpawner : MonoBehaviour
             typeTowerSelection = "freeze";
         }
         Invoke(nameof(ShowHintText), 1f);
-        
-    }
-
-    void ShowHintText()
-    {
-        if (hasShownHint) return;
-        hasShownHint = true;
-        hintTextObj = CreateText("Click to deploy a tower", new Vector2(0, 0));
-        Destroy(hintTextObj, 5f); 
-    }
 
         // Call the singleton to send data
         if (SendTowerSelection.Instance != null)
@@ -192,5 +182,13 @@ public class TowerButtonSpawner : MonoBehaviour
             Debug.LogError("SendTowerSelection instance not found!");
         }
 
+    }
+
+    void ShowHintText()
+    {
+        if (hasShownHint) return;
+        hasShownHint = true;
+        hintTextObj = CreateText("Click to deploy a tower", new Vector2(0, 0));
+        Destroy(hintTextObj, 5f); 
     }
 }
