@@ -56,8 +56,25 @@ public class BulletSpawner : MonoBehaviour
         }
     }
 
-    void FireBullet(Vector3 target)
+    bool IsZombieVisibleOnScreen()
     {
+        Zombie[] zombies = FindObjectsOfType<Zombie>();
+        Camera cam = Camera.main;
+
+        foreach (Zombie zombie in zombies)
+        {
+            Vector3 viewPos = cam.WorldToViewportPoint(zombie.transform.position);
+            if (viewPos.z > 0 && viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    void FireBullet(Vector3 target)
+    {   
         if (showGuideInTutorial && bulletGuideLinePrefab != null && !stop)
         {
             GameObject guide = Instantiate(bulletGuideLinePrefab);
@@ -65,12 +82,17 @@ public class BulletSpawner : MonoBehaviour
             guideScript.bulletStart = transform;
         }
 
+        if (!IsZombieVisibleOnScreen())
+            return;
+
         Vector3 direction = (target - transform.position).normalized; 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 
         // Debug.Log("Quaternion.Euler(0, 0, angle): " + Quaternion.Euler(0, 0, angle).eulerAngles);
         
         StartCoroutine(BurstFire(transform.position, Quaternion.Euler(0, 0, angle)));
+
+        SendAccuracy.bulletsFired += 1;
     }
 
     IEnumerator BurstFire(Vector3 position, Quaternion rotation)

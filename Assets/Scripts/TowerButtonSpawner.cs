@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -174,7 +175,7 @@ public class TowerButtonSpawner : MonoBehaviour
         else if (buttonText == buttonTextC)
         {
             towerSpawner.AddTower(2);
-
+            typeTowerSelection = "freeze";
         }
 
 
@@ -196,9 +197,5 @@ public class TowerButtonSpawner : MonoBehaviour
         Destroy(hintClickTower);
 
     }
-
-
-
-
 
 }

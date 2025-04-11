@@ -16,6 +16,9 @@ public class Zombie : MonoBehaviour
     {   //Debug.Log("Zombie color: " + color + ", Bullet color: " + bulletColor);
         if (bulletColor != color && bulletColor != Color.black) return;
         hp -= damageAmount;
+
+        SendAccuracy.bulletsHit += 1;
+
         GameObject canvasObj = GameObject.Find("Damage");
         Transform canvas = canvasObj.transform;
 
@@ -48,5 +51,4 @@ public class Zombie : MonoBehaviour
             }
         }
     }
-
 }
