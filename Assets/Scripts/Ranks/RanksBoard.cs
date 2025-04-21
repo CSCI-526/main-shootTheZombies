@@ -58,8 +58,8 @@ public class RanksBoard : MonoBehaviour
     {
         entries.Clear();
         var lines = csv.Split('\n');
-        int topTen = math.min(5, lines.Length);
-        for (int i = 1; i < topTen; i++)
+        int topTen = math.min(5, lines.Length); // top 5 records
+        for (int i = 1; i <= topTen; i++)
         {
             if (string.IsNullOrWhiteSpace(lines[i])) continue;
             var cols = lines[i].Split(',');

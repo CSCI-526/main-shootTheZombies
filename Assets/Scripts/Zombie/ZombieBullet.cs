@@ -34,4 +34,8 @@ public class ZombieBullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void destroySelf(){
+        Destroy(gameObject);
+    }
 }

@@ -4362,7 +4362,7 @@ MonoBehaviour:
   towerPrefabs:
   - {fileID: 2329369698235008983, guid: 4fa36402d8f4344848369ab0c8318261, type: 3}
   - {fileID: 6871212363128140854, guid: 409118b41c67e42938d7830488ea7972, type: 3}
-  - {fileID: 2764441425440760173, guid: d47db0a100edb49e9b5ac6eeff3f142d, type: 3}
+  - {fileID: 4093435375661205097, guid: 4f30d4a5f2f9b4ad48ccaee9951c65ee, type: 3}
 --- !u!1 &1772486196
 GameObject:
   m_ObjectHideFlags: 0

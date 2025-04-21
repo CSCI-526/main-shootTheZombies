@@ -105,7 +105,7 @@ public class TowerBase : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         hp -= damage;
-        print("Tower 受到了 " + damage + " 点伤害，剩余 HP：" + hp);
+        // print("Tower 受到了 " + damage + " 点伤害，剩余 HP：" + hp);
         GameObject canvasObj = GameObject.Find("Damage");
 
         Transform canvas = canvasObj.transform;
