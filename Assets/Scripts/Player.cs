@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private Zombie targetZombie; 
     public int exp = 0;
     public int expRate = 10;    // EXP gained per second
-    private float timer = 0f;   // Timer to track elapsed time
+    public float timer = 0f;   // Timer to track elapsed time
     private GameObject grayCover; // Reference to the gray cover UI element
     private int cnt = 0;
 
@@ -75,6 +75,8 @@ public class Player : MonoBehaviour
         // {
         //     targetZombie = FindNearestZombie(transform.position);
         // }
+        timer += Time.deltaTime;
+        // Debug.Log(timer);
     }
 
     // IEnumerator ShootCoroutine()

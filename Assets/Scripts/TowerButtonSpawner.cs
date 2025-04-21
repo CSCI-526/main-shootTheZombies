@@ -174,7 +174,6 @@ public class TowerButtonSpawner : MonoBehaviour
         }
         else if(buttonText == buttonTextC){
             towerSpawner.AddTower(2);
-            typeTowerSelection = "freeze";
         }
 
         // Call the singleton to send data
