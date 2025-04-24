@@ -12,9 +12,14 @@ public class PlayerManagerScript : MonoBehaviour
 
     // get all the variable from the player class
     public Player player;
+
+    public Wall wall;
     //exp bar setting 
     public Image expbar;
+
+    public Image HPbar;
     public float maxXp = 100f;
+    public float maxHp = 100f;
 
     //will change after we get the xp and level from others
     public int level = 1;
@@ -66,6 +71,7 @@ public class PlayerManagerScript : MonoBehaviour
 
         //update the exp bar 
         expbar.fillAmount = Mathf.Clamp(player.exp / maxXp, 0, 1);
+        HPbar.fillAmount = Mathf.Clamp(wall.health / maxHp, 0, 1);
 
 
         // add more player

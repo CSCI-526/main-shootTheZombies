@@ -34,34 +34,26 @@ public class ZombieSpawner : MonoBehaviour
         //for wave 1
         if (waveCount > 25 && waveCount <= 40){
             zombiePrefab = meleeZombiePrefab;
-            waveCount -= 1;
+            waveCount -= 5;
         }
         else if (waveCount > 10){
             spawnInterval = 3f;
             zombiePrefab = explodingZombiePrefab;
-            waveCount -= 1;
+            waveCount -= 5;
         }
         else if (waveCount > 0){
             spawnInterval = 5f;
             zombiePrefab = rangedZombiePrefab;
-            waveCount -= 1;
+            waveCount -= 5;
         }
         else{
-            spawnInterval = 1f;
+            spawnInterval = 3f;
             int zombieType = Random.Range(0, 3);
             zombiePrefab = (zombieType == 0) ? meleeZombiePrefab :
                           (zombieType == 1) ? rangedZombiePrefab :
                           explodingZombiePrefab;
         }
         Debug.Log(" wavecount == " + waveCount);
-        if (waveCount == 19){
-            playerManager.ShowPopup("Tank zombies have appeared!!!");}
-        else if (waveCount == 9){
-            playerManager.ShowPopup("Ranged zombies have appeared!!!");}
-        else if (waveCount == 0){
-            playerManager.ShowPopup("Mix zombies comes!!!");}
-        
-
         Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
     }
 }
