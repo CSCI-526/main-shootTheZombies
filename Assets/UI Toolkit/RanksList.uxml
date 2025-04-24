@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:Label text="Survival Time Leaderboard" style="font-size:40px; margin-bottom:5px;"/>
+  <ui:VisualElement class="root"
+                    style="display: flex;
+                           flex-direction: column;
+                           justify-content: space-between;
+                           flex-grow: 1;
+                           padding: 20px;
+                           font-size: 40px;">
+    <ui:ListView name="leaderboardList"
+                 style-flex-grow="1"
+                 item-height="50"
+                 show-border="true"/>
+    <ui:Button name="backToMain" text="Back To Main" />
+  </ui:VisualElement>
+</ui:UXML>

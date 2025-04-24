@@ -23,7 +23,11 @@ public class SceneControl : MonoBehaviour
     }
 
     public void Ranks(){
-        // SceneManager.LoadScene(3);
+        SceneManager.LoadScene(3);
+    }
+
+    public void BackToMain(){
+        SceneManager.LoadScene(0);
     }
 
 }

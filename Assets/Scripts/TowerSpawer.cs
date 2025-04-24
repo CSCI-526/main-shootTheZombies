@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class TowerSpawner : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class TowerSpawner : MonoBehaviour
     public TowerDatabase towerDatabase;
     // public TowerBulletSpawner bulletSpawnerPrefab;
     private List<GameObject> towers = new List<GameObject>();
+    private Player player;
+    private TowerButtonSpawner towerButtonSpawner;
     private GameObject currentTower; // Declare currentTower as a class member
     private int MaxTowerNumber = 0;
     private int currentTowerNumber = 0;
@@ -18,11 +21,14 @@ public class TowerSpawner : MonoBehaviour
     private int towerType;
     private int currentTowerIndex = 0; // Add this line to track the current tower type
     private bool FirstTime = true;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // Initialization if needed
+        player = FindObjectOfType<Player>();
+        towerButtonSpawner = FindObjectOfType<TowerButtonSpawner>();
         HideHint();
     }
 
@@ -65,6 +71,7 @@ public class TowerSpawner : MonoBehaviour
         {
             isMoving = false;
             CreateNewTower();
+            towerButtonSpawner.destoryHint();
         }
 
         if (currentTower != null && isMoving)

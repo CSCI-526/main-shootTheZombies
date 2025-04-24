@@ -666,7 +666,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -688,11 +694,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 965f8c10-4551-4237-9879-007b8f879dab
+  cloudProjectId: af70d5fa-6916-4b7c-83b4-1d691aea7d4e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: ShootTheZombie
-  organizationId: zetianzh
+  organizationId: swampskye
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

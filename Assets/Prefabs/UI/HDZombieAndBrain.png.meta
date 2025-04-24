@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5c079f65b046a4ada818180d91ae0194
+guid: d32bfc698d83f41c1abf76d0a7e3bbb0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -429670414109276508
-    second: Screenshot 2025-03-02 at 00.38.27_0
+      213: -5084777368835316440
+    second: HDZombieAndBrain_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Screenshot 2025-03-02 at 00.38.27_0
+      name: HDZombieAndBrain_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 484
-        height: 607
+        width: 431
+        height: 530
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4a6858ce801890af0800000000000000
-      internalID: -429670414109276508
+      spriteID: 82520a06ced3f69b0800000000000000
+      internalID: -5084777368835316440
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Screenshot 2025-03-02 at 00.38.27_0: -429670414109276508
+      HDZombieAndBrain_0: -5084777368835316440
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

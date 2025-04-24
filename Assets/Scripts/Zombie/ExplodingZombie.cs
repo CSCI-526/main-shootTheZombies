@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class ExplodingZombie : Zombie
 {
     public float explosionRadius = 3f;
@@ -61,7 +61,12 @@ public class ExplodingZombie : Zombie
         
         if (player.playerLevel <= 6)
         {
-            player.GainExp(20);
+             if (SceneManager.GetActiveScene().name == "TutorialLevel"){
+                player.GainExp(100);
+             }else{
+                player.GainExp(20);
+             }
+            
         }
     }
 
