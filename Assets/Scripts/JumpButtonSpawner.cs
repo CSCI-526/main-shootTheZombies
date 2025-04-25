@@ -87,7 +87,7 @@ public class JumpButtonSpawner : MonoBehaviour
         buttonObj.transform.SetParent(canvas.transform,false); // Attach to Canvas
 
         RectTransform rectTransform = buttonObj.AddComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(160, 50); // Button size
+        rectTransform.sizeDelta = new Vector2(200, 50); // Button size
         rectTransform.anchoredPosition = anchoredPosition; // Button position
 
         Button btn = buttonObj.AddComponent<Button>();
