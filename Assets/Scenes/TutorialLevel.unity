@@ -4921,9 +4921,9 @@ MonoBehaviour:
   popupTextObject: {fileID: 965646281}
   displayTime: 10
   player: {fileID: 1485013290}
-  wall: {fileID: 0}
+  wall: {fileID: 999447908}
   expbar: {fileID: 201137786}
-  HPbar: {fileID: 0}
+  HPbar: {fileID: 765784169}
   maxXp: 100
   maxHp: 100
   level: 1
