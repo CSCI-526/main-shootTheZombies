@@ -27,7 +27,7 @@ public class Wall : MonoBehaviour
     {
         if (_hasGameEnded) return;
         healthText.text = "HP " + health;
-        survivalTime.text =  $"You have survived for { _player.timer.ToString("F1") } seconds.";
+        survivalTime.text =  $"survived { _player.timer.ToString("F1") } seconds";
 
 
         Vector2 screenPos = Camera.main.WorldToScreenPoint(transform.position);

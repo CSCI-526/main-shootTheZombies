@@ -4,15 +4,13 @@ public class DefenseBullet : BulletBase
 {
     public override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("ZombieBullet"))
+        var zp = other.GetComponent<ZombieProjectile>();
+        if (zp != null)
         {
-            ZombieBullet zombieBullet = other.GetComponent<ZombieBullet>();
-            if (zombieBullet != null)
-            {
-                // Destroy(zombieBullet);
-                zombieBullet.destroySelf();
-            }
-            Destroy(gameObject); 
+            // destroy the zombie bullet
+            Destroy(other.gameObject);
+            // destroy this defense bullet
+            Destroy(gameObject);
         }
     }
 

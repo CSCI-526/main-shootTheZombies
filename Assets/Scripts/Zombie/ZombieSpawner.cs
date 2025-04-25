@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ZombieSpawner : MonoBehaviour
 {
-    private int waveCount = 40;
+    private int waveCount = 10;
     public PlayerManagerScript playerManager;
     public GameObject meleeZombiePrefab;
     public GameObject rangedZombiePrefab;
@@ -32,11 +32,11 @@ public class ZombieSpawner : MonoBehaviour
         GameObject zombiePrefab;
 
         //for wave 1
-        if (waveCount > 25 && waveCount <= 40){
+        if (waveCount > 6 && waveCount <= 10){
             zombiePrefab = meleeZombiePrefab;
             waveCount -= 1;
         }
-        else if (waveCount > 10){
+        else if (waveCount > 3){
             spawnInterval = 3f;
             zombiePrefab = explodingZombiePrefab;
             waveCount -= 1;
@@ -46,22 +46,21 @@ public class ZombieSpawner : MonoBehaviour
             zombiePrefab = rangedZombiePrefab;
             waveCount -= 1;
         }
+        else if (waveCount > -40 && waveCount <= 0){
+            spawnInterval -= 0.1f;
+            waveCount -= 1;
+            int zombieType = Random.Range(0, 3);
+            zombiePrefab = (zombieType == 0) ? meleeZombiePrefab :
+                          (zombieType == 1) ? rangedZombiePrefab :
+                          explodingZombiePrefab;
+        }
         else{
-            spawnInterval = 1f;
             int zombieType = Random.Range(0, 3);
             zombiePrefab = (zombieType == 0) ? meleeZombiePrefab :
                           (zombieType == 1) ? rangedZombiePrefab :
                           explodingZombiePrefab;
         }
         Debug.Log(" wavecount == " + waveCount);
-        if (waveCount == 19){
-            playerManager.ShowPopup("Tank zombies have appeared!!!");}
-        else if (waveCount == 9){
-            playerManager.ShowPopup("Ranged zombies have appeared!!!");}
-        else if (waveCount == 0){
-            playerManager.ShowPopup("Mix zombies comes!!!");}
-        
-
         Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
     }
 }

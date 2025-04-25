@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 4269aea93d9094dc985748cb70b16070
+guid: bc0683df23f6142859674080835d07c7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 762456511582842315
-    second: bullet_1_0
+      213: -4992593594199279026
+    second: tower_2_right_0
+  - first:
+      213: -162989338837740082
+    second: tower_2_right_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bullet_1_0
+      name: tower_2_right_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 0
-        width: 147
-        height: 1294
+        x: 13
+        y: 22
+        width: 193
+        height: 189
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bcd2499582ac49a00800000000000000
-      internalID: 762456511582842315
+      spriteID: e4a7cd5f39eb6bab0800000000000000
+      internalID: -4992593594199279026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tower_2_right_1
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 21
+        width: 36
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec596645f02fcbdf0800000000000000
+      internalID: -162989338837740082
       vertices: []
       indices: 
       edges: []
@@ -147,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tower_2_right_0: -4992593594199279026
+      tower_2_right_1: -162989338837740082
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

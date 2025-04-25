@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 4269aea93d9094dc985748cb70b16070
+guid: f4377ed1dee8c46fdbd2f44fece4368c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 762456511582842315
-    second: bullet_1_0
+      213: 7653555557609357695
+    second: tower_2_0
+  - first:
+      213: -1774948734366935773
+    second: tower_2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +116,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bullet_1_0
+      name: tower_2_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 0
-        width: 147
-        height: 1294
+        x: 19
+        y: 22
+        width: 193
+        height: 189
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bcd2499582ac49a00800000000000000
-      internalID: 762456511582842315
+      spriteID: f71c508ba34e63a60800000000000000
+      internalID: 7653555557609357695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tower_2_1
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 21
+        width: 36
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3259789b78d1e57e0800000000000000
+      internalID: -1774948734366935773
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0c221612caffe48e88e5407d11e400b8
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tower_2_0: 7653555557609357695
+      tower_2_1: -1774948734366935773
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
