@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class TowerButtonSpawner : MonoBehaviour
 {
     public PlayerManagerScript playerManager;
@@ -107,6 +106,7 @@ public class TowerButtonSpawner : MonoBehaviour
         text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         text.alignment = TextAnchor.MiddleCenter;
         text.color = Color.black;
+        text.fontSize = 24; // Enlarged text size
 
         RectTransform textRect = textObj.GetComponent<RectTransform>();
         textRect.sizeDelta = rectTransform.sizeDelta;
@@ -131,7 +131,7 @@ public class TowerButtonSpawner : MonoBehaviour
 
         Text hintTextText = hintTextObj.AddComponent<Text>();
         hintTextText.text = hintText;
-        hintTextText.fontSize = 24;
+        hintTextText.fontSize = 40;
         hintTextText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         hintTextText.alignment = TextAnchor.MiddleCenter;
         hintTextText.color = Color.red;
@@ -193,7 +193,11 @@ public class TowerButtonSpawner : MonoBehaviour
         if (hasShownHint) return;
         hasShownHint = true;
         hintClickTower = CreateText("Click to deploy a tower", new Vector2(0, 0));
-       
+        // Destroy after 2 seconds if it exists
+        if (hintClickTower != null)
+        {
+            Destroy(hintClickTower, 2f);
+        }
     }
 
     public void destoryHint(){

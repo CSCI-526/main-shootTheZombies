@@ -51,7 +51,7 @@ public class JumpButtonSpawner : MonoBehaviour
             TbuttonC = CreateButton(buttonTextC, new Vector2(200, -200)); // Avoid same position as buttonB
 
         
-
+        ShowHintText();
     
     }
  
@@ -102,6 +102,7 @@ public class JumpButtonSpawner : MonoBehaviour
         text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         text.alignment = TextAnchor.MiddleCenter;
         text.color = Color.black;
+        text.fontSize = 24; // Enlarged text size
 
         RectTransform textRect = textObj.GetComponent<RectTransform>();
         textRect.sizeDelta = rectTransform.sizeDelta;
@@ -126,7 +127,7 @@ public class JumpButtonSpawner : MonoBehaviour
 
         Text hintTextText = hintTextObj.AddComponent<Text>();
         hintTextText.text = hintText;
-        hintTextText.fontSize = 24;
+        hintTextText.fontSize = 40;
         hintTextText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         hintTextText.alignment = TextAnchor.MiddleCenter;
         hintTextText.color = Color.red;
@@ -161,8 +162,13 @@ public class JumpButtonSpawner : MonoBehaviour
         else if(buttonText == buttonTextC){
             SceneManager.LoadScene("RegularLevel"); // Jump to Regularlevel scene
 
+        }         
+        if (hintClickTower != null)
+        {
+            Destroy(hintClickTower);
         }
-        // Invoke(nameof(ShowHintText), 1f);
+
+
         
     }
 
@@ -170,8 +176,8 @@ public class JumpButtonSpawner : MonoBehaviour
     {
         if (hasShownHint) return;
         hasShownHint = true;
-        hintTextObj = CreateText("Click to deploy a tower", new Vector2(0, 0));
-        Destroy(hintTextObj, 5f); 
+        hintTextObj = CreateText("Congraduation!", new Vector2(0, 0));
+        
     }
 
    
