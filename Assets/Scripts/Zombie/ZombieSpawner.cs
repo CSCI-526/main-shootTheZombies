@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ZombieSpawner : MonoBehaviour
 {
-    private int waveCount = 40;
+    private int waveCount = 10;
     public PlayerManagerScript playerManager;
     public GameObject meleeZombiePrefab;
     public GameObject rangedZombiePrefab;
@@ -32,19 +32,19 @@ public class ZombieSpawner : MonoBehaviour
         GameObject zombiePrefab;
 
         //for wave 1
-        if (waveCount > 25 && waveCount <= 40){
+        if (waveCount > 6 && waveCount <= 10){
             zombiePrefab = meleeZombiePrefab;
-            waveCount -= 5;
+            waveCount -= 1;
         }
-        else if (waveCount > 10){
+        else if (waveCount > 3){
             spawnInterval = 3f;
             zombiePrefab = explodingZombiePrefab;
-            waveCount -= 5;
+            waveCount -= 1;
         }
         else if (waveCount > 0){
             spawnInterval = 5f;
             zombiePrefab = rangedZombiePrefab;
-            waveCount -= 5;
+            waveCount -= 1;
         }
         else{
             spawnInterval = 3f;

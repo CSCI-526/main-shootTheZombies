@@ -169,6 +169,6 @@ MonoBehaviour:
   hp: 100
   color: {r: 0, g: 0, b: 0, a: 0}
   projectilePrefab: {fileID: 1003970795388038849, guid: 18edff41566dd45b4b231d23d8d79be5, type: 3}
-  shootCooldown: 1
+  shootCooldown: 3
   moveSpeed: 2
-  damage: 5
+  damage: 3

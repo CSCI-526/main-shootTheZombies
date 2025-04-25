@@ -1,9 +1,9 @@
-<<<<<<< HEAD
 *.vscode/
 *.csproj
 *.sln
-=======
->>>>>>> Chan
+*.DS_Store
+.vscode/settings.json
+
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
@@ -11,8 +11,5 @@
 [Bb]uilds/
 [Ll]ogs/
 UserSettings/
-<<<<<<< HEAD
-=======
 
->>>>>>> Chan
-.vscode/settings.json
+
