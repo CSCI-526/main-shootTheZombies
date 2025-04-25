@@ -43,14 +43,14 @@ public class TowerButtonSpawner : MonoBehaviour
     {
         // If buttons already exist, don't recreate them
         if (TbuttonA == null && buttonTextA != "")
-            TbuttonA = CreateButton(buttonTextA, new Vector2(-200, -200));
+            TbuttonA = CreateButton(buttonTextA, new Vector2(-250, -200));
 
         if (TbuttonB == null && buttonTextB != "")
             TbuttonB = CreateButton(buttonTextB, new Vector2(0, -200));
 
 
         if (TbuttonC == null && buttonTextC != "")
-            TbuttonC = CreateButton(buttonTextC, new Vector2(200, -200)); // Avoid same position as buttonB
+            TbuttonC = CreateButton(buttonTextC, new Vector2(250, -200)); // Avoid same position as buttonB
 
 
         // Add hint text
@@ -79,8 +79,14 @@ public class TowerButtonSpawner : MonoBehaviour
             c.sortingOrder = 100; // Set a high sorting order to ensure the canvas is in front
         }
 
-
-
+        CanvasScaler canvasScaler = canvas.GetComponent<CanvasScaler>();
+        if (canvasScaler != null)
+        {
+            canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            canvasScaler.referenceResolution = new Vector2(1920, 1080); // Reference resolution
+            canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+            canvasScaler.matchWidthOrHeight = 0.5f; // Adjust to balance width and height scaling
+        }
     }
 
 
@@ -91,7 +97,10 @@ public class TowerButtonSpawner : MonoBehaviour
         buttonObj.transform.SetParent(canvas.transform, false); // Attach to Canvas
 
         RectTransform rectTransform = buttonObj.AddComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(160, 50); // Button size
+        rectTransform.anchorMin = new Vector2(0.5f, 0.5f); // Center anchor
+        rectTransform.anchorMax = new Vector2(0.5f, 0.5f); // Center anchor
+        rectTransform.pivot = new Vector2(0.5f, 0.5f); // Center pivot
+        rectTransform.sizeDelta = new Vector2(200, 50); // Button size
         rectTransform.anchoredPosition = anchoredPosition; // Button position
 
         Button btn = buttonObj.AddComponent<Button>();
@@ -106,16 +115,13 @@ public class TowerButtonSpawner : MonoBehaviour
         text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         text.alignment = TextAnchor.MiddleCenter;
         text.color = Color.black;
-        text.fontSize = 24; // Enlarged text size
+        text.fontSize = 20; // Enlarged text size
 
         RectTransform textRect = textObj.GetComponent<RectTransform>();
         textRect.sizeDelta = rectTransform.sizeDelta;
         textRect.anchoredPosition = Vector2.zero;
         // //Debug.Log("Button " + buttonText + " created and click listener added.");
         btn.onClick.AddListener(() => OnButtonClick(buttonText));
-
-
-
 
         return buttonObj;
     }
