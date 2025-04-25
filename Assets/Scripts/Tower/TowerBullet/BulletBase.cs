@@ -28,7 +28,7 @@ public class BulletBase : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.x < -7.6f || transform.position.x > 7.6f || transform.position.y > 10.0f)
+        if (transform.position.x < -7.6f || transform.position.x > 7.6f || transform.position.y > 12.0f)
         {
             Destroy(gameObject);
         }

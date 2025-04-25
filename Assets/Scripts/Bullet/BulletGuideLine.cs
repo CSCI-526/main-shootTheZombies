@@ -60,7 +60,7 @@ public class BulletGuideLine : MonoBehaviour
             for (int i = 0; i < 1000; i++) 
             {
                 endPoint += dir * step;
-                if (endPoint.y > 10f || Mathf.Abs(endPoint.x) > 7.5f)
+                if (endPoint.y > 12f || Mathf.Abs(endPoint.x) > 7.5f)
                 {
                     points.Add(endPoint);
                     // Debug.Log("endPoint " + endPoint);
@@ -75,7 +75,7 @@ public class BulletGuideLine : MonoBehaviour
             for (int i = 0; i < 1000; i++) 
             {
                 endPoint += dir * step;
-                if (endPoint.y > 10f)
+                if (endPoint.y > 12f)
                 {
                     points.Add(endPoint);
                     // Debug.Log("endPoint " + endPoint);
