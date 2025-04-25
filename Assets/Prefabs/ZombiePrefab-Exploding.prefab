@@ -171,5 +171,5 @@ MonoBehaviour:
   explosionRadius: 2
   explosionDamage: 30
   moveSpeed: 2
-  damage: 20
+  damage: 15
   explosionEffectPrefab: {fileID: 0}
