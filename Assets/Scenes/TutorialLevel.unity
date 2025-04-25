@@ -150,7 +150,7 @@ RectTransform:
   m_LocalScale: {x: 1.2523999, y: 1.2523999, z: 1.2523999}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1736902984}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -2170,7 +2170,7 @@ RectTransform:
   m_LocalScale: {x: 1.0465999, y: 1.0466, z: 1.0466}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1736902984}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5266,17 +5266,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1883506300 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1011030407380252014, guid: be045624f2fff4ed28386a3e2529074f, type: 3}
-  m_PrefabInstance: {fileID: 1896563160677543353}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1954211574
 GameObject:
   m_ObjectHideFlags: 0
@@ -6246,7 +6235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1011030407380252014, guid: be045624f2fff4ed28386a3e2529074f, type: 3}
       propertyPath: m_text
-      value: Group 9
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4065338354468595544, guid: be045624f2fff4ed28386a3e2529074f, type: 3}
       propertyPath: m_RenderMode
@@ -6348,6 +6337,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8681353102598496221, guid: be045624f2fff4ed28386a3e2529074f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -6388,3 +6381,5 @@ SceneRoots:
   - {fileID: 703661517}
   - {fileID: 1290277358}
   - {fileID: 441104120}
+  - {fileID: 158873206}
+  - {fileID: 956771827}
