@@ -37,7 +37,7 @@ public class ZombieSpawner : MonoBehaviour
             waveCount -= 5;
         }
         else if (waveCount > 10){
-            spawnInterval = 3f;
+            spawnInterval = 5f;
             zombiePrefab = explodingZombiePrefab;
             waveCount -= 5;
         }
@@ -46,8 +46,15 @@ public class ZombieSpawner : MonoBehaviour
             zombiePrefab = rangedZombiePrefab;
             waveCount -= 5;
         }
+        else if (waveCount > -40 && waveCount <= 0){
+            spawnInterval -= 0.1f;
+            waveCount -= 1;
+            int zombieType = Random.Range(0, 3);
+            zombiePrefab = (zombieType == 0) ? meleeZombiePrefab :
+                          (zombieType == 1) ? rangedZombiePrefab :
+                          explodingZombiePrefab;
+        }
         else{
-            spawnInterval = 3f;
             int zombieType = Random.Range(0, 3);
             zombiePrefab = (zombieType == 0) ? meleeZombiePrefab :
                           (zombieType == 1) ? rangedZombiePrefab :
