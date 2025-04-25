@@ -74,7 +74,7 @@ public class TowerBase : MonoBehaviour
         if (bulletScript != null)
         {
             Vector3 offSet = new Vector3(0,-2,0);
-            if(targetPosition.y < -15){
+            if(targetPosition.y < -5){
                 offSet.y = 0;
             }
             bulletScript.Initialize(targetPosition + offSet, speed, damage);
