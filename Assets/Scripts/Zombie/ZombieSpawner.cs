@@ -46,8 +46,15 @@ public class ZombieSpawner : MonoBehaviour
             zombiePrefab = rangedZombiePrefab;
             waveCount -= 1;
         }
+        else if (waveCount > -40 && waveCount <= 0){
+            spawnInterval -= 0.1f;
+            waveCount -= 1;
+            int zombieType = Random.Range(0, 3);
+            zombiePrefab = (zombieType == 0) ? meleeZombiePrefab :
+                          (zombieType == 1) ? rangedZombiePrefab :
+                          explodingZombiePrefab;
+        }
         else{
-            spawnInterval = 3f;
             int zombieType = Random.Range(0, 3);
             zombiePrefab = (zombieType == 0) ? meleeZombiePrefab :
                           (zombieType == 1) ? rangedZombiePrefab :
