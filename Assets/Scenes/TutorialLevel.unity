@@ -2496,8 +2496,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07772a56535a47edb55f6f85f8e9445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dummyTarget: {fileID: 120756688}
   promptText: {fileID: 216107797}
+  redBox: {fileID: 2120574832}
+  greenBox: {fileID: 1204648628}
+  blueBox: {fileID: 1979342984}
+  normalScale: 1
+  highlightedScale: 1.1
 --- !u!4 &887872173
 Transform:
   m_ObjectHideFlags: 0
@@ -3600,7 +3604,7 @@ RectTransform:
   m_Father: {fileID: 476218470}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.532, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -4.4999714, y: 48.837}
   m_SizeDelta: {x: 37.9859, y: 43.973}
   m_Pivot: {x: 0.5, y: 1.6106054}
@@ -4736,7 +4740,7 @@ MonoBehaviour:
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
-  m_FillCenter: 1
+  m_FillCenter: 0
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
@@ -5100,7 +5104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.300003, y: 52.7}
+  m_AnchoredPosition: {x: 3.2999878, y: 52.7}
   m_SizeDelta: {x: 30.4069, y: 29.965}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1544409356
@@ -5762,9 +5766,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -42, y: 42}
-  m_SizeDelta: {x: 51.0046, y: 43.972}
-  m_Pivot: {x: -1.3678367, y: 1.5601231}
+  m_AnchoredPosition: {x: 95, y: 48.084}
+  m_SizeDelta: {x: 51.0046, y: 43.506}
+  m_Pivot: {x: 0.5, y: 1.65}
 --- !u!58 &1979342985
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6436,9 +6440,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 33, y: 59.625}
+  m_AnchoredPosition: {x: -93, y: 58.014}
   m_SizeDelta: {x: 44.9767, y: 50}
-  m_Pivot: {x: 2.4183173, y: 1.6106052}
+  m_Pivot: {x: 0.5, y: 1.6}
 --- !u!58 &2120574833
 CircleCollider2D:
   m_ObjectHideFlags: 0

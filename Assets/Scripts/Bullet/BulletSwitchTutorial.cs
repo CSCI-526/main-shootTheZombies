@@ -4,10 +4,15 @@ using System.Collections;
 
 public class BulletSwitchTutorial : MonoBehaviour
 {
-    public GameObject dummyTarget;
     public TextMeshProUGUI promptText;
 
-    private SpriteRenderer dummyRenderer;
+    public RectTransform redBox;
+    public RectTransform greenBox;
+    public RectTransform blueBox;
+    public float normalScale = 1f;
+    public float highlightedScale = 1.1f;
+
+    // private SpriteRenderer dummyRenderer;
 
     private bool redPressed = false;
     private bool greenPressed = false;
@@ -21,8 +26,9 @@ public class BulletSwitchTutorial : MonoBehaviour
     void Start()
     {
         promptText.text = "Press Q, W, or E to select Red, Blue, or Green bullets.\n\nCurrent bullet color is shown in the box on the right.";
-        dummyRenderer = dummyTarget.GetComponent<SpriteRenderer>();
-        dummyRenderer.color = Color.gray;
+        // dummyRenderer = dummyTarget.GetComponent<SpriteRenderer>();
+        // dummyRenderer.color = Color.gray;
+        SetAllBoxes(normalScale);
     }
 
     void Update()
@@ -40,17 +46,20 @@ public class BulletSwitchTutorial : MonoBehaviour
         if (q)
         {
             redPressed = true;
-            dummyRenderer.color = Color.red;
+            // dummyRenderer.color = Color.red;
+            Highlight(redBox);
         }
         else if (w)
         {
             greenPressed = true;
-            dummyRenderer.color = Color.green;
+            // dummyRenderer.color = Color.green;
+            Highlight(greenBox);
         }
         else if (e)
         {
             bluePressed = true;
-            dummyRenderer.color = Color.blue;
+            // dummyRenderer.color = Color.blue;
+            Highlight(blueBox);
         }
 
         if (redPressed && greenPressed && bluePressed && !completionHintShown)
@@ -76,6 +85,19 @@ public class BulletSwitchTutorial : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         completionHintReadyToClear = true;
+    }
+
+    private void SetAllBoxes(float scale)
+    {
+        redBox.localScale   = Vector3.one * scale;
+        greenBox.localScale = Vector3.one * scale;
+        blueBox.localScale  = Vector3.one * scale;
+    }
+
+    private void Highlight(RectTransform boxToHighlight)
+    {
+        SetAllBoxes(normalScale * 0.95f);
+        boxToHighlight.localScale = Vector3.one * highlightedScale;
     }
 
 }
