@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class BulletSwitchTutorial : MonoBehaviour
 {
@@ -54,12 +55,11 @@ public class BulletSwitchTutorial : MonoBehaviour
 
         if (redPressed && greenPressed && bluePressed && !completionHintShown)
         {
-            promptText.text = "Good! You've learned to switch bullets.";
             completionHintShown = true;
-            StartCoroutine(EnableCompletionHintClearAfterDelay());
+            StartCoroutine(ShowCompletionHints());
         }
 
-        if (completionHintShown && !completionHintCleared && completionHintReadyToClear && (q || w || e))
+        if (completionHintShown && !completionHintCleared && completionHintReadyToClear && (q || w || e || Input.GetMouseButtonDown(0)))
         {
             promptText.text = "";
             completionHintCleared = true;
@@ -67,9 +67,15 @@ public class BulletSwitchTutorial : MonoBehaviour
         }
     }
 
-    System.Collections.IEnumerator EnableCompletionHintClearAfterDelay()
+    System.Collections.IEnumerator ShowCompletionHints()
     {
+        promptText.text = "Good! You've learned to switch bullets.";
+        yield return new WaitForSeconds(1.5f);
+
+        promptText.text = "Left-click to proceed to the next step.";
         yield return new WaitForSeconds(1f);
+
         completionHintReadyToClear = true;
     }
+
 }

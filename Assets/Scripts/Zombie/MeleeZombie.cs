@@ -17,6 +17,7 @@ public class MeleeZombie : Zombie
 
     public void Update()
     {
+        if (isTutorialTarget) return;
         transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
         if (isAttacking)
         {

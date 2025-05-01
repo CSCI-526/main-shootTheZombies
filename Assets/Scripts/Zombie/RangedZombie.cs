@@ -16,6 +16,7 @@ public class RangedZombie : Zombie
 
     private void Update()
     {
+        if (isTutorialTarget) return;
         transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
 
         shootTimer += Time.deltaTime;

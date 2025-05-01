@@ -30,6 +30,7 @@ public class Zombie : MonoBehaviour
 
         if (hp <= 0)
         {
+
             if (isTutorialTarget)
             {
                 if (tutorialRef != null)

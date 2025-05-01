@@ -7,6 +7,7 @@ public class AimingShootingTutorial : MonoBehaviour
     public GameObject meleeZombiePrefab;
     public GameObject rangedZombiePrefab;
     public GameObject explodingZombiePrefab;
+    public GameObject keyHintLabelPrefab;
 
     private int targetsRemaining = 3;
     private bool tutorialStarted = false;
@@ -16,22 +17,34 @@ public class AimingShootingTutorial : MonoBehaviour
         tutorialStarted = true;
         promptText.text = "Move your mouse to aim and Left-Click to fire.";
 
-        SpawnZombie(meleeZombiePrefab, new Vector3(-2f, 10f, 0f));
-        SpawnZombie(rangedZombiePrefab, new Vector3(0f, 10f, 0f));
-        SpawnZombie(explodingZombiePrefab, new Vector3(2f, 10f, 0f));
+        SpawnZombie(meleeZombiePrefab, new Vector3(-4f,6f,0f), "Q", Color.red);
+        SpawnZombie(rangedZombiePrefab, new Vector3(0f,6f,0f), "W", Color.green);
+        SpawnZombie(explodingZombiePrefab, new Vector3(4f,6f,0f), "E", Color.blue);
     }
 
-    void SpawnZombie(GameObject prefab, Vector3 position)
+    void SpawnZombie(GameObject prefab, Vector3 position, string key, Color color)
     {
         GameObject zombie = Instantiate(prefab, position, Quaternion.identity);
-        Zombie tutorialZombie = zombie.GetComponent<Zombie>();
-        if (tutorialZombie != null)
+        var tz = zombie.GetComponentInChildren<Zombie>();
+        if (tz == null) return;
+        tz.hp = 30;
+        tz.isTutorialTarget = true;
+        tz.tutorialRef = this;
+
+        GameObject canvasObj = GameObject.Find("Damage");
+        Transform canvas = canvasObj.transform;
+        Vector3 headPos = zombie.transform.position + Vector3.up * 2f;
+        GameObject popup = Instantiate(keyHintLabelPrefab, headPos, Quaternion.identity, canvas);
+        var textMesh = popup.GetComponentInChildren<TextMeshProUGUI>();
+        if (textMesh != null)
         {
-            tutorialZombie.hp = 30;
-            tutorialZombie.isTutorialTarget = true;
-            tutorialZombie.tutorialRef = this;
+            textMesh.text  = key;
+            textMesh.color = color;
+            textMesh.fontSize = 50;
         }
     }
+
+
 
     public void OnZombieKilled()
     {

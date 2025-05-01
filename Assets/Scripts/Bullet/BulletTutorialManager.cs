@@ -30,6 +30,19 @@ public class BulletTutorialManager : MonoBehaviour
                 Debug.Log("All tutorial stages complete.");
                 break;
         }
+
+        if (currentStage != BulletTutorialStage.none)
+        {
+            var spawner = GameObject.Find("ZombieSpawner");
+            if (spawner != null)
+                spawner.GetComponent<TutorialZombieSpawner>().allowSpawning = false;
+        }
+        else
+        {
+            var spawner = GameObject.Find("ZombieSpawner");
+            if (spawner != null)
+                spawner.GetComponent<TutorialZombieSpawner>().allowSpawning = true;
+        }
     }
 }
 
@@ -37,5 +50,5 @@ public enum BulletTutorialStage
 {
     BulletSwitching,
     AimingShooting,
-    // 后续阶段在这里继续添加
+    none
 }
