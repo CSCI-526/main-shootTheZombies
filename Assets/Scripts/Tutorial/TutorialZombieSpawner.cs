@@ -10,14 +10,20 @@ public class TutorialZombieSpawner : MonoBehaviour
     public float fixedY = 10f;
     private float timeSinceLastSpawn = 0f;
     public float spawnInterval = 10f; // Time between spawns
+    private bool firstSpawn = true;
     private int spawnStep = 0;
     //private bool hasSpawned = false;
 
     private void Update()
     {
         timeSinceLastSpawn += Time.deltaTime;
-
-        if (timeSinceLastSpawn >= spawnInterval)
+        if (firstSpawn && timeSinceLastSpawn >= 5f)
+        {
+            SpawnNextZombie();
+            firstSpawn = false;
+            timeSinceLastSpawn = 0f;
+        }
+        else if (timeSinceLastSpawn >= spawnInterval)
         {
             SpawnNextZombie();
             timeSinceLastSpawn = 0f;

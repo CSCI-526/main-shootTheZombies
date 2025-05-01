@@ -7,6 +7,9 @@ public class Zombie : MonoBehaviour
     public int hp;
     public Color color;
 
+    public bool isTutorialTarget = false;
+    public AimingShootingTutorial tutorialRef;
+
     protected virtual void Start()
     {
         hp = 100;
@@ -27,6 +30,14 @@ public class Zombie : MonoBehaviour
 
         if (hp <= 0)
         {
+            if (isTutorialTarget)
+            {
+                if (tutorialRef != null)
+                    tutorialRef.OnZombieKilled();
+
+                Destroy(gameObject);
+                return;
+            }
             //Debug.Log("Base Zombie Died: " + gameObject.name);
             Player player = GameObject.Find("Testplayer").GetComponent<Player>();
             Destroy(gameObject);

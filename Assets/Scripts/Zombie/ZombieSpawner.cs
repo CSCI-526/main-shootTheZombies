@@ -12,12 +12,19 @@ public class ZombieSpawner : MonoBehaviour
     public float fixedY = 10f; // Y position for spawning
 
     private float timeSinceLastSpawn = 0f;
+    private bool firstSpawn = true;
 
     private void Update()
     {
         timeSinceLastSpawn += Time.deltaTime;
 
-        if (timeSinceLastSpawn >= spawnInterval)
+        if (firstSpawn && timeSinceLastSpawn >= 2f)
+        {
+            SpawnZombie();
+            firstSpawn = false;
+            timeSinceLastSpawn = 0f;
+        }
+        else if (timeSinceLastSpawn >= spawnInterval)
         {
             SpawnZombie();
             timeSinceLastSpawn = 0f;

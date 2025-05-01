@@ -23,13 +23,15 @@ public class BulletSpawner : MonoBehaviour
     private Sprite currentBulletSprite;
     private float timer = 0f;
     private bool stop = false;
+    private float nextFireTime = 0f;
+    private float newFireRate = 3f;
 
     void Start()
     {
         if (bulletSprites != null && bulletSprites.Length >= 1)
             currentBulletSprite = bulletSprites[0];
         bulletColor = Color.red;
-        StartCoroutine(ShootCoroutine());
+        // StartCoroutine(ShootCoroutine());
         showGuideInTutorial = (SceneManager.GetActiveScene().buildIndex == 1);
     }
 
@@ -38,23 +40,30 @@ public class BulletSpawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             bulletColor = Color.red;
-            currentBulletSprite = (bulletSprites.Length > 0 ? bulletSprites[0] : currentBulletSprite);
+            // currentBulletSprite = (bulletSprites.Length > 0 ? bulletSprites[0] : currentBulletSprite);
         }
         else if (Input.GetKeyDown(KeyCode.W))
         {
             bulletColor = Color.green;
-            currentBulletSprite = (bulletSprites.Length > 1 ? bulletSprites[1] : currentBulletSprite);
+            // currentBulletSprite = (bulletSprites.Length > 1 ? bulletSprites[1] : currentBulletSprite);
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
             bulletColor = Color.blue;
-            currentBulletSprite = (bulletSprites.Length > 2 ? bulletSprites[2] : currentBulletSprite);
+            // currentBulletSprite = (bulletSprites.Length > 2 ? bulletSprites[2] : currentBulletSprite);
         }
 
         if (!stop)
         {
             timer += Time.deltaTime;
             if (timer >= maxTime) stop = true;
+        }
+
+        if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
+        {
+            Vector3 target = GetMouseWorldPosition();
+            FireBullet(target);
+            nextFireTime = Time.time + 1f / fireRate;
         }
     }
 
@@ -141,7 +150,7 @@ public class BulletSpawner : MonoBehaviour
         {
             if (currentBulletSprite != null)
                 sr.sprite = currentBulletSprite;
-            // sr.color = bulletColor;
+            sr.color = bulletColor;
         }
     }
 
