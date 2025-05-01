@@ -83,7 +83,7 @@ public class TowerButtonSpawner : MonoBehaviour
         if (canvasScaler != null)
         {
             canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            canvasScaler.referenceResolution = new Vector2(1920, 1080); // Reference resolution
+            // canvasScaler.referenceResolution = new Vector2(1920, 1080); // Reference resolution
             canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
             canvasScaler.matchWidthOrHeight = 0.5f; // Adjust to balance width and height scaling
         }
@@ -137,7 +137,7 @@ public class TowerButtonSpawner : MonoBehaviour
 
         Text hintTextText = hintTextObj.AddComponent<Text>();
         hintTextText.text = hintText;
-        hintTextText.fontSize = 40;
+        hintTextText.fontSize = 30;
         hintTextText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         hintTextText.alignment = TextAnchor.MiddleCenter;
         hintTextText.color = Color.red;

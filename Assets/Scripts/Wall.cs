@@ -32,7 +32,7 @@ public class Wall : MonoBehaviour
 
         Vector2 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         healthText.transform.position = screenPos;
-        survivalTime.transform.position = screenPos + new Vector2(300, 50);
+        // survivalTime.transform.position = screenPos + new Vector2(300, 50);
 
         if (health <= 0)
         {   

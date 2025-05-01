@@ -62,7 +62,7 @@ public class ExplodingZombie : Zombie
         if (player.playerLevel <= 6)
         {
              if (SceneManager.GetActiveScene().name == "TutorialLevel"){
-                player.GainExp(100);
+                player.GainExp(50);
              }else{
                 player.GainExp(20);
              }
