@@ -176,7 +176,7 @@ public class JumpButtonSpawner : MonoBehaviour
     {
         if (hasShownHint) return;
         hasShownHint = true;
-        hintTextObj = CreateText("Congraduation!", new Vector2(0, 0));
+        hintTextObj = CreateText("Congratulations!", new Vector2(0, 0));
         
     }
 

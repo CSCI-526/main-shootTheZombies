@@ -31,7 +31,7 @@ public class Zombie : MonoBehaviour
             Player player = GameObject.Find("Testplayer").GetComponent<Player>();
             Destroy(gameObject);
             if (SceneManager.GetActiveScene().name == "TutorialLevel"){
-                player.GainExp(100);
+                player.GainExp(50);
              }else{
                 player.GainExp(20);
              }
