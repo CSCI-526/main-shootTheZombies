@@ -21,11 +21,11 @@ public class TutorialZombie : Zombie
     {
         if (bulletColor != color && bulletColor != Color.black) return;
         hp -= damage;
-        GameObject canvasObj = GameObject.Find("Damage");
-        Transform canvas = canvasObj.transform;
+        // GameObject canvasObj = GameObject.Find("Damage");
+        // Transform canvas = canvasObj.transform;
 
-        GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up, Quaternion.identity, canvas);
-        popup.GetComponent<DamagePopup>().Setup(-damage);
+        // GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up, Quaternion.identity, canvas);
+        // popup.GetComponent<DamagePopup>().Setup(-damage);
 
         if (hp <= 0)
         {

@@ -2,19 +2,38 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class Zombie : MonoBehaviour
 {
+
+    [Header("Stats")]
+    public int hp = 100;
+
+    [Header("UI")]
+    public Image healthFill; 
+
+    protected int maxHp;
+
+
     public GameObject damagePopupPrefab;
-    public int hp;
     public Color color;
+    
+    protected const float xpDiminishingFactor = 0.2f;
 
     public bool isTutorialTarget = false;
     public AimingShootingTutorial tutorialRef;
 
     protected virtual void Start()
     {
-        hp = 100;
+        maxHp = hp;
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthFill != null && maxHp > 0)
+            healthFill.fillAmount = (float)hp / maxHp;
     }
 
     public virtual void TakeDamage(int damageAmount, Color bulletColor)
@@ -48,6 +67,11 @@ public class Zombie : MonoBehaviour
         // if (bulletColor != color && bulletColor != Color.black) return;
         hp -= damageAmount;
 
+
+        // hp -= damageAmount;
+        hp = Mathf.Max(0, hp - damageAmount);
+        UpdateHealthBar();
+
         SendAccuracy.bulletsHit += 1;
 
         GameObject canvasObj = GameObject.Find("Damage");
@@ -68,13 +92,20 @@ public class Zombie : MonoBehaviour
                 return;
             }
             //Debug.Log("Base Zombie Died: " + gameObject.name);
+            if (healthFill != null)
+                healthFill.transform.parent.gameObject.SetActive(false);
+
             Player player = GameObject.Find("Testplayer").GetComponent<Player>();
             Destroy(gameObject);
             if (SceneManager.GetActiveScene().name == "TutorialLevel"){
                 player.GainExp(50);
              }else{
-                player.GainExp(20);
-             }
+                int baseXp = (SceneManager.GetActiveScene().name == "TutorialLevel") ? 50 : 20;
+                int lvl = player.playerLevel;
+                int reward = Mathf.CeilToInt(baseXp / (1f + (lvl - 1) * xpDiminishingFactor));
+                player.GainExp(reward);
+            }
+
 
             //AnalyticsCommon.timeZombieKilled = DateTime.Now.Ticks
 

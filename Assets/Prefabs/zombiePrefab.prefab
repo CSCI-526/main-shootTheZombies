@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4716800807657791607}
   - component: {fileID: -7824314321068058195}
   m_Layer: 0
-  m_Name: ZombiePrefab
+  m_Name: zombiePrefab
   m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,10 +102,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82379f5a3d7414512aba5890d0515be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
   hp: 100
-  damage: 20
-  damagePopupPrefab: {fileID: 0}
+  healthFill: {fileID: 0}
+  damagePopupPrefab: {fileID: 2437635022160800495, guid: 57af91314f46b40ebace9c0eb458f01d, type: 3}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  isTutorialTarget: 0
+  tutorialRef: {fileID: 0}
 --- !u!50 &4716800807657791607
 Rigidbody2D:
   serializedVersion: 5
