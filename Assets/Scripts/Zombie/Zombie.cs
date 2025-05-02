@@ -14,7 +14,7 @@ public class Zombie : MonoBehaviour
     protected int maxHp;
 
 
-    public GameObject damagePopupPrefab;
+    // public GameObject damagePopupPrefab;
     public Color color;
 
     protected virtual void Start()
@@ -40,11 +40,11 @@ public class Zombie : MonoBehaviour
 
         SendAccuracy.bulletsHit += 1;
 
-        GameObject canvasObj = GameObject.Find("Damage");
-        Transform canvas = canvasObj.transform;
+        // GameObject canvasObj = GameObject.Find("Damage");
+        // Transform canvas = canvasObj.transform;
 
-        GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up, Quaternion.identity, canvas);
-        popup.GetComponent<DamagePopup>().Setup(-damageAmount);
+        // GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up, Quaternion.identity, canvas);
+        // popup.GetComponent<DamagePopup>().Setup(-damageAmount);
 
         if (hp <= 0)
         {
