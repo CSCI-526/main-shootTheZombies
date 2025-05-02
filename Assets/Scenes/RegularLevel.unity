@@ -4987,13 +4987,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f304184ab4b924cc38b0121bee66d951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 1866031802}
+  player: {fileID: 1485013290}
   meleeZombiePrefab: {fileID: 2073466129586462176, guid: fb0d68306e63c4f05bc88eb4a412f81b, type: 3}
   rangedZombiePrefab: {fileID: 2073466129586462176, guid: f464322f3ac324a188b96db8c5cabc92, type: 3}
   explodingZombiePrefab: {fileID: 2073466129586462176, guid: 6fff79995c63e4bc8abdbf35d7400b64, type: 3}
-  spawnInterval: 5
+  baseSpawnInterval: 5
   spawnRangeX: {x: -4, y: 4}
-  fixedY: 10
+  spawnY: 10
 --- !u!4 &1620237428
 Transform:
   m_ObjectHideFlags: 0

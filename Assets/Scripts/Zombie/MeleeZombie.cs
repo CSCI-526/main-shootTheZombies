@@ -21,7 +21,6 @@ public class MeleeZombie : Zombie
     {
         if (healthFill != null && maxHp > 0) {
             healthFill.fillAmount = (float)hp / maxHp;
-            Debug.Log($"[{name}] HealthBar updated to {healthFill.fillAmount}");
         }
 
     }

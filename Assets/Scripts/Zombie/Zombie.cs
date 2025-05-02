@@ -16,6 +16,8 @@ public class Zombie : MonoBehaviour
 
     // public GameObject damagePopupPrefab;
     public Color color;
+    
+    protected const float xpDiminishingFactor = 0.2f;
 
     protected virtual void Start()
     {
@@ -57,8 +59,12 @@ public class Zombie : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "TutorialLevel"){
                 player.GainExp(50);
              }else{
-                player.GainExp(20);
-             }
+                int baseXp = (SceneManager.GetActiveScene().name == "TutorialLevel") ? 50 : 20;
+                int lvl = player.playerLevel;
+                int reward = Mathf.CeilToInt(baseXp / (1f + (lvl - 1) * xpDiminishingFactor));
+                player.GainExp(reward);
+            }
+
 
             //AnalyticsCommon.timeZombieKilled = DateTime.Now.Ticks
 
