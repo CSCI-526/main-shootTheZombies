@@ -22,7 +22,6 @@ public class ExplodingZombie : Zombie
     {
         if (healthFill != null && maxHp > 0) {
             healthFill.fillAmount = (float)hp / maxHp;
-            Debug.Log($"[{name}] HealthBar updated to {healthFill.fillAmount}");
         }
 
     }
@@ -66,18 +65,28 @@ public class ExplodingZombie : Zombie
         Explode();
 
         Player player = GameObject.Find("Testplayer").GetComponent<Player>();
+        int lvl = player.playerLevel;
 
         //Debug.Log("Destroying Exploding Zombie: " + gameObject.name);
         Destroy(gameObject);
         
-        if (player.playerLevel <= 6)
-        {
-             if (SceneManager.GetActiveScene().name == "TutorialLevel"){
-                player.GainExp(50);
-             }else{
-                player.GainExp(20);
-             }
+        // if (player.playerLevel <= 6)
+        // {
+        //      if (SceneManager.GetActiveScene().name == "TutorialLevel"){
+        //         player.GainExp(50);
+        //      }else{
+        //         player.GainExp(20);
+        //      }
             
+        // }
+
+
+        if (SceneManager.GetActiveScene().name == "TutorialLevel"){
+            player.GainExp(50);
+        }else{
+            int baseXp = (SceneManager.GetActiveScene().name == "TutorialLevel") ? 50 : 20;
+            int reward = Mathf.CeilToInt(baseXp / (1f + (lvl - 1) * xpDiminishingFactor));
+            player.GainExp(reward);
         }
     }
 
