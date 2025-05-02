@@ -21,7 +21,7 @@ public class TutorialZombieSpawner : MonoBehaviour
     private int spawnStep = 0;
     //private bool hasSpawned = false;
     public bool allowSpawning = false;
-    public GameObject keyHintLabelPrefab;
+    // public GameObject keyHintLabelPrefab;
 
     public void Start()
     {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
@@ -9,8 +10,11 @@ public class BulletSwitchTutorial : MonoBehaviour
     public RectTransform redBox;
     public RectTransform greenBox;
     public RectTransform blueBox;
+    public Outline redOutline;
+    public Outline greenOutline;
+    public Outline blueOutline;
     public float normalScale = 1f;
-    public float highlightedScale = 1.1f;
+    public float highlightedScale = 1.3f;
 
     // private SpriteRenderer dummyRenderer;
 
@@ -25,7 +29,7 @@ public class BulletSwitchTutorial : MonoBehaviour
 
     void Start()
     {
-        promptText.text = "Press Q, W, or E to select Red, Blue, or Green bullets.\n\nCurrent bullet color is shown in the box on the right.";
+        promptText.text = "Press Q, W, E to select bullets for attacking zombies.";
         // dummyRenderer = dummyTarget.GetComponent<SpriteRenderer>();
         // dummyRenderer.color = Color.gray;
         SetAllBoxes(normalScale);
@@ -47,19 +51,19 @@ public class BulletSwitchTutorial : MonoBehaviour
         {
             redPressed = true;
             // dummyRenderer.color = Color.red;
-            Highlight(redBox);
+            Highlight(redBox, redOutline);
         }
         else if (w)
         {
             greenPressed = true;
             // dummyRenderer.color = Color.green;
-            Highlight(greenBox);
+            Highlight(greenBox, greenOutline);
         }
         else if (e)
         {
             bluePressed = true;
             // dummyRenderer.color = Color.blue;
-            Highlight(blueBox);
+            Highlight(blueBox, blueOutline);
         }
 
         if (redPressed && greenPressed && bluePressed && !completionHintShown)
@@ -78,8 +82,8 @@ public class BulletSwitchTutorial : MonoBehaviour
 
     System.Collections.IEnumerator ShowCompletionHints()
     {
-        promptText.text = "Good! You've learned to switch bullets.";
-        yield return new WaitForSeconds(1.5f);
+        promptText.text = "Good job!";
+        yield return new WaitForSeconds(1f);
 
         promptText.text = "Left-click to proceed to the next step.";
         yield return new WaitForSeconds(1f);
@@ -92,12 +96,23 @@ public class BulletSwitchTutorial : MonoBehaviour
         redBox.localScale   = Vector3.one * scale;
         greenBox.localScale = Vector3.one * scale;
         blueBox.localScale  = Vector3.one * scale;
+        redOutline.enabled = false;
+        greenOutline.enabled = false;
+        blueOutline.enabled = false;
     }
 
-    private void Highlight(RectTransform boxToHighlight)
+    private void Highlight(RectTransform boxToHighlight, Outline outline)
     {
-        SetAllBoxes(normalScale * 0.95f);
+        SetAllBoxes(normalScale * 0.8f);
         boxToHighlight.localScale = Vector3.one * highlightedScale;
+        redOutline.enabled   = false;
+        greenOutline.enabled = false;
+        blueOutline.enabled  = false;
+
+        outline.effectColor    = outline == redOutline   ? Color.red   :
+                                 outline == greenOutline ? Color.green : Color.blue;
+
+        outline.enabled = true;
     }
 
 }
