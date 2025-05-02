@@ -48,11 +48,11 @@ public class ExplodingZombie : Zombie
         hp -= damageAmount;
         //Debug.Log("Exploding Zombie took damage: " + damageAmount + ", HP: " + hp);
 
-        GameObject canvasObj = GameObject.Find("Damage");
-        Transform canvas = canvasObj.transform;
+        // GameObject canvasObj = GameObject.Find("Damage");
+        // Transform canvas = canvasObj.transform;
 
-        GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up, Quaternion.identity, canvas);
-        popup.GetComponent<DamagePopup>().Setup(-damageAmount);
+        // GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up, Quaternion.identity, canvas);
+        // popup.GetComponent<DamagePopup>().Setup(-damageAmount);
 
         if (hp <= 0)
         {

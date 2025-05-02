@@ -14,7 +14,7 @@ public class TowerBase : MonoBehaviour
     
     // Prefabs
     public GameObject bulletPrefab;  // 子弹预制体
-    public GameObject damagePopupPrefab;
+    // public GameObject damagePopupPrefab;
 
     public TowerManager towerManager;
     public ButtonSpawner buttonSpawner;
@@ -106,12 +106,12 @@ public class TowerBase : MonoBehaviour
     {
         hp -= damage;
         // print("Tower 受到了 " + damage + " 点伤害，剩余 HP：" + hp);
-        GameObject canvasObj = GameObject.Find("Damage");
+        // GameObject canvasObj = GameObject.Find("Damage");
 
-        Transform canvas = canvasObj.transform;
+        // Transform canvas = canvasObj.transform;
 
-        GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up, Quaternion.identity, canvas);
-        popup.GetComponent<DamagePopup>().Setup(-damage);
+        // GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up, Quaternion.identity, canvas);
+        // popup.GetComponent<DamagePopup>().Setup(-damage);
         if (hp <= 0)
         {
             Die();
@@ -120,7 +120,7 @@ public class TowerBase : MonoBehaviour
 
     public void Die()
     {
-        print("Zombie 被击杀！");
+        //print("Zombie 被击杀！");
         Destroy(gameObject);
     }
 }
