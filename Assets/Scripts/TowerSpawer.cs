@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TowerSpawner : MonoBehaviour
 {
-    public TextMeshProUGUI hintText; 
+    // public TextMeshProUGUI hintText; 
     // public GameObject towerPrefab;
     public TowerDatabase towerDatabase;
     // public TowerBulletSpawner bulletSpawnerPrefab;
@@ -37,7 +37,7 @@ public class TowerSpawner : MonoBehaviour
     {
         if(isMoving){
             Move();
-        }
+        }   
         
     }
     public void incMaxTowerNumber(){
@@ -54,7 +54,6 @@ public class TowerSpawner : MonoBehaviour
         towerType = type;
         
         CreateNewTower();//change ismoving inside
-
 
     }
     private void Move(){
@@ -143,12 +142,12 @@ public class TowerSpawner : MonoBehaviour
 
     public void ShowHint(string message)
     {
-        hintText.text = message;
+        // hintText.text = message;
         CancelInvoke(nameof(HideHint)); 
         Invoke(nameof(HideHint), 3f);
     }
     void HideHint()
     {
-        hintText.text = "";
+        // hintText.text = "";
     }
 }

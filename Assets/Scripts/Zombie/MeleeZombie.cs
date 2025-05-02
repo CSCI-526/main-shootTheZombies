@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MeleeZombie : Zombie
 {
@@ -10,11 +11,19 @@ public class MeleeZombie : Zombie
     public int damage = 30;
 
     protected override void Start()
-    {
-        hp = 100;
+    {   
+        if (SceneManager.GetActiveScene().name == "TutorialLevel")
+        {
+            hp = 30;
+        }
+        else
+        {
+            hp = 100;
+        }
         color = Color.red;
         maxHp = hp;
         UpdateHealthBar();
+        Debug.Log("Melee Zombie HP: " + hp);
     }
 
     private void UpdateHealthBar()
@@ -27,6 +36,7 @@ public class MeleeZombie : Zombie
 
     public void Update()
     {
+        if (isTutorialTarget) return;
         transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
         if (isAttacking)
         {

@@ -1,3 +1,4 @@
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class ZombieSpawner : MonoBehaviour
@@ -14,9 +15,11 @@ public class ZombieSpawner : MonoBehaviour
     public float spawnY = 10f;               // Y position for all zombies
 
     private float spawnTimer;
+    public bool allowSpawning = false;
 
     void Update()
     {
+        if (!allowSpawning && SceneManager.GetActiveScene().name == "TutorialLevel") return;
         spawnTimer += Time.deltaTime;
 
         // interval shrinks 10% per level, min 1 second
@@ -114,3 +117,4 @@ public class ZombieSpawner : MonoBehaviour
         }
     }
 }
+

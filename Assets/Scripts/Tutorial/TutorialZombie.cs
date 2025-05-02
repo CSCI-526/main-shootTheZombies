@@ -4,8 +4,8 @@ public class TutorialZombie : Zombie
 {
     private TutorialManager tutorialManager;
     // public GameObject damagePopupPrefab;
-    public int hp;
-    public Color color;
+    // public int hp;
+    // public Color color;
 
     public void SetTutorialManager(TutorialManager manager)
     {

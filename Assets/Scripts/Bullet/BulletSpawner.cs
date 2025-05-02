@@ -6,7 +6,7 @@ public class BulletSpawner : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float bulletSpeed = 10f;
-    public float fireRate = 1f;
+    public float fireRate = 2f;
 
     public int burstCount = 1;
     public float burstInterval = 0.1f;
@@ -23,14 +23,16 @@ public class BulletSpawner : MonoBehaviour
     private Sprite currentBulletSprite;
     private float timer = 0f;
     private bool stop = false;
+    private float nextFireTime = 0f;
+    private float newFireRate = 3f;
 
     void Start()
     {
         if (bulletSprites != null && bulletSprites.Length >= 1)
             currentBulletSprite = bulletSprites[0];
         bulletColor = Color.red;
-        StartCoroutine(ShootCoroutine());
-        showGuideInTutorial = (SceneManager.GetActiveScene().buildIndex == 1);
+        // StartCoroutine(ShootCoroutine());
+        // showGuideInTutorial = (SceneManager.GetActiveScene().buildIndex == 1);
     }
 
     void Update()
@@ -38,23 +40,24 @@ public class BulletSpawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             bulletColor = Color.red;
-            currentBulletSprite = (bulletSprites.Length > 0 ? bulletSprites[0] : currentBulletSprite);
+            // currentBulletSprite = (bulletSprites.Length > 0 ? bulletSprites[0] : currentBulletSprite);
         }
         else if (Input.GetKeyDown(KeyCode.W))
         {
             bulletColor = Color.green;
-            currentBulletSprite = (bulletSprites.Length > 1 ? bulletSprites[1] : currentBulletSprite);
+            // currentBulletSprite = (bulletSprites.Length > 1 ? bulletSprites[1] : currentBulletSprite);
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
             bulletColor = Color.blue;
-            currentBulletSprite = (bulletSprites.Length > 2 ? bulletSprites[2] : currentBulletSprite);
+            // currentBulletSprite = (bulletSprites.Length > 2 ? bulletSprites[2] : currentBulletSprite);
         }
 
-        if (!stop)
+        if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
         {
-            timer += Time.deltaTime;
-            if (timer >= maxTime) stop = true;
+            Vector3 target = GetMouseWorldPosition();
+            FireBullet(target);
+            nextFireTime = Time.time + 1f / fireRate;
         }
     }
 
@@ -84,8 +87,12 @@ public class BulletSpawner : MonoBehaviour
 
     void FireBullet(Vector3 target)
     {
+        // Debug.Log("FireBullet: showGuideInTutorial = " + showGuideInTutorial);
         if (showGuideInTutorial && bulletGuideLinePrefab != null && !stop)
         {
+            // Debug.Log("FireBullet: Instantiate bulletGuideLinePrefab");
+            // timer += Time.deltaTime;
+            // if (timer >= maxTime) stop = true;
             GameObject guide = Instantiate(bulletGuideLinePrefab);
             var guideScript = guide.GetComponent<BulletGuideLine>();
             guideScript.bulletStart = transform;
@@ -141,7 +148,7 @@ public class BulletSpawner : MonoBehaviour
         {
             if (currentBulletSprite != null)
                 sr.sprite = currentBulletSprite;
-            // sr.color = bulletColor;
+            sr.color = bulletColor;
         }
     }
 

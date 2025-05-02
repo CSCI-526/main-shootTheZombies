@@ -1,10 +1,15 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class TowerButtonSpawner : MonoBehaviour
-{
+{   
     public PlayerManagerScript playerManager;
+    public Texture2D normalTowerHint;
+    public Texture2D flameTowerHint;
+    public Texture2D defenseTowerHint;
     private string buttonTextA = "Normal Tower";
     private string buttonTextB = "Flame Tower";
     private string buttonTextC = "Defense Tower";
@@ -23,24 +28,60 @@ public class TowerButtonSpawner : MonoBehaviour
     private bool canSelectTower = false;
 
     private bool hasShownHint = false;
-
+    private int tutorialStep = 0;
+    private bool tutorialMode = true;
+    private JumpButtonSpawner jumpButtonSpawner;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Canvas uiCanvas;
+    private void EnsureCanvas()
+    {
+        if (uiCanvas == null)
+            uiCanvas = FindObjectOfType<Canvas>();
+    }
+
     void Start()
     {
+        EnsureCanvas();
         towerSpawner = FindObjectOfType<TowerSpawner>();
         player = FindObjectOfType<Player>();
         CreateCanvas();
-
+        jumpButtonSpawner = FindObjectOfType<JumpButtonSpawner>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (SceneManager.GetActiveScene().name == "TutorialLevel")
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Time.timeScale = 1f;
+                if(tutorialStep==3){
+                    jumpButtonSpawner.InitializeButtons();
+                    Time.timeScale = 0f;
+                }                    
+            }
+        }
     }
 
     public void InitializeButtons()
     {
+        if (SceneManager.GetActiveScene().name == "TutorialLevel" && tutorialMode == true)
+        {
+            if (tutorialStep < 3)
+            {
+                Texture2D tex = tutorialStep == 0
+                    ? normalTowerHint
+                    : tutorialStep == 1
+                        ? flameTowerHint
+                        : defenseTowerHint;
+                StartCoroutine(ShowCursorHint(tex, tutorialStep));
+            }
+            if (tutorialStep >= 3)
+                tutorialMode = false;
+            return;
+            Debug.Log("tutorialMode: " + tutorialMode);
+        }
         // If buttons already exist, don't recreate them
         if (TbuttonA == null && buttonTextA != "")
             TbuttonA = CreateButton(buttonTextA, new Vector2(-250, -200));
@@ -54,7 +95,7 @@ public class TowerButtonSpawner : MonoBehaviour
 
 
         // Add hint text
-        hintTextObj = CreateText("Add a Tower Now!", new Vector2(0, 0));
+        // hintTextObj = CreateText("Add a Tower Now!", new Vector2(0, 0));
 
     }
 
@@ -198,7 +239,7 @@ public class TowerButtonSpawner : MonoBehaviour
     {
         if (hasShownHint) return;
         hasShownHint = true;
-        hintClickTower = CreateText("Click to deploy a tower", new Vector2(0, 0));
+        // hintClickTower = CreateText("Click to deploy a tower", new Vector2(0, 0));
         // Destroy after 2 seconds if it exists
         if (hintClickTower != null)
         {
@@ -211,6 +252,38 @@ public class TowerButtonSpawner : MonoBehaviour
         // Debug.Log("destory");
         Destroy(hintClickTower);
 
+    }
+
+    private IEnumerator ShowCursorHint(Texture2D tex, int type)
+    {   
+        Time.timeScale = 1;
+        var go = new GameObject("TowerInstallHint", typeof(RawImage));
+        go.transform.SetParent(uiCanvas.transform, false);
+
+        var ri = go.GetComponent<RawImage>();
+        ri.texture = tex;
+
+        var rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = Vector2.zero;
+        rt.sizeDelta = new Vector2(tex.width, tex.height);
+
+        float duration = 2f;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            float s = Mathf.Lerp(0.25f, 0.5f, elapsed / duration);
+            go.transform.localScale = Vector3.one * s;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        go.transform.localScale = Vector3.one;
+        Destroy(go);
+
+        Time.timeScale = 0;
+        towerSpawner.AddTower(tutorialStep);
+        tutorialStep++;
     }
 
 }

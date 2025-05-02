@@ -1,7 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 using UnityEngine.UI;
+
 public class Zombie : MonoBehaviour
 {
 
@@ -14,10 +16,13 @@ public class Zombie : MonoBehaviour
     protected int maxHp;
 
 
-    // public GameObject damagePopupPrefab;
+    public GameObject damagePopupPrefab;
     public Color color;
     
     protected const float xpDiminishingFactor = 0.2f;
+
+    public bool isTutorialTarget = false;
+    public AimingShootingTutorial tutorialRef;
 
     protected virtual void Start()
     {
@@ -33,7 +38,34 @@ public class Zombie : MonoBehaviour
 
     public virtual void TakeDamage(int damageAmount, Color bulletColor)
     {   //Debug.Log("Zombie color: " + color + ", Bullet color: " + bulletColor);
-        if (bulletColor != color && bulletColor != Color.black) return;
+        if (bulletColor != color && bulletColor != Color.black)
+        {
+            // if (isTutorialTarget)
+            // {
+                var missCanvas = GameObject.Find("Damage");
+                if (missCanvas != null)
+                {
+                    var canvastsfrm = missCanvas.transform;
+                    var missPopup = Instantiate(
+                        damagePopupPrefab,
+                        transform.position + Vector3.up * 2f,
+                        Quaternion.identity,
+                        canvastsfrm
+                    );
+                    var txt = missPopup.GetComponentInChildren<TextMeshProUGUI>();
+                    if (txt != null)
+                    {
+                        txt.text  = "Miss";
+                        txt.color = Color.white;
+                    }
+                    Destroy(missPopup, 1f);
+                }
+            // }
+            return;
+        }
+
+        // if (bulletColor != color && bulletColor != Color.black) return;
+        // hp -= damageAmount;
 
 
         // hp -= damageAmount;
@@ -50,6 +82,15 @@ public class Zombie : MonoBehaviour
 
         if (hp <= 0)
         {
+
+            if (isTutorialTarget)
+            {
+                if (tutorialRef != null)
+                    tutorialRef.OnZombieKilled(this);
+
+                Destroy(gameObject);
+                return;
+            }
             //Debug.Log("Base Zombie Died: " + gameObject.name);
             if (healthFill != null)
                 healthFill.transform.parent.gameObject.SetActive(false);

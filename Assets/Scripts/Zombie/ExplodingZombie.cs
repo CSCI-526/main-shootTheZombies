@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class ExplodingZombie : Zombie
 {
     public float explosionRadius = 3f;
@@ -11,11 +12,20 @@ public class ExplodingZombie : Zombie
     public int damage = 30;
     public GameObject explosionEffectPrefab;
     protected override void Start()
-    {
-        hp = 150;
-        color = Color.blue;
-        maxHp = hp;
-        UpdateHealthBar();
+    {   
+        if (SceneManager.GetActiveScene().name == "TutorialLevel")
+        {
+            hp = 30;
+        }
+        else
+        {
+            hp = 150;
+        }
+        color = Color.blue;   
+        {
+            maxHp = hp;
+            UpdateHealthBar();
+        }
     }
     
     private void UpdateHealthBar()
@@ -23,11 +33,11 @@ public class ExplodingZombie : Zombie
         if (healthFill != null && maxHp > 0) {
             healthFill.fillAmount = (float)hp / maxHp;
         }
-
     }
 
     public void Update()
     {
+        if (isTutorialTarget) return;
         transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
         
         if (isAttacking)
