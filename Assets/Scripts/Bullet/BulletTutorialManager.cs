@@ -26,8 +26,17 @@ public class BulletTutorialManager : MonoBehaviour
                     Debug.LogWarning("AimingShootingTutorial not found in scene!");
                 break;
 
+            case BulletTutorialStage.AimingShooting:
+                currentStage = BulletTutorialStage.none;
+                Debug.Log("Tutorial in aiming shooting stage.");
+                break;
+
+            case BulletTutorialStage.none:
+                Debug.Log("Tutorial in none stage.");
+                break;
+
             default:
-                Debug.Log("All tutorial stages complete.");
+                Debug.Log("Tutorial in default stage.");
                 break;
         }
 

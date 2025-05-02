@@ -110,9 +110,9 @@ public class Player : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "TutorialLevel"&&this.exp >= 100)
         {
            
-           cnt++;
+           
            Tutorial_LevelUp();
-            exp = 0;
+            // exp = 0;
         }
         else if(this.exp >= 100){
             LevelUp();
@@ -125,9 +125,9 @@ public class Player : MonoBehaviour
     void  Tutorial_LevelUp(){
             if(cnt<3){
                 LevelUp();
-                   
-            }
-            else {
+                Debug.Log("cnt: " + cnt);
+                      
+            }else if(cnt>=3){
                  if (grayCover != null)
                         {
                             grayCover.SetActive(true); // Show the gray cover
@@ -135,11 +135,13 @@ public class Player : MonoBehaviour
                         Time.timeScale = 0;
 
                         // AutoGenerateButton();
-                        jumpButtonSpawner.InitializeButtons();
-            }
+                        // jumpButtonSpawner.InitializeButtons();
+                        // Debug.Log("congratulation");
+                } 
 
     }
     void LevelUp(){
+        cnt++;
         Time.timeScale = 0;
         playerLevel += 1;
 

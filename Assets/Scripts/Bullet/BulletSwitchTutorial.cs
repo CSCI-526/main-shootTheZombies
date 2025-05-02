@@ -5,8 +5,6 @@ using System.Collections;
 
 public class BulletSwitchTutorial : MonoBehaviour
 {
-    public TextMeshProUGUI promptText;
-
     public RectTransform redBox;
     public RectTransform greenBox;
     public RectTransform blueBox;
@@ -16,7 +14,9 @@ public class BulletSwitchTutorial : MonoBehaviour
     public float normalScale = 1f;
     public float highlightedScale = 1.3f;
 
-    // private SpriteRenderer dummyRenderer;
+    public SpriteRenderer redHintSprite;
+    public SpriteRenderer greenHintSprite;
+    public SpriteRenderer blueHintSprite;
 
     private bool redPressed = false;
     private bool greenPressed = false;
@@ -29,66 +29,46 @@ public class BulletSwitchTutorial : MonoBehaviour
 
     void Start()
     {
-        promptText.text = "Press Q, W, E to select bullets for attacking zombies.";
-        // dummyRenderer = dummyTarget.GetComponent<SpriteRenderer>();
-        // dummyRenderer.color = Color.gray;
+        if (redHintSprite   != null) redHintSprite.enabled   = true;
+        if (greenHintSprite != null) greenHintSprite.enabled = true;
+        if (blueHintSprite  != null) blueHintSprite.enabled  = true;
         SetAllBoxes(normalScale);
     }
 
     void Update()
     {
-        bool q = Input.GetKeyDown(KeyCode.Q);
-        bool w = Input.GetKeyDown(KeyCode.W);
-        bool e = Input.GetKeyDown(KeyCode.E);
-
-        if (!initialHintCleared && (q || w || e))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            promptText.text = "";
-            initialHintCleared = true;
-        }
-
-        if (q)
-        {
-            redPressed = true;
-            // dummyRenderer.color = Color.red;
             Highlight(redBox, redOutline);
+            if (!redPressed)
+            {
+                redPressed = true;
+                if (redHintSprite != null) redHintSprite.enabled = false;
+                TryAdvance();
+            }
         }
-        else if (w)
+
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            greenPressed = true;
-            // dummyRenderer.color = Color.green;
             Highlight(greenBox, greenOutline);
+            if (!greenPressed)
+            {
+                greenPressed = true;
+                if (greenHintSprite != null) greenHintSprite.enabled = false;
+                TryAdvance();
+            }
         }
-        else if (e)
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            bluePressed = true;
-            // dummyRenderer.color = Color.blue;
             Highlight(blueBox, blueOutline);
+            if (!bluePressed)
+            {
+                bluePressed = true;
+                if (blueHintSprite != null) blueHintSprite.enabled = false;
+                TryAdvance();
+            }
         }
-
-        if (redPressed && greenPressed && bluePressed && !completionHintShown)
-        {
-            completionHintShown = true;
-            StartCoroutine(ShowCompletionHints());
-        }
-
-        if (completionHintShown && !completionHintCleared && completionHintReadyToClear && (q || w || e || Input.GetMouseButtonDown(0)))
-        {
-            promptText.text = "";
-            completionHintCleared = true;
-            BulletTutorialManager.Instance.AdvanceStage();
-        }
-    }
-
-    System.Collections.IEnumerator ShowCompletionHints()
-    {
-        promptText.text = "Good job!";
-        yield return new WaitForSeconds(1f);
-
-        promptText.text = "Left-click to proceed to the next step.";
-        yield return new WaitForSeconds(1f);
-
-        completionHintReadyToClear = true;
     }
 
     private void SetAllBoxes(float scale)
@@ -113,6 +93,14 @@ public class BulletSwitchTutorial : MonoBehaviour
                                  outline == greenOutline ? Color.green : Color.blue;
 
         outline.enabled = true;
+    }
+
+    private void TryAdvance()
+    {
+        if (redPressed && greenPressed && bluePressed)
+        {
+            BulletTutorialManager.Instance.AdvanceStage();
+        }
     }
 
 }

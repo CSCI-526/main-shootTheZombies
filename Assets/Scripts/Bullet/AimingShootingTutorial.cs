@@ -2,19 +2,23 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
 
 public class AimingShootingTutorial : MonoBehaviour
 {
-    public TextMeshProUGUI promptText;
+    // public TextMeshProUGUI promptText;
     public GameObject meleeZombiePrefab;
     public GameObject rangedZombiePrefab;
     public GameObject explodingZombiePrefab;
     public GameObject damagePopupPrefab;
-    
+    public Texture2D tutorialCursor;
+    public float    cursorAnimDuration = 2f;
+
     private BulletSpawner spawner; 
     private int targetsRemaining = 3;
     private bool tutorialStarted = false;
-    private List<GameObject> hintLabels = new List<GameObject>();
+    private Dictionary<Zombie, GameObject> hintMap = new Dictionary<Zombie, GameObject>();
+
     void Awake()
     {
         spawner = FindObjectOfType<BulletSpawner>();
@@ -23,8 +27,21 @@ public class AimingShootingTutorial : MonoBehaviour
     public void StartTutorial()
     {
         tutorialStarted = true;
-        promptText.text = "Move your mouse to aim and Left-Click to fire.";
-        StartCoroutine(ClearPromptAfterDelay(1f));
+        var canvas = FindObjectOfType<Canvas>().transform;
+        var go = new GameObject("TutorialCursor", typeof(RawImage));
+        go.transform.SetParent(canvas, false);
+
+        var rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.6f);
+        rt.pivot     = new Vector2(0.5f, 0.6f);
+        rt.anchoredPosition = Vector2.zero;
+
+        var ri = go.GetComponent<RawImage>();
+        ri.texture = tutorialCursor;
+        rt.sizeDelta = new Vector2(tutorialCursor.width, tutorialCursor.height);
+        go.transform.localScale = Vector3.one;
+
+        StartCoroutine(ScaleAndDestroy(go.transform, 1.5f, 2f, cursorAnimDuration));
 
         if (spawner != null)
             spawner.showGuideInTutorial = true;
@@ -47,7 +64,6 @@ public class AimingShootingTutorial : MonoBehaviour
         Transform canvas = canvasObj.transform;
         Vector3 headPos = zombie.transform.position + Vector3.up * 2f;
         GameObject popup = Instantiate(damagePopupPrefab, headPos, Quaternion.identity, canvas);
-        hintLabels.Add(popup);
         var textMesh = popup.GetComponentInChildren<TextMeshProUGUI>();
         if (textMesh != null)
         {
@@ -55,23 +71,21 @@ public class AimingShootingTutorial : MonoBehaviour
             textMesh.color = color;
             textMesh.fontSize = 50;
         }
+        hintMap[tz] = popup;
     }
 
-    public void OnZombieKilled()
+    public void OnZombieKilled(Zombie tz)
     {
-        targetsRemaining--;
-
-        if (hintLabels.Count > 0)
+        if (hintMap.TryGetValue(tz, out GameObject hint))
         {
-            Destroy(hintLabels[0]);
-            hintLabels.RemoveAt(0);
+            Destroy(hint);
+            hintMap.Remove(tz);
         }
 
+        targetsRemaining--;
         if (targetsRemaining <= 0)
         {
-            promptText.text = "";
-            if (spawner != null)
-                spawner.showGuideInTutorial = false;
+            spawner.showGuideInTutorial = false;
             BulletTutorialManager.Instance.AdvanceStage();
         }
     }
@@ -79,6 +93,21 @@ public class AimingShootingTutorial : MonoBehaviour
     private IEnumerator ClearPromptAfterDelay(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        promptText.text = "";
+        // promptText.text = "";
+        // Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    private IEnumerator ScaleAndDestroy(Transform t, float from, float to, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            float s = Mathf.Lerp(from, to, elapsed / duration);
+            t.localScale = Vector3.one * s;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        t.localScale = Vector3.one * to;
+        Destroy(t.gameObject);
     }
 }

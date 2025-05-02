@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class ExplodingZombie : Zombie
 {
     public float explosionRadius = 3f;
@@ -11,9 +12,16 @@ public class ExplodingZombie : Zombie
     public int damage = 30;
     public GameObject explosionEffectPrefab;
     protected override void Start()
-    {
-        hp = 150;
-        color = Color.blue;
+    {   
+        if (SceneManager.GetActiveScene().name == "TutorialLevel")
+        {
+            hp = 30;
+        }
+        else
+        {
+            hp = 150;
+        }
+        color = Color.blue;   
     }
 
     public void Update()

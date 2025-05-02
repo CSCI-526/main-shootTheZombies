@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class JumpButtonSpawner : MonoBehaviour
 {
     public PlayerManagerScript playerManager;
+    public GameObject hintTextObj;
     private string buttonTextA = "Menu";
     private string buttonTextC = "Regular Level";
 
@@ -13,7 +15,6 @@ public class JumpButtonSpawner : MonoBehaviour
     private GameObject TbuttonB;
     private GameObject TbuttonC;
     private GameObject canvas;
-    private GameObject hintTextObj; // Add this line to store the hint text object
     private Player player;
 
     private GameObject hintClickTower;
@@ -23,43 +24,32 @@ public class JumpButtonSpawner : MonoBehaviour
     private bool canSelectTower = false;
 
     private bool hasShownHint = false;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Material hintMaterial;
+
     void Start()
     {
         towerSpawner = FindObjectOfType<TowerSpawner>();
         player = FindObjectOfType<Player>();
         CreateCanvas();
-       
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
     }
 
-     public void InitializeButtons()
+    public void InitializeButtons()
     {
-        // If buttons already exist, don't recreate them
-        if (TbuttonA == null&&buttonTextA!="")
+        if (TbuttonA == null && buttonTextA != "")
             TbuttonA = CreateButton(buttonTextA, new Vector2(-200, -200));
 
+        if (TbuttonC == null && buttonTextC != "")
+            TbuttonC = CreateButton(buttonTextC, new Vector2(200, -200));
 
-        
-
-        if (TbuttonC == null&&buttonTextC!="")
-            TbuttonC = CreateButton(buttonTextC, new Vector2(200, -200)); // Avoid same position as buttonB
-
-        
         ShowHintText();
-    
     }
- 
-    
 
     private void CreateCanvas()
     {
-        // Check if a Canvas already exists
         canvas = GameObject.Find("Canvas");
         if (canvas == null)
         {
@@ -69,26 +59,22 @@ public class JumpButtonSpawner : MonoBehaviour
             c.sortingOrder = 100;
             canvas.AddComponent<CanvasScaler>();
             canvas.AddComponent<GraphicRaycaster>();
-        }else
-    {
-        Canvas c = canvas.GetComponent<Canvas>();
-        c.sortingOrder = 100; // Set a high sorting order to ensure the canvas is in front
+        }
+        else
+        {
+            Canvas c = canvas.GetComponent<Canvas>();
+            c.sortingOrder = 100;
+        }
     }
-
-   
-        
-    }
-
- 
 
     private GameObject CreateButton(string buttonText, Vector2 anchoredPosition)
     {
-        GameObject buttonObj = new GameObject("Button_" +buttonText);
-        buttonObj.transform.SetParent(canvas.transform,false); // Attach to Canvas
+        GameObject buttonObj = new GameObject("Button_" + buttonText);
+        buttonObj.transform.SetParent(canvas.transform, false);
 
         RectTransform rectTransform = buttonObj.AddComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(200, 50); // Button size
-        rectTransform.anchoredPosition = anchoredPosition; // Button position
+        rectTransform.sizeDelta = new Vector2(200, 50);
+        rectTransform.anchoredPosition = anchoredPosition;
 
         Button btn = buttonObj.AddComponent<Button>();
         Image img = buttonObj.AddComponent<Image>();
@@ -102,74 +88,54 @@ public class JumpButtonSpawner : MonoBehaviour
         text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         text.alignment = TextAnchor.MiddleCenter;
         text.color = Color.black;
-        text.fontSize = 24; // Enlarged text size
+        text.fontSize = 24;
 
         RectTransform textRect = textObj.GetComponent<RectTransform>();
         textRect.sizeDelta = rectTransform.sizeDelta;
         textRect.anchoredPosition = Vector2.zero;
-        // //Debug.Log("Button " + buttonText + " created and click listener added.");
+
         btn.onClick.AddListener(() => OnButtonClick(buttonText));
 
-
-    
-
-   return buttonObj;
+        return buttonObj;
     }
 
-    private GameObject CreateText(string hintText, Vector2 anchoredPosition)
+    private GameObject CreateText(string message, Vector2 anchoredPosition)
     {
-        GameObject hintTextObj = new GameObject("HintText");
-        hintTextObj.transform.SetParent(canvas.transform, false);
+        GameObject go = new GameObject("HintText", typeof(RectTransform));
+        go.transform.SetParent(canvas.transform, false);
 
-        RectTransform hintTextRect = hintTextObj.AddComponent<RectTransform>();
-        hintTextRect.sizeDelta = new Vector2(480, 50); // Hint text size
-        hintTextRect.anchoredPosition = anchoredPosition; // Hint text position
+        RectTransform rt = go.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(480, 50);
+        rt.anchoredPosition = anchoredPosition;
 
-        Text hintTextText = hintTextObj.AddComponent<Text>();
-        hintTextText.text = hintText;
-        hintTextText.fontSize = 40;
-        hintTextText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        hintTextText.alignment = TextAnchor.MiddleCenter;
-        hintTextText.color = Color.red;
+        TextMeshProUGUI tmp = go.AddComponent<TextMeshProUGUI>();
+        tmp.text = message;
+        tmp.fontSize = 40;
+        tmp.alignment = TextAlignmentOptions.Center;
+        if (hintMaterial != null)
+            tmp.fontSharedMaterial = hintMaterial;
 
-        return hintTextObj;
+        return go;
     }
+
     private void OnButtonClick(string buttonText)
-    {   
+    {
         Time.timeScale = 1;
-        Debug.Log("Button " + buttonText + " clicked");
-        if(TbuttonA !=null){
-             Destroy(TbuttonA, 0.2f);
-
-        }
-       if(TbuttonB !=null){
-             Destroy(TbuttonB, 0.2f);
-
-        }
-        if(TbuttonC !=null){
-             Destroy(TbuttonC, 0.2f);
-
-        }
-        Destroy(hintTextObj, 0.2f); // Destroy the hint text
+        if (TbuttonA != null)
+            Destroy(TbuttonA, 0.2f);
+        if (TbuttonB != null)
+            Destroy(TbuttonB, 0.2f);
+        if (TbuttonC != null)
+            Destroy(TbuttonC, 0.2f);
+        Destroy(hintTextObj, 0.2f);
         player.ResumeGame();
 
-        if(buttonText==buttonTextA){
-            SceneManager.LoadScene("MainPage"); // Jump to Regularlevel scene
-            
-        }
-
-
-        else if(buttonText == buttonTextC){
-            SceneManager.LoadScene("RegularLevel"); // Jump to Regularlevel scene
-
-        }         
+        if (buttonText == buttonTextA)
+            SceneManager.LoadScene("MainPage");
+        else if (buttonText == buttonTextC)
+            SceneManager.LoadScene("RegularLevel");
         if (hintClickTower != null)
-        {
             Destroy(hintClickTower);
-        }
-
-
-        
     }
 
     void ShowHintText()
@@ -177,11 +143,10 @@ public class JumpButtonSpawner : MonoBehaviour
         if (hasShownHint) return;
         hasShownHint = true;
         hintTextObj = CreateText("Congratulations!", new Vector2(0, 0));
-        
     }
 
-   
-
-   
-   
+    public void destoryHint()
+    {
+        Destroy(hintClickTower);
+    }
 }

@@ -37,7 +37,7 @@ public class TowerSpawner : MonoBehaviour
     {
         if(isMoving){
             Move();
-        }
+        }   
         
     }
     public void incMaxTowerNumber(){
@@ -54,7 +54,6 @@ public class TowerSpawner : MonoBehaviour
         towerType = type;
         
         CreateNewTower();//change ismoving inside
-
 
     }
     private void Move(){

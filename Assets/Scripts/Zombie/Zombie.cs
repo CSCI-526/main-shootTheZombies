@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 public class Zombie : MonoBehaviour
 {
     public GameObject damagePopupPrefab;
@@ -17,7 +19,33 @@ public class Zombie : MonoBehaviour
 
     public virtual void TakeDamage(int damageAmount, Color bulletColor)
     {   //Debug.Log("Zombie color: " + color + ", Bullet color: " + bulletColor);
-        if (bulletColor != color && bulletColor != Color.black) return;
+        if (bulletColor != color && bulletColor != Color.black)
+        {
+            // if (isTutorialTarget)
+            // {
+                var missCanvas = GameObject.Find("Damage");
+                if (missCanvas != null)
+                {
+                    var canvastsfrm = missCanvas.transform;
+                    var missPopup = Instantiate(
+                        damagePopupPrefab,
+                        transform.position + Vector3.up * 2f,
+                        Quaternion.identity,
+                        canvastsfrm
+                    );
+                    var txt = missPopup.GetComponentInChildren<TextMeshProUGUI>();
+                    if (txt != null)
+                    {
+                        txt.text  = "Miss";
+                        txt.color = Color.white;
+                    }
+                    Destroy(missPopup, 1f);
+                }
+            // }
+            return;
+        }
+
+        // if (bulletColor != color && bulletColor != Color.black) return;
         hp -= damageAmount;
 
         SendAccuracy.bulletsHit += 1;
@@ -34,7 +62,7 @@ public class Zombie : MonoBehaviour
             if (isTutorialTarget)
             {
                 if (tutorialRef != null)
-                    tutorialRef.OnZombieKilled();
+                    tutorialRef.OnZombieKilled(this);
 
                 Destroy(gameObject);
                 return;
