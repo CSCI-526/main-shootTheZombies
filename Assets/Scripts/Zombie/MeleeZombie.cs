@@ -23,6 +23,7 @@ public class MeleeZombie : Zombie
         color = Color.red;
         maxHp = hp;
         UpdateHealthBar();
+        Debug.Log("Melee Zombie HP: " + hp);
     }
 
     private void UpdateHealthBar()

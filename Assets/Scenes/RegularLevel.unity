@@ -5429,10 +5429,8 @@ MonoBehaviour:
   rangedZombiePrefab: {fileID: 2073466129586462176, guid: f464322f3ac324a188b96db8c5cabc92, type: 3}
   explodingZombiePrefab: {fileID: 2073466129586462176, guid: 6fff79995c63e4bc8abdbf35d7400b64, type: 3}
   baseSpawnInterval: 5
-  spawnInterval: 10
   spawnRangeX: {x: -4, y: 4}
   spawnY: 10
-  fixedY: 10
 --- !u!4 &1620237428
 Transform:
   m_ObjectHideFlags: 0
@@ -5934,7 +5932,7 @@ MonoBehaviour:
   expbar: {fileID: 1934662854}
   HPbar: {fileID: 731693131}
   maxXp: 100
-  maxHp: 200
+  maxHp: 250
   level: 1
   xp: 0
   LevelUpUI: {fileID: 0}
