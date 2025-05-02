@@ -65,7 +65,7 @@ public class Zombie : MonoBehaviour
         }
 
         // if (bulletColor != color && bulletColor != Color.black) return;
-        hp -= damageAmount;
+        // hp -= damageAmount;
 
 
         // hp -= damageAmount;
@@ -74,11 +74,11 @@ public class Zombie : MonoBehaviour
 
         SendAccuracy.bulletsHit += 1;
 
-        GameObject canvasObj = GameObject.Find("Damage");
-        Transform canvas = canvasObj.transform;
+        // GameObject canvasObj = GameObject.Find("Damage");
+        // Transform canvas = canvasObj.transform;
 
-        GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up, Quaternion.identity, canvas);
-        popup.GetComponent<DamagePopup>().Setup(-damageAmount);
+        // GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up, Quaternion.identity, canvas);
+        // popup.GetComponent<DamagePopup>().Setup(-damageAmount);
 
         if (hp <= 0)
         {

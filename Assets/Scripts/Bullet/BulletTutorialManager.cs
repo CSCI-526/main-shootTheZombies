@@ -46,13 +46,13 @@ public class BulletTutorialManager : MonoBehaviour
         {
             var spawner = GameObject.Find("ZombieSpawner");
             if (spawner != null)
-                spawner.GetComponent<TutorialZombieSpawner>().allowSpawning = false;
+                spawner.GetComponent<ZombieSpawner>().allowSpawning = false;
         }
         else
         {
             var spawner = GameObject.Find("ZombieSpawner");
             if (spawner != null)
-                spawner.GetComponent<TutorialZombieSpawner>().allowSpawning = true;
+                spawner.GetComponent<ZombieSpawner>().allowSpawning = true;
         }
     }
 }
