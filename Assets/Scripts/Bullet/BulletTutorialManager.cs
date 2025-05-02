@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BulletTutorialManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class BulletTutorialManager : MonoBehaviour
 
     public void AdvanceStage()
     {
+        if (SceneManager.GetActiveScene().name != "TutorialLevel") return;
         switch (currentStage)
         {
             case BulletTutorialStage.BulletSwitching:

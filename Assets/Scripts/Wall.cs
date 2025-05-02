@@ -15,6 +15,8 @@ public class Wall : MonoBehaviour
     public TMP_Text survivalTime;
     private bool _hasGameEnded;
 
+    private float _timer = 0f;
+
     void Start()
     {
         _hasGameEnded = false;
@@ -25,7 +27,10 @@ public class Wall : MonoBehaviour
     }
     void Update()
     {
+        
         if (_hasGameEnded) return;
+        _timer += Time.deltaTime;
+        _player.timer = _timer;
         healthText.text = "HP " + health;
         survivalTime.text =  $"survived { _player.timer.ToString("F1") } seconds";
 
