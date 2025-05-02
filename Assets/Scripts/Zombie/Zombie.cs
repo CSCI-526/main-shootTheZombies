@@ -1,21 +1,42 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class Zombie : MonoBehaviour
 {
+
+    [Header("Stats")]
+    public int hp = 100;
+
+    [Header("UI")]
+    public Image healthFill; 
+
+    protected int maxHp;
+
+
     public GameObject damagePopupPrefab;
-    public int hp;
     public Color color;
 
     protected virtual void Start()
     {
-        hp = 100;
+        maxHp = hp;
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthFill != null && maxHp > 0)
+            healthFill.fillAmount = (float)hp / maxHp;
     }
 
     public virtual void TakeDamage(int damageAmount, Color bulletColor)
     {   //Debug.Log("Zombie color: " + color + ", Bullet color: " + bulletColor);
         if (bulletColor != color && bulletColor != Color.black) return;
-        hp -= damageAmount;
+
+
+        // hp -= damageAmount;
+        hp = Mathf.Max(0, hp - damageAmount);
+        UpdateHealthBar();
 
         SendAccuracy.bulletsHit += 1;
 
@@ -28,6 +49,9 @@ public class Zombie : MonoBehaviour
         if (hp <= 0)
         {
             //Debug.Log("Base Zombie Died: " + gameObject.name);
+            if (healthFill != null)
+                healthFill.transform.parent.gameObject.SetActive(false);
+
             Player player = GameObject.Find("Testplayer").GetComponent<Player>();
             Destroy(gameObject);
             if (SceneManager.GetActiveScene().name == "TutorialLevel"){

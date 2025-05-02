@@ -13,6 +13,17 @@ public class MeleeZombie : Zombie
     {
         hp = 100;
         color = Color.red;
+        maxHp = hp;
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthFill != null && maxHp > 0) {
+            healthFill.fillAmount = (float)hp / maxHp;
+            Debug.Log($"[{name}] HealthBar updated to {healthFill.fillAmount}");
+        }
+
     }
 
     public void Update()
