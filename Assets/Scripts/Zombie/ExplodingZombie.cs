@@ -14,6 +14,17 @@ public class ExplodingZombie : Zombie
     {
         hp = 150;
         color = Color.blue;
+        maxHp = hp;
+        UpdateHealthBar();
+    }
+    
+    private void UpdateHealthBar()
+    {
+        if (healthFill != null && maxHp > 0) {
+            healthFill.fillAmount = (float)hp / maxHp;
+            Debug.Log($"[{name}] HealthBar updated to {healthFill.fillAmount}");
+        }
+
     }
 
     public void Update()
